@@ -46,8 +46,10 @@
     margin: 10px 0px !important;
 }
 
-.NewAssessment  {
-  display: span !important;
+.NewAssessment .assessment-btn  {
+  display:inline-block !important;
+  font-size: 17px;
+  background-color: gray;
 }
 
 .score-dot {

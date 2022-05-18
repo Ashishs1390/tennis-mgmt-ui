@@ -10,16 +10,12 @@ import { fetchVideo } from "./../../redux/index";
 
 function VideoPlayerContainer(props) {
 
-    console.log("-------------VideoPlayerContainer----------------")
-    console.log(props);
     const { fetchVideo, videoInfo: { videoData},error, videoAnalysis, showPlayerVideo} = props;
     const [startPlay, setStartPlay] = useState(false);
     const [startTime, setStartTime] = useState(0);
     const [mute, setMute] = useState(false);
     const [payBackSpeed, setPayBackSpeed] = useState(1);
     const { from } = useParams();
-    console.log("--------from-----------")
-    console.log(from);
     const [frames,setFrame] = useState([
         {
             frameId:"frame1",
@@ -138,10 +134,6 @@ function VideoPlayerContainer(props) {
     }
     const submitFrameInfo = () =>{
         const arr = [];
-        console.log("----------------------------")
-        console.log(frames);
-        console.log(youtubeId)
-
         frames.forEach((frame)=>{
             // console.log(youtubeId[yt])
             console.log(frame.src);

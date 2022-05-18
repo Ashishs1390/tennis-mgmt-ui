@@ -11,6 +11,8 @@ import { selectMainTheme } from 'app/store/fuse/settingsSlice';
 // import { setProductsSearchText } from '../store/productsSlice';
 
 function Header(props) {
+    console.log("---------props-----------")
+    console.log(props)
     const dispatch = useDispatch();
     const mainTheme = useSelector(selectMainTheme);
 
@@ -32,7 +34,7 @@ function Header(props) {
                     delay={300}
                     className="hidden sm:flex text-16 md:text-24 mx-12 font-semibold"
                 >
-                    Video Analysis
+                    <span>{props.title}</span> 
                 </Typography>
             </div>
             <motion.div

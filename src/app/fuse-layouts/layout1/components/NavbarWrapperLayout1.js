@@ -12,9 +12,6 @@ function NavbarWrapperLayout1(props) {
   const navbar = useSelector(({ fuse }) => fuse.navbar);
 
   const navbarTheme = useSelector(selectNavbarTheme);
-  console.log("---------navbarTheme-----------")
-  console.log(navbarTheme);
-
   return (
     <>
       <ThemeProvider theme={navbarTheme}>

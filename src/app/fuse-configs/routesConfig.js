@@ -6,7 +6,7 @@ import Error404Page from 'app/main/404/Error404Page';
 import Login from './../components/login/Login';
 import Registration from 'app/components/registration/Registration';
 import CompetancyRating from "app/components/competancy_rating/competancy_rating";
-import PlayerDevelopment from "app/components/PlayerDevelopment/PlayerDevelopment";
+import PlayerDevelopmentWrapper from "app/components/PlayerDevelopment/PlayerDevelopmentWrapper";
 import ProfilePage from 'app/components/profile/ProfilePage';
 import VideoAnalysis from 'app/components/youtube-player/videoanalysiswrapper';
 // import StrockAnalysisList from "app/components/strock-analysis-list/strock-analysis-list";
@@ -61,7 +61,7 @@ const routes = [
   },
   {
     path: 'playerdevelopment',
-    element: <PlayerDevelopment/>
+    element: <PlayerDevelopmentWrapper/>
   },
   {
     path: 'link/player',

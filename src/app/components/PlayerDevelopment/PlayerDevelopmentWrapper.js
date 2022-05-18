@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 // import reducer from '../store';
 // import Header from './ProductsHeader';
 import Header from '../common-components/header/Header';
-import VideoPlayerContainer from './player-container';
+import PlayerDevelopment from './PlayerDevelopment';
 const Root = styled(FusePageCarded)(({ theme }) => ({
     '& .FusePageCarded-header': {
         minHeight: 72,
@@ -23,15 +23,15 @@ const Root = styled(FusePageCarded)(({ theme }) => ({
     },
 }));
 
-function VideoAnalysis() {
+function PlayerDevelopmentWrapper() {
     // return <div>Video Analyaia page</div>
-    return(<>
-        <Root header={<Header title= "Video Analysis" />} content={<VideoPlayerContainer/> } innerScroll  />;
+    return (<>
+        <Root header={<Header title="Player Development" />} content={<PlayerDevelopment />} innerScroll />;
     </>)
-    
-   
+
+
 }
 
-export default VideoAnalysis;
+export default PlayerDevelopmentWrapper;
 
 // export default withReducer('eCommerceApp', reducer)(Products);

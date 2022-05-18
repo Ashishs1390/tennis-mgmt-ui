@@ -55,8 +55,6 @@ export const selectNavigation = createSelector(
   [selectNavigationAll, ({ i18n }) => i18n.language, getUserRole],
   (navigation, language, userRole) => {
     function setTranslationValues(data) {
-      console.log("--------setTranslationValues-------")
-      console.log(data)
       // loop through every object in the array
       return data.map((item) => {
         if (item.translate && item.title) {

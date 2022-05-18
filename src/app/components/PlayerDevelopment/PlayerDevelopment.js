@@ -206,8 +206,12 @@ function PlayerDevelopment(props) {
           }}/>
         </FormGroup>
       </div>
+     
+      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+        player development plans -skill view
+      </Typography>
       <div className="NewAssessment">
-        <MenuItem
+        <MenuItem className="assessment-btn"
           onClick={() => {
             updateNav("../assessments");
           }}
@@ -215,9 +219,6 @@ function PlayerDevelopment(props) {
           Assessments
         </MenuItem>
       </div>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-        player development plans -skill view
-      </Typography>
       {/* <PlayerDevelopmentDatesSection datesArr={datesArr} /> */}
       <div className="checkboxcontainer">
         {
