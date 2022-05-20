@@ -50,7 +50,7 @@ const schema = yup.object().shape({
         .required('Please enter your password.')
         .min(4, 'Password is too short - should be 4 chars minimum.'),
     passwordConfirm: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match'),
-    current_level: yup .string() .required("select one option")
+    //current_level: yup .string() .required("select one option")
     // acceptTermsConditions: yup.boolean().oneOf([true], 'The terms and conditions must be accepted.'),
 });
 

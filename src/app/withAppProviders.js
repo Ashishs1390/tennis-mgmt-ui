@@ -10,12 +10,23 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import AppContext from './AppContext';
 import routes from './fuse-configs/routesConfig';
 import store from './store';
+import { useEffect, useState } from 'react';
+import Cookies from "js-cookie";
 
 const withAppProviders = (Component) => (props) => {
-  const WrapperComponent = () => (
-    <AppContext.Provider
+  function WrapperComponent() {
+    const [isLoggedIn, setISLoggedIn] = useState(
+      Cookies.get("token") == null ? false : true
+    );
+
+    useEffect(() => {
+      if (isLoggedIn && Cookies.get("token") !== '') {
+        setISLoggedIn(true);
+      }
+    }, [Cookies.get("token")]);
+    return <AppContext.Provider
       value={{
-        routes,
+        routes: routes(),
       }}
     >
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -26,7 +37,7 @@ const withAppProviders = (Component) => (props) => {
         </Provider>
       </LocalizationProvider>
     </AppContext.Provider>
-  );
+  };
 
   return WrapperComponent;
 };

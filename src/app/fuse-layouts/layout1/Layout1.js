@@ -37,6 +37,11 @@ function Layout1(props) {
   const [isLoggedIn, setISLoggedIn] = useState(
     document.cookie == '' ? false : true
   );
+  useEffect(() => {
+    if (!isLoggedIn && document.cookie !== '') {
+      setISLoggedIn(true);
+    }
+  }, [document.cookie]);
   console.log(isLoggedIn);
   const config = useSelector(({ fuse }) => fuse.settings.current.layout.config);
   const appContext = useContext(AppContext);
