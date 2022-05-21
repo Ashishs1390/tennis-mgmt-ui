@@ -16,7 +16,7 @@ const Root = styled(FusePageCarded)(({ theme }) => ({
         },
     },
     '& .FusePageCarded-content': {
-        display: 'flex',
+        // display: 'flex',
     },
     '& .FusePageCarded-contentCard': {
         overflow: 'hidden',
@@ -24,7 +24,6 @@ const Root = styled(FusePageCarded)(({ theme }) => ({
 }));
 
 function PlayerDevelopmentWrapper() {
-    // return <div>Video Analyaia page</div>
     return (<>
         <Root header={<Header title="Player Development" />} content={<PlayerDevelopment />} innerScroll />;
     </>)
@@ -34,4 +33,3 @@ function PlayerDevelopmentWrapper() {
 
 export default PlayerDevelopmentWrapper;
 
-// export default withReducer('eCommerceApp', reducer)(Products);
