@@ -87,19 +87,10 @@ function Login3Page(props) {
                 console.log(response.data.role);
                 if (response.data.role == "player") {
                     // navigate(`/user/${response.data.role}`);
-                    setTimeout(() => {
-                        console.log("abc")
-                    }, 4000);
-                    setTimeout(() => {
-                        // navigate(`link/player`);
                         navigate("/profilepage");
-                    },4000)
                 } else {
                     console.log("---------else-------------")
-                    setTimeout(() => {
-                        navigate(`link/player`)
-                    },4000);
-
+                    navigate(`link/player`)
                 }
             })
             .catch((error) => {
