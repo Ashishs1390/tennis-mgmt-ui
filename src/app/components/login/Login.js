@@ -13,9 +13,10 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link,  } from 'react-router-dom';
 import * as yup from 'yup';
 import _ from '@lodash';
+import Cookies from "js-cookie";
 
 const Root = styled('div')(({ theme }) => ({
     '& .Login3-leftSection': {},
@@ -56,6 +57,15 @@ function Login3Page(props) {
     const [role, setRole] = useState("player");
     const [errmsg, setErrmsg] = useState({});
     const { isValid, dirtyFields, errors } = formState;
+    const [isLoggedIn, setISLoggedIn] = useState(
+        Cookies.get("token") == null ? false : true
+      );
+
+    useEffect(() => {
+        if (isLoggedIn && Cookies.get("token") !== '') {
+            navigate("/profilepage");
+        }
+      });
 
     const loginCall = (fields, role) => {
         console.log(fields);
@@ -77,19 +87,10 @@ function Login3Page(props) {
                 console.log(response.data.role);
                 if (response.data.role == "player") {
                     // navigate(`/user/${response.data.role}`);
-                    setTimeout(() => {
-                        console.log("abc")
-                    }, 4000);
-                    setTimeout(() => {
-                        // navigate(`link/player`);
                         navigate("/profilepage");
-                    },4000)
                 } else {
                     console.log("---------else-------------")
-                    setTimeout(() => {
-                        navigate(`link/player`)
-                    },4000);
-
+                    navigate(`link/player`)
                 }
             })
             .catch((error) => {

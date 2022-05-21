@@ -14,10 +14,11 @@ import StrockAnalysisList from "./../components/strock-analysis-list/strock-anal
 import CompareLibrary from "./../components/compare-library/compare-library";
 // import ProfilePageConfig from './../components/profile/ProfilePageConfig'
 import LinkPlayer from "./../components/link-player/link-player";
+import ValidateRoute from "../shared-components/validateRoute";
 const routeConfigs = [ExampleConfig];
 
-
-const routes = [
+const routes = () => {  
+  return [
   // if you want to make whole app auth protected by default change defaultAuth for example:
   // ...FuseUtils.generateRoutesFromConfigs(routeConfigs, ['admin','staff','user']),
   // The individual route configs which has auth option won't be overridden.
@@ -32,24 +33,23 @@ const routes = [
   },
   {
     path: 'registration/:role',
-    // element: <Navigate to="registration"/>
     element:<Registration/>
   },
   {
     path: 'profilepage',
-    element: <ProfilePage/>
+    element:  <ValidateRoute><ProfilePage/></ValidateRoute>
   },
   {
     path: 'videoanalysis/:from',
-    element: <VideoAnalysis/>
+    element: <ValidateRoute><VideoAnalysis/></ValidateRoute>
   },
   {
     path: "comparelibrary",
-    element:<CompareLibrary/>
+    element: <ValidateRoute> <CompareLibrary/> </ValidateRoute>
   },
   {
     path: "assessments",
-    element: <CompetancyRating/>
+    element: <ValidateRoute> <CompetancyRating/> </ValidateRoute>
   },
   {
     path: 'loading',
@@ -57,15 +57,15 @@ const routes = [
   },
   {
     path: 'strockanalysislist',
-    element: <StrockAnalysisList/>
+    element: <ValidateRoute>  <StrockAnalysisList/> </ValidateRoute>
   },
   {
     path: 'playerdevelopment',
-    element: <PlayerDevelopmentWrapper/>
+    element: <ValidateRoute> <PlayerDevelopmentWrapper/> </ValidateRoute>
   },
   {
     path: 'link/player',
-    element: <LinkPlayer/>
+    element: <ValidateRoute> <LinkPlayer/> </ValidateRoute>
   },
   {
     path: '404',
@@ -75,6 +75,6 @@ const routes = [
     path: '*',
     element: <Navigate to="404" />,
   },
-];
+]};
 
 export default routes;
