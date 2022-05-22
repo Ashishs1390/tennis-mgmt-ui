@@ -82,29 +82,9 @@ function StrockAnalysisList(props) {
       <Typography variant="h4" gutterBottom component="div">
         Stroke (Video) Analysis List
       </Typography>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box>
         <Grid container spacing={2}>
-          <Grid item xs={10} md={4}>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Select Player Name
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  label="Select Player Name"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={10}>Kobara Obove</MenuItem>
-                  <MenuItem value={20}>Twenty Noun</MenuItem>
-                  <MenuItem value={30}>Rand Koltan</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Grid>
-          <Grid item xs={10} md={3}>
+          {/* <Grid item xs={10} md={3}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">
                 Select Player Name
@@ -121,32 +101,14 @@ function StrockAnalysisList(props) {
                 <MenuItem value={30}>Rand Koltan</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-          <Grid item xs={10} md={3}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                All listings
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="All listings"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Kobara Obove</MenuItem>
-                <MenuItem value={20}>Twenty Noun</MenuItem>
-                <MenuItem value={30}>Rand Koltan</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
+          </Grid> */}
           <Grid item xs={10} md={2}>
-            <Button variant="contained" onClick={() => { console.log(props)}}>Filter</Button>
-            <Button variant="contained" onClick={() => { selectVideoForAnalysis() }}>select</Button>
+            {/* <Button variant="contained" onClick={() => { console.log(props)}}>Filter</Button> */}
+            <Button variant="contained" fullWidth = "true" onClick={() => { selectVideoForAnalysis() }}>select</Button>
           </Grid>
         </Grid>
       </Box>
-      <Stack spacing={2}>
+      {/* <Stack spacing={2}>
         <Pagination
           count={10}
           variant="outlined"
@@ -154,8 +116,8 @@ function StrockAnalysisList(props) {
           showFirstButton
           showLastButton
         />
-      </Stack>
-      <List sx={{ width: "100%", maxWidth: 1080, bgcolor: "background.paper" }}>
+      </Stack> */}
+      <List sx={{ width: "100%", bgcolor: "background.paper" }}>
       {videoAnalysis.data && videoAnalysis.data.length > 0 && videoAnalysis.data.map((value, i) => {
           const labelId = `checkbox-list-secondary-label-${i}`;
           return (
@@ -164,7 +126,7 @@ function StrockAnalysisList(props) {
                 alignItems="flex-start"
                 secondaryAction={
                   <Checkbox
-                    edge="end"
+                    edge="false"
                     onChange={handleToggle(value)}
                     inputProps={{ "aria-labelledby": labelId }}
                     disabled={isChecked(value) && disableChecked}
@@ -175,7 +137,7 @@ function StrockAnalysisList(props) {
                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                 </ListItemAvatar>
                 <ListItemText
-                   primary="Brunch this weekend?"
+                  primary={`"Video ${i} ---- ${value.id}"`}
                   secondary={<p style={{ fontStyle: "italic", margin: 0 }}>
                     <Typography
                         sx={{ display: "inline" }}

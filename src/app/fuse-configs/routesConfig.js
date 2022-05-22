@@ -10,7 +10,7 @@ import PlayerDevelopmentWrapper from "app/components/PlayerDevelopment/PlayerDev
 import ProfilePage from 'app/components/profile/ProfilePage';
 import VideoAnalysis from 'app/components/youtube-player/videoanalysiswrapper';
 // import StrockAnalysisList from "app/components/strock-analysis-list/strock-analysis-list";
-import StrockAnalysisList from "./../components/strock-analysis-list/strock-analysis-list";
+import StrockAnalysisWrapper from "./../components/strock-analysis-list/StrockAnalysisWrapper";
 import CompareLibrary from "./../components/compare-library/compare-library";
 // import ProfilePageConfig from './../components/profile/ProfilePageConfig'
 import LinkPlayer from "./../components/link-player/link-player";
@@ -57,7 +57,7 @@ const routes = () => {
   },
   {
     path: 'strockanalysislist',
-    element: <ValidateRoute>  <StrockAnalysisList/> </ValidateRoute>
+    element: <ValidateRoute>  <StrockAnalysisWrapper/> </ValidateRoute>
   },
   {
     path: 'playerdevelopment',
