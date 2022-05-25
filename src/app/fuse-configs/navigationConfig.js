@@ -16,12 +16,12 @@ const navigationConfig = [
     icon: 'apps',
     children: [
       {
-        id: 'example-component',
-        title: 'Example',
-        translate: 'EXAMPLE',
+        id: 'profile',
+        title: 'Profile',
+        translate: 'PROFILE',
         type: 'item',
         icon: 'whatshot',
-        url: 'example',
+        url: 'profilepage',
       },
       {
         id: 'video-analysis',
@@ -60,5 +60,34 @@ const navigationConfig = [
     ],
   },
 ];
+
+
+export const navigationConfigPC = [
+  {
+    id: 'applications',
+    title: 'Applications',
+    translate: 'APPLICATIONS',
+    type: 'group',
+    icon: 'apps',
+    children: [
+      {
+        id: 'profile',
+        title: 'Profile',
+        translate: 'PROFILE',
+        type: 'item',
+        icon: 'whatshot',
+        url: 'profilepage',
+      },
+      {
+        id: 'player-data',
+        title: 'PLAYER DATA',
+        //translate: 'PLAYER DATA',
+        type: 'item',
+        icon: 'whatshot',
+        url: 'competancyaggregation',
+      }
+    ]
+  }
+]
 
 export default navigationConfig;

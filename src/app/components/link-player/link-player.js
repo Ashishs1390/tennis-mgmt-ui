@@ -9,6 +9,8 @@ import {
   updateConnectedChildren,
 } from "./../../redux/index";
 
+import { removeAllNav, setParentCoachNav, resetNavigation} from './../../store/fuse/navigationSlice';
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -33,6 +35,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from "../../api/axios.api";
 // import LogoutApp from "../../../services/logout";
@@ -73,6 +76,7 @@ function LinkPlayer(props) {
     JSON.parse(localStorage.getItem("localStore"))
   );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const regEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const txtCntrl = useRef();
@@ -84,6 +88,14 @@ function LinkPlayer(props) {
       setRole(localStore.role);
     }, 100);
     props.fetchLinkedPlayerList();
+    if(userDetails.role === 'parent') {
+      dispatch(removeAllNav());
+      dispatch(setParentCoachNav());
+    }
+
+    return () => {
+      dispatch(resetNavigation());
+    }
   }, []);
 
   useEffect(() => {

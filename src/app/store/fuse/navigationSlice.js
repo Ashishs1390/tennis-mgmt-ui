@@ -1,5 +1,5 @@
 import { createSelector, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import navigationConfig from 'app/fuse-configs/navigationConfig';
+import navigationConfig, { navigationConfigPC } from 'app/fuse-configs/navigationConfig';
 import FuseUtils from '@fuse/utils';
 import i18next from 'i18next';
 import _ from '@lodash';
@@ -44,10 +44,12 @@ const navigationSlice = createSlice({
   reducers: {
     setNavigation: navigationAdapter.setAll,
     resetNavigation: (state, action) => initialState,
+    removeAllNav: (state, action) => navigationAdapter.removeAll(state),
+    setParentCoachNav: (state, action) => navigationAdapter.upsertMany(state, navigationConfigPC),
   },
 });
 
-export const { setNavigation, resetNavigation } = navigationSlice.actions;
+export const { setNavigation, resetNavigation, removeAllNav, setParentCoachNav } = navigationSlice.actions;
 
 const getUserRole = (state) => state.auth.user.role;
 
