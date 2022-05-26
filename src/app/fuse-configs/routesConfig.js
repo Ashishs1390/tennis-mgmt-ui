@@ -16,6 +16,7 @@ import CompareLibrary from "./../components/compare-library/compare-library";
 import LinkPlayer from "./../components/link-player/link-player";
 import ValidateRoute from "../shared-components/validateRoute";
 const routeConfigs = [ExampleConfig];
+import CompetancyAggregation from "../components/CompetancyAggregation/CompetancyAggregation" 
 
 const routes = () => {  
   return [
@@ -66,6 +67,10 @@ const routes = () => {
   {
     path: 'link/player',
     element: <ValidateRoute> <LinkPlayer/> </ValidateRoute>
+    },
+    {
+      path: 'competancyaggregation',
+      element: <ValidateRoute> <CompetancyAggregation /> </ValidateRoute>
   },
   {
     path: '404',
