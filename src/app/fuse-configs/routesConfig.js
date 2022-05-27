@@ -15,6 +15,8 @@ import CompareLibrary from "./../components/compare-library/compare-library";
 // import ProfilePageConfig from './../components/profile/ProfilePageConfig'
 import LinkPlayer from "./../components/link-player/link-player";
 import ValidateRoute from "../shared-components/validateRoute";
+import ContactsApp from "./../components/link-player/contacts/ContactsApp"
+import { element } from 'prop-types';
 const routeConfigs = [ExampleConfig];
 import CompetancyAggregation from "../components/CompetancyAggregation/CompetancyAggregation" 
 
@@ -71,7 +73,11 @@ const routes = () => {
     {
       path: 'competancyaggregation',
       element: <ValidateRoute> <CompetancyAggregation /> </ValidateRoute>
-  },
+  },{
+      path:'contact',
+      element: <ValidateRoute> <ContactsApp /> </ValidateRoute>
+    },
+  
   {
     path: '404',
     element: <Error404Page />,

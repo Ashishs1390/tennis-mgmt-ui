@@ -31,6 +31,14 @@ import ListSubheader from "@mui/material/ListSubheader";
 import Avatar from "@mui/material/Avatar";
 import CircularProgress from "@mui/material/CircularProgress";
 // import NavBarParent from "../../player-coach/NavBarParent/NarBarParent";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
 
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -88,7 +96,7 @@ function LinkPlayer(props) {
       setRole(localStore.role);
     }, 100);
     props.fetchLinkedPlayerList();
-    if(userDetails.role === 'parent') {
+    if (userDetails.role === 'parent' || userDetails.role === 'coach') {
       dispatch(removeAllNav());
       dispatch(setParentCoachNav());
     }
@@ -185,7 +193,7 @@ function LinkPlayer(props) {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ flexGrow: 1 }}>
+      {/* <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={10} md={2}></Grid>
           <Grid item xs={10} md={4}>
@@ -297,7 +305,7 @@ function LinkPlayer(props) {
             )}
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={10} md={2}></Grid>
@@ -403,6 +411,25 @@ function LinkPlayer(props) {
           </Box>
         )
       )}
+      <div className="flex flex-col w-full min-h-full sm:border-1 sm:rounded-16 overflow-hidden">
+        <TableContainer>
+          <Table stickyHeader >
+            <TableHead>
+              <TableRow>
+                <TableCell >
+                    Name
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  Title
+                </TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+      </div>
+
     </div>
   );
 }
