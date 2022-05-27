@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
     fetchLinkedPlayerList,
-} from "./../../../redux/index";
+} from "./../../redux/index";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { ListItem } from "@mui/material";
@@ -12,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from "@mui/material/Button";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import CompetancyAggregation from "./CompetancyAggregation";
-import NavBarParent from "../../player-coach/NavBarParent/NarBarParent";
+// import NavBarParent from "../../player-coach/NavBarParent/NarBarParent";
 function UserListAggregation(props) {
     const navigate = useNavigate();
     const { fetchLinkedPlayerList, searchedPlayerList } = props;
@@ -46,7 +46,7 @@ function UserListAggregation(props) {
             {!showAggrePage &&
             <Grid container spacing={2}>
                     <Grid item xs={10} md={12}>
-                        <NavBarParent></NavBarParent>
+                        {/* <NavBarParent></NavBarParent> */}
 
                     {
                         searchedPlayerList && searchedPlayerList.map((value) => {

@@ -24,6 +24,7 @@ import {
   initalCompareReducer
 } from "./../redux/videoanalysis/videoAnalysisReducer";
 import { linkPlayerReducer } from "./../redux/link-player/linkPlayerReducer";
+import { initalAggrReducer } from "./../redux/competancy-aggregation/competancyAggregationReducer";
 
 
 const createReducer = (asyncReducers) => (state, action) => {
@@ -40,7 +41,7 @@ const createReducer = (asyncReducers) => (state, action) => {
     competancy: initalCompetnacyReducer,
     personalDevelopment: initalPDPReducer,
     linkPlayerReducer: linkPlayerReducer,
-    // aggregatedCompData: initalAggrReducer,
+    aggregatedCompData: initalAggrReducer,
     ...asyncReducers,
   });
 
