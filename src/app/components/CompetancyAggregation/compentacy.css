@@ -1,0 +1,19 @@
+.labelWidth{
+    width:400px !important;
+}
+.labelWidth .MuiFormControlLabel-label{
+    font-size: 18px !important;
+    vertical-align: unset;
+}
+
+.aggregationList {
+    margin-bottom: 40px;
+}
+
+.buttonWrapper{
+    margin-top: 40px;
+}
+
+.AggregationWrapper{
+    padding:10px 20px;
+}

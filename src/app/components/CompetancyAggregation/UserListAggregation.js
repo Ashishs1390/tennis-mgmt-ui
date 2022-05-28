@@ -12,6 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from "@mui/material/Button";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import CompetancyAggregation from "./CompetancyAggregation";
+import "./compentacy.css";
 // import NavBarParent from "../../player-coach/NavBarParent/NarBarParent";
 function UserListAggregation(props) {
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ function UserListAggregation(props) {
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} className="AggregationWrapper">
             {!showAggrePage &&
             <Grid container spacing={2}>
                     <Grid item xs={10} md={12}>
@@ -51,13 +52,15 @@ function UserListAggregation(props) {
                     {
                         searchedPlayerList && searchedPlayerList.map((value) => {
                             return (
-                                <ListItem key={value}>
+                                //className="aggregationList"
+                                <ListItem key={value} > 
                                     <FormGroup>
                                         <FormControlLabel value={value}
                                             onChange={() => {
                                                 updateCheckBoxSelection(value)
                                             }}
-
+                                            className="labelWidth"
+                                            
                                             control={<Checkbox />} label={value} />
                                     </FormGroup>
                                 </ListItem>
@@ -68,12 +71,13 @@ function UserListAggregation(props) {
                         component="form"
                         noValidate
                         autoComplete="off"
-                        className="fieldbox"
+                        className="fieldbox buttonWrapper"
+                        
                     >
                         <Button
-                            fullWidth
+                            sizeMedium
                             variant="contained"
-                            color="secondary"
+                            color="primary"
                             onClick={onSumbit}
                         >
                             Button Compare

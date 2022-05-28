@@ -18,7 +18,7 @@ import ValidateRoute from "../shared-components/validateRoute";
 import ContactsApp from "./../components/link-player/contacts/ContactsApp"
 import { element } from 'prop-types';
 const routeConfigs = [ExampleConfig];
-import UserListAggregation from "../components/CompetancyAggregation/UserListAggregation" 
+import CompetancyAggregationWrapper from "../components/CompetancyAggregation/CompetancyAggregationWrapper" 
 
 const routes = () => {  
   return [
@@ -72,7 +72,7 @@ const routes = () => {
     },
     {
       path: 'competancyaggregation',
-      element: <ValidateRoute> <UserListAggregation /> </ValidateRoute>
+      element: <ValidateRoute> <CompetancyAggregationWrapper /> </ValidateRoute>
   },{
       path:'contact',
       element: <ValidateRoute> <ContactsApp /> </ValidateRoute>

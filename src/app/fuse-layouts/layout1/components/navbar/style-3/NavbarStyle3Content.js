@@ -125,7 +125,7 @@ function NavbarStyle3Content(props) {
               />
             </FuseScrollbars>
             <div>
-              ashish
+              {/* ashish */}
             </div>
           </div>
         </ThemeProvider>
