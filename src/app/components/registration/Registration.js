@@ -309,7 +309,7 @@ function Registration(props) {
 
                     <div className="flex flex-col items-center justify-center pb-32">
                         <span className="font-normal">Already have an account?</span>
-                        <Link className="font-normal" to="/pages/auth/login-3">
+                        <Link className="font-normal" to="/">
                             Login
                         </Link>
                     </div>

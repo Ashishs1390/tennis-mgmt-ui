@@ -46,6 +46,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from "../../api/axios.api";
+
+import useManageNavState from "../../custom-hooks/nav-manage";
 // import LogoutApp from "../../../services/logout";
 
 import "./link-player.css";
@@ -80,11 +82,10 @@ function LinkPlayer(props) {
   const [validEmail, SetValidEmail] = useState(null);
   const [alreadyAddedEmail, setAlreadyAddedEmail] = useState(false);
   const [role, setRole] = useState("");
-  const [userDetails] = useState(
-    JSON.parse(localStorage.getItem("localStore"))
-  );
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoachNav, resetNavigation});
+  const navigate = useNavigate();
+
   const regEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const txtCntrl = useRef();
@@ -96,14 +97,16 @@ function LinkPlayer(props) {
       setRole(localStore.role);
     }, 100);
     props.fetchLinkedPlayerList();
-    if (userDetails.role === 'parent' || userDetails.role === 'coach') {
-      dispatch(removeAllNav());
-      dispatch(setParentCoachNav());
-    }
+    // if (userDetails.role === 'parent' || userDetails.role === 'coach') {
+    //   dispatch(removeAllNav());
+    //   dispatch(setParentCoachNav());
+    // }
 
-    return () => {
-      dispatch(resetNavigation());
-    }
+    // return () => {
+    //   if (sessionStorage.getItem('child_email')) {
+    //     dispatch(resetNavigation());
+    //   }
+    // }
   }, []);
 
   useEffect(() => {
@@ -163,7 +166,8 @@ function LinkPlayer(props) {
         updateConnectedChildren(emailChecked);
         localStorage.setItem("child_email", emailChecked);
         localStorage.setItem("current_level", x.data.data.current_level);
-        navigate(`../user/${role}/playerdevelopment`);
+        sessionStorage.setItem("child_email", emailChecked);
+        navigate(`/playerdevelopment`);
       })
       .catch((err) => {
         console.log(err);

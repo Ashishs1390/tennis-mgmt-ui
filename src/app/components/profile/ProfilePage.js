@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import AboutTab from './tabs/AboutTab';
 import PhotosVideosTab from './tabs/PhotosVideosTab';
 import TimelineTab from './tabs/TimelineTab';
+import { removeAllNav, setParentCoachNav, resetNavigation} from './../../store/fuse/navigationSlice';
+import useManageNavState from "../../custom-hooks/nav-manage";
+import { useDispatch } from 'react-redux';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
   '& .FusePageSimple-topBg': {
@@ -54,6 +57,10 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 
 function ProfilePage() {
   const [selectedTab, setSelectedTab] = useState(0);
+
+  
+const dispatch = useDispatch();
+const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoachNav, resetNavigation});
 
   function handleTabChange(event, value) {
     setSelectedTab(value);
