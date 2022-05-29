@@ -97,16 +97,7 @@ function LinkPlayer(props) {
       setRole(localStore.role);
     }, 100);
     props.fetchLinkedPlayerList();
-    // if (userDetails.role === 'parent' || userDetails.role === 'coach') {
-    //   dispatch(removeAllNav());
-    //   dispatch(setParentCoachNav());
-    // }
 
-    // return () => {
-    //   if (sessionStorage.getItem('child_email')) {
-    //     dispatch(resetNavigation());
-    //   }
-    // }
   }, []);
 
   useEffect(() => {

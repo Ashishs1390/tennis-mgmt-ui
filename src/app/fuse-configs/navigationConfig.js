@@ -71,6 +71,14 @@ export const navigationConfigPC = [
     icon: 'apps',
     children: [
       {
+        id: 'link-player',
+        title: 'Home',
+        //translate: 'PLAYER DATA',
+        type: 'item',
+        icon: 'whatshot',
+        url: 'link/player',
+      },
+      {
         id: 'profile',
         title: 'Profile',
         translate: 'PROFILE',
