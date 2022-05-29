@@ -18,6 +18,7 @@ import { useNavigate, Link, Outlet } from "react-router-dom";
 import { Routes, Route, useParams } from "react-router-dom";
 
 function CompetancyAggregation(props) {
+    console.log("--------Competancy Aggregati")
     const navigate = useNavigate();
     const { getCompetancyDetails, aggregatedCompData: { aggrData }, selectedPlayers } = props;
     const [data, setData] = useState([]);
@@ -37,7 +38,8 @@ function CompetancyAggregation(props) {
     }, []);
 
 
-    const routePlayerDevelop = (selectedEmail,current_level) => {
+    const routePlayerDevelop = (selectedEmail, current_level) => {
+        console.log(selectedEmail)
         get("/api/tennismgmt/linktoplayer/itn_level", {
             params: { email: selectedEmail},
         })

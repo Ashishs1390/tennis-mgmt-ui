@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
     fetchLinkedPlayerList,
-} from "./../../../redux/index";
+} from "./../../redux/index";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { ListItem } from "@mui/material";
@@ -12,7 +12,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from "@mui/material/Button";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import CompetancyAggregation from "./CompetancyAggregation";
-import NavBarParent from "../../player-coach/NavBarParent/NarBarParent";
+import "./compentacy.css";
+// import NavBarParent from "../../player-coach/NavBarParent/NarBarParent";
 function UserListAggregation(props) {
     const navigate = useNavigate();
     const { fetchLinkedPlayerList, searchedPlayerList } = props;
@@ -42,22 +43,24 @@ function UserListAggregation(props) {
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} className="AggregationWrapper">
             {!showAggrePage &&
             <Grid container spacing={2}>
                     <Grid item xs={10} md={12}>
-                        <NavBarParent></NavBarParent>
+                        {/* <NavBarParent></NavBarParent> */}
 
                     {
                         searchedPlayerList && searchedPlayerList.map((value) => {
                             return (
-                                <ListItem key={value}>
+                                //className="aggregationList"
+                                <ListItem key={value} > 
                                     <FormGroup>
                                         <FormControlLabel value={value}
                                             onChange={() => {
                                                 updateCheckBoxSelection(value)
                                             }}
-
+                                            className="labelWidth"
+                                            
                                             control={<Checkbox />} label={value} />
                                     </FormGroup>
                                 </ListItem>
@@ -68,12 +71,13 @@ function UserListAggregation(props) {
                         component="form"
                         noValidate
                         autoComplete="off"
-                        className="fieldbox"
+                        className="fieldbox buttonWrapper"
+                        
                     >
                         <Button
-                            fullWidth
+                            sizeMedium
                             variant="contained"
-                            color="secondary"
+                            color="primary"
                             onClick={onSumbit}
                         >
                             Button Compare

@@ -197,7 +197,7 @@ function LinkPlayer(props) {
           </Grid>
         </Grid>
       </Box>
-      {/* <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={10} md={2}></Grid>
           <Grid item xs={10} md={4}>
@@ -309,7 +309,7 @@ function LinkPlayer(props) {
             )}
           </Grid>
         </Grid>
-      </Box> */}
+      </Box>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={10} md={2}></Grid>
@@ -324,7 +324,6 @@ function LinkPlayer(props) {
                   dense
                   sx={{
                     width: "100%",
-                    maxWidth: 360,
                     bgcolor: "background.paper",
                   }}
                   subheader={
@@ -415,25 +414,6 @@ function LinkPlayer(props) {
           </Box>
         )
       )}
-      <div className="flex flex-col w-full min-h-full sm:border-1 sm:rounded-16 overflow-hidden">
-        <TableContainer>
-          <Table stickyHeader >
-            <TableHead>
-              <TableRow>
-                <TableCell >
-                    Name
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  Title
-                </TableCell>
-              </TableRow>
-            </TableHead>
-          </Table>
-        </TableContainer>
-      </div>
-
     </div>
   );
 }
