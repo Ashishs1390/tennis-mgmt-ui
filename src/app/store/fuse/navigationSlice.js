@@ -1,5 +1,5 @@
 import { createSelector, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import navigationConfig, { navigationConfigPC } from 'app/fuse-configs/navigationConfig';
+import navigationConfig, { navigationConfigPC, navigationConfigParentCoach } from 'app/fuse-configs/navigationConfig';
 import FuseUtils from '@fuse/utils';
 import i18next from 'i18next';
 import _ from '@lodash';
@@ -38,12 +38,19 @@ export const {
   selectById: selectNavigationItemById,
 } = navigationAdapter.getSelectors((state) => state.fuse.navigation);
 
+const checkRoleParentCoach = () => {
+  const data = JSON.parse(localStorage.getItem("localStore"));
+  if(data) {
+    return data.role === 'parent' || data.role === 'coach';
+  }
+  return false
+};
 const navigationSlice = createSlice({
   name: 'navigation',
   initialState,
   reducers: {
     setNavigation: navigationAdapter.setAll,
-    resetNavigation: (state, action) => initialState,
+    resetNavigation: (state, action) => checkRoleParentCoach() ? navigationAdapter.upsertMany(emptyInitialState, navigationConfigParentCoach) : initialState,
     removeAllNav: (state, action) => navigationAdapter.removeAll(state),
     setParentCoachNav: (state, action) => navigationAdapter.upsertMany(state, navigationConfigPC),
   },
