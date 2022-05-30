@@ -13,4 +13,18 @@
   margin-bottom: 5px !important;
   color: #172217;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.HomePageHeader{
+  border-bottom: 3px solid #252f3e;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.searchBtn {
+  width: 70px;
+  height: 50px;
+  border-radius: 0px;
 }

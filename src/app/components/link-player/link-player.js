@@ -168,7 +168,7 @@ function LinkPlayer(props) {
   return (
     <div>
       {/* <NavBarParent></NavBarParent> */}
-      <Typography variant="h4" gutterBottom component="div" align="center">
+      <Typography variant="h4" gutterBottom component="div" align="center" className="HomePageHeader">
         Player Connect
       </Typography>
 
@@ -270,6 +270,7 @@ function LinkPlayer(props) {
                 onClick={() => {
                   validateAndSubmit(searchEmail, true);
                 }}
+                className="searchBtn"
                 inputprops={{ disabled: props.loadingSearchedPlayer }}
               >
                 {props.loadingSearchedPlayer ? (
@@ -283,7 +284,8 @@ function LinkPlayer(props) {
               </Button>
             ) : (
               <Button
-                variant="contained"
+                  variant="contained"
+                  className="searchBtn"
                 onClick={() => {
                   addSelectedEmailToList();
                 }}
@@ -375,7 +377,8 @@ function LinkPlayer(props) {
             <Grid item xs={10} md={6}></Grid>
             <Grid item xs={10} md={2}>
               <Button
-                variant="contained"
+                  variant="contained"
+                  className="searchBtn"
                 onClick={(e) => {
                   getPlayerItnLevel();
                 }}

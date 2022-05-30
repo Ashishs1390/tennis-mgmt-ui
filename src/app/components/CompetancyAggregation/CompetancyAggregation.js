@@ -18,7 +18,6 @@ import { useNavigate, Link, Outlet } from "react-router-dom";
 import { Routes, Route, useParams } from "react-router-dom";
 
 function CompetancyAggregation(props) {
-    console.log("--------Competancy Aggregati")
     const navigate = useNavigate();
     const { getCompetancyDetails, aggregatedCompData: { aggrData }, selectedPlayers } = props;
     const [data, setData] = useState([]);

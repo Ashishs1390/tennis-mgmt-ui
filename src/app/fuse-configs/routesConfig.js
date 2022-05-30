@@ -13,7 +13,7 @@ import VideoAnalysis from 'app/components/youtube-player/videoanalysiswrapper';
 import StrockAnalysisWrapper from "./../components/strock-analysis-list/StrockAnalysisWrapper";
 import CompareLibrary from "./../components/compare-library/compare-library";
 // import ProfilePageConfig from './../components/profile/ProfilePageConfig'
-import LinkPlayer from "./../components/link-player/link-player";
+import LinkPlayerWrapper from "./../components/link-player/LinkPlayerWrapper";
 import ValidateRoute from "../shared-components/validateRoute";
 import ContactsApp from "./../components/link-player/contacts/ContactsApp"
 import { element } from 'prop-types';
@@ -68,7 +68,7 @@ const routes = () => {
   },
   {
     path: 'link/player',
-    element: <ValidateRoute> <LinkPlayer/> </ValidateRoute>
+    element: <ValidateRoute> <LinkPlayerWrapper/> </ValidateRoute>
     },
     {
       path: 'competancyaggregation',

@@ -23,7 +23,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
-import { getPersonalDevPageInfo, getPersonalDevOnDate } from "./../../redux/index";
+import { getPersonalDevPageInfo, getPersonalDevOnDate, fetchDetails } from "./../../redux/index";
 import { connect } from "react-redux";
 
 import { emptyCompetancySave } from '../../redux/index'
@@ -62,14 +62,44 @@ function PlayerDevelopment(props) {
   const {
     getPersonalDevPageInfo,
     pdpData: { progressBarData, assessmentDates, assessmentTestDates, loading = false },
+    userInfo
   } = props;
   //const [selectedRadios, setSelectedRadios] = useState({player: radioSelectionList.player[0], parent: radioSelectionList.parent[0], coach: radioSelectionList.coach[0]});
   const [selectedRadios, setSelectedRadios] = useState({ player: '', parent: '', coach: '' });
+  const child_email = localStorage.getItem("child_email")
+  const localStore = localStorage.getItem("localStore");
+  const [userName, setUserName] = useState("");
+  const [childEmail, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  useEffect(() => {
+    setTimeout(() => {
+      const { first_name, last_name, role } = JSON.parse(localStore);
+      const fullName = `${first_name} ${last_name}`;
+      setRole(role);
+      setUserName(fullName);
+    })
+
+  }, [localStore]);
   useEffect(() => {
     const current_level = localStorage.getItem("current_level");
     getPersonalDevPageInfo(current_level);
     props.emptyCompetancySave();
   }, []);
+  useEffect(() => {
+    setEmail(child_email);
+
+  }, [child_email]);
+
+  useEffect(() => {
+    console.log(childEmail)
+    if (role == "parent" || role == "coach") {
+      props.fetchDetails(childEmail);
+    }
+  }, [role]);
+
+  useEffect(() => {
+    localStorage.setItem("childInfo", JSON.stringify(userInfo.data));
+  }, [userInfo]);
 
   const updateCheckBoxSelection = (value, role) => {
     if (!selectedCheckBox[role].includes(value)) {
@@ -307,11 +337,16 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getPersonalDevPageInfo(current_level)),
     getPersonalDevOnDate: (data) => dispatch(getPersonalDevOnDate(data)),
     emptyCompetancySave: () => dispatch(emptyCompetancySave()),
+    fetchDetails: (email) => dispatch(fetchDetails(email)),
+
   };
 };
 
 const mapStateToProps = (state) => {
-  return { pdpData: state.personalDevelopment.pdpData };
+  return {
+    pdpData: state.personalDevelopment.pdpData,
+    userInfo: state.getData
+};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerDevelopment);

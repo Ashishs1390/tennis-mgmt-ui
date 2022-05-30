@@ -6,6 +6,7 @@ import {
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { ListItem } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -44,6 +45,9 @@ function UserListAggregation(props) {
 
     return (
         <Box sx={{ flexGrow: 1 }} className="AggregationWrapper">
+            <Typography variant="h4" gutterBottom component="div" align="center" className="HomePageHeader">
+                Competancy Aggregation
+            </Typography>
             {!showAggrePage &&
             <Grid container spacing={2}>
                     <Grid item xs={10} md={12}>
