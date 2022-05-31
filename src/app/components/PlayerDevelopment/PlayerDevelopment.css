@@ -38,7 +38,8 @@
   margin: 10px 0px !important;
 }
 .NewAssessment {
-  display: span !important;
+  /* display: span !important; */
+  padding-left: 40px;
 }
 .score-dot {
   display: inline-block;
@@ -167,4 +168,14 @@
 }
 .checkboxcontainer {
   display: flex;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+.assessmentheader{
+  margin-left: 20px;
+  padding-left: 20px;
+  font-size: 30px;
+}
+.DatesRole{
+  padding-left: 20px;
 }

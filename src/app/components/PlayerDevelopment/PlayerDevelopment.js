@@ -7,6 +7,7 @@ import { useNavigate, Link, Outlet } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
+import Button from '@mui/material/Button';
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./PlayerDevelopment.css";
@@ -237,17 +238,18 @@ function PlayerDevelopment(props) {
         </FormGroup>
       </div>
      
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div" className="assessmentheader">
         player development plans -skill view
       </Typography>
       <div className="NewAssessment">
-        <MenuItem className="assessment-btn"
+        <Button className="assessment-btn" variant="contained"
           onClick={() => {
             updateNav("../assessments");
           }}
         >
+
           Assessments
-        </MenuItem>
+        </Button>
       </div>
       {/* <PlayerDevelopmentDatesSection datesArr={datesArr} /> */}
       <div className="checkboxcontainer">
