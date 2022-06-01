@@ -90,7 +90,7 @@ function Login3Page(props) {
                         navigate("/profilepage");
                 } else {
                     console.log("---------else-------------")
-                    navigate(`link/player`)
+                    navigate(`/link/player`)
                 }
             })
             .catch((error) => {

@@ -16,6 +16,9 @@ import { get } from "../../api/axios.api"
 
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import { Routes, Route, useParams } from "react-router-dom";
+import { removeAllNav, setParentCoachNav, resetNavigation } from './../../store/fuse/navigationSlice';
+import useManageNavState from "../../custom-hooks/nav-manage";
+import { useDispatch } from 'react-redux';
 
 function CompetancyAggregation(props) {
     const navigate = useNavigate();
@@ -23,6 +26,8 @@ function CompetancyAggregation(props) {
     const [data, setData] = useState([]);
     const [role, setRole] = useState("");
     // const [player,setPlayers] = useState([]);
+    const dispatch = useDispatch();
+    const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoachNav, resetNavigation });
 
     useEffect(() => {
         getCompetancyDetails(selectedPlayers)

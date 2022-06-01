@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from 'js-cookie'
 const host = "http://localhost:8000";
 const defaultConfig = (config) => {
     const token = document.cookie.split('=')[1];
@@ -15,18 +16,28 @@ const defaultConfig = (config) => {
 
     }
 }
+console.log("------error----------");
+
 
 const success = (data) => ({
     data: {...data},
     error: false
 });
 
-const failure = (error) => (
-    {
-    message: error.message,
-    error: true,
-    errorStatus: error.status 
-});
+const failure = (error) => {
+    console.log("------error----------", error.response.status);
+    if (error.response.status === 401) {
+        Cookies.remove('token');
+        localStorage.clear();
+        window.location.href = "./";  
+
+    } 
+    return {
+        message: error.message,
+            error: true,
+                errorStatus: error.status
+    }
+};
 
 
 // get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
@@ -36,7 +47,7 @@ const get = async (url, config = {}) => {
         const response = await axios.get(host + url, (defaultConfig(config)));
         return success(response);
     } catch(error) {
-        throw (error);
+        return failure(error);
     }
 }
 

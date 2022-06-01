@@ -5,7 +5,7 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import Error404Page from 'app/main/404/Error404Page';
 import Login from './../components/login/Login';
 import Registration from 'app/components/registration/Registration';
-import CompetancyRating from "app/components/competancy_rating/competancy_rating";
+// import CompetancyAggregationWrapper from "app/components/competancy_rating/CompetancyWrapper";
 import PlayerDevelopmentWrapper from "app/components/PlayerDevelopment/PlayerDevelopmentWrapper";
 import ProfilePage from 'app/components/profile/ProfilePage';
 import VideoAnalysis from 'app/components/youtube-player/videoanalysiswrapper';
@@ -18,16 +18,21 @@ import ValidateRoute from "../shared-components/validateRoute";
 import ContactsApp from "./../components/link-player/contacts/ContactsApp"
 import { element } from 'prop-types';
 const routeConfigs = [ExampleConfig];
-import CompetancyAggregationWrapper from "../components/CompetancyAggregation/CompetancyAggregationWrapper" 
+import CompetancyAggregationWrapper from "../components/CompetancyAggregation/CompetancyAggregationWrapper"
+import CompetancyAssessmentWrapper from "../components/competancy_rating/CompetancyWrapper" 
 
 const routes = () => {  
   return [
   // if you want to make whole app auth protected by default change defaultAuth for example:
   // ...FuseUtils.generateRoutesFromConfigs(routeConfigs, ['admin','staff','user']),
   // The individual route configs which has auth option won't be overridden.
-  ...FuseUtils.generateRoutesFromConfigs(routeConfigs, null),
+    ...FuseUtils.generateRoutesFromConfigs(routeConfigs, null),
+    {
+      path: "/",
+      element : < Navigate to="login" ></Navigate>
+    },
   {
-    path: '/',
+    path: '/login',
     element: <Login/>
   },
   {
@@ -52,7 +57,7 @@ const routes = () => {
   },
   {
     path: "assessments",
-    element: <ValidateRoute> <CompetancyRating/> </ValidateRoute>
+    element: <ValidateRoute> <CompetancyAssessmentWrapper/> </ValidateRoute>
   },
   {
     path: 'loading',
