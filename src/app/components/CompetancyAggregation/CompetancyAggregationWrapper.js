@@ -5,6 +5,12 @@ import { styled } from '@mui/material/styles';
 // import Header from './ProductsHeader';
 import Header from '../common-components/header/Header';
 import UserListAggregation from './UserListAggregation';
+
+
+import { removeAllNav, setParentCoachNav, resetNavigation } from './../../store/fuse/navigationSlice';
+import useManageNavState from "../../custom-hooks/nav-manage";
+import { useDispatch } from 'react-redux';
+
 const Root = styled(FusePageCarded)(({ theme }) => ({
     '& .FusePageCarded-header': {
         minHeight: 72,
@@ -24,6 +30,8 @@ const Root = styled(FusePageCarded)(({ theme }) => ({
 }));
 
 function CompetancyAggregationWrapper() {
+    const dispatch = useDispatch();
+    const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoachNav, resetNavigation });
     // return <div>Video Analyaia page</div>
     return (<>
         <Root header={<Header title="Competancy Aggregation" />} content={<UserListAggregation />} innerScroll />;
