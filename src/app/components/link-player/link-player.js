@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 // import Login from "../../global/login/Login";
 import { connect } from "react-redux";
 import { useNavigate, Link, Outlet } from "react-router-dom";
@@ -45,7 +46,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useDispatch, useSelector } from 'react-redux';
 
-import { get } from "../../api/axios.api";
+import { get ,post} from "../../api/axios.api";
 
 import useManageNavState from "../../custom-hooks/nav-manage";
 // import LogoutApp from "../../../services/logout";
@@ -150,9 +151,9 @@ function LinkPlayer(props) {
   };
 
   const getPlayerItnLevel = () => {
-    get("/api/tennismgmt/linktoplayer/itn_level", {
-      params: { email: emailChecked },
-    })
+    console.log("-1111-")
+  
+      post("/api/tennismgmt/itn_level", { email: emailChecked },{withCredentials: true})
       .then((x) => {
         updateConnectedChildren(emailChecked);
         localStorage.setItem("child_email", emailChecked);
