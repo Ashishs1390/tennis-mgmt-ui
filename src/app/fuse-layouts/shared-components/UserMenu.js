@@ -10,11 +10,15 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logoutUser } from 'app/auth/store/userSlice';
+import Cookies from "js-cookie";
 
 function UserMenu(props) {
   const dispatch = useDispatch();
   const user = useSelector(({ auth }) => auth.user);
   const navigate = useNavigate();
+
+  const data = JSON.parse(localStorage.getItem("localStore"));
+  console.log('XXXXXX', data);
 
   const [userMenu, setUserMenu] = useState(null);
 
@@ -26,6 +30,12 @@ function UserMenu(props) {
     setUserMenu(null);
   };
 
+  const logout = () => {
+    Cookies.remove("token");
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href= "";
+  }
   return (
     <>
       <Button
@@ -68,17 +78,16 @@ function UserMenu(props) {
       >
         {!user.role || user.role.length === 0 ? (
           <>
-            <MenuItem component={Link} to="/login" role="button">
+            <MenuItem
+              onClick={() => {
+                // dispatch(logoutUser());
+                logout();
+              }}
+            >
               <ListItemIcon className="min-w-40">
-                <Icon>lock</Icon>
+                <Icon>exit_to_app</Icon>
               </ListItemIcon>
-              <ListItemText primary="Login" />
-            </MenuItem>
-            <MenuItem component={Link} to="/register" role="button">
-              <ListItemIcon className="min-w-40">
-                <Icon>person_add</Icon>
-              </ListItemIcon>
-              <ListItemText primary="Register" />
+              <ListItemText primary="Logout" />
             </MenuItem>
           </>
         ) : (
