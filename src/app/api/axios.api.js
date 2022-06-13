@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie'
-const host = "http://localhost:8000";
+const host = "http://18.237.239.203:8000";
 const defaultConfig = (config) => {
     const token = document.cookie.split('=')[1];
     // return Object.assign({}, ...config, {

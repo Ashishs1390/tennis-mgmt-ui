@@ -71,7 +71,7 @@ function Login3Page(props) {
         console.log(fields);
         const localStore = {};
         axios
-            .post(`http://localhost:8000/api/tennismgmt/login`, { ...fields }, { withCredentials: true })
+            .post(`http://18.237.239.203:8000/api/tennismgmt/login`, { ...fields }, { withCredentials: true })
             .then((response) => {
                 console.log(response);
                 localStore.current_level = response.data.current_level;
