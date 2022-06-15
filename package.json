@@ -104,7 +104,7 @@
         "util": "^0.12.4"
     },
     "scripts": {
-        "start": "set PORT=3001 && craco start",
+        "start": "craco start",
         "build": "cross-env GENERATE_SOURCEMAP=false craco build",
         "test": "craco test --env=node",
         "eject": "craco eject",
