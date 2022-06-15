@@ -51,6 +51,8 @@ import { get ,post} from "../../api/axios.api";
 import useManageNavState from "../../custom-hooks/nav-manage";
 // import LogoutApp from "../../../services/logout";
 
+import PlayersList from "./player-list";
+
 import "./link-player.css";
 
 // function DisablingControl(props) {
@@ -370,6 +372,9 @@ function LinkPlayer(props) {
           </Grid>
         </Grid>
       </Box>
+      {/* <Box sx={{ flexGrow: 1 }}>
+      <PlayersList />
+    </Box> */}
       {!props.loadingSearchedPlayerList &&
       props.searchedPlayerList &&
       props.searchedPlayerList.length > 0 ? (
