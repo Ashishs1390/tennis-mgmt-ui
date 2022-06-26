@@ -22,6 +22,7 @@ import Stack from "@mui/material/Stack";
 import { connect } from "react-redux";
 import { getVideosForAnalysis, selectVideoAnalysis } from "../../redux/videoanalysis/videoAnalysisActions";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
 // import { SELECT_VIDEO_FOR_ANALYSIS } from "../../../redux/videoanalysis/videoAnalysisActionsTypes";
 
 
@@ -84,41 +85,15 @@ function StrockAnalysisList(props) {
       </Typography>
       <Box>
         <Grid container spacing={2}>
-          {/* <Grid item xs={10} md={3}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Select Player Name
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Select Player Name"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Kobara Obove</MenuItem>
-                <MenuItem value={20}>Twenty Noun</MenuItem>
-                <MenuItem value={30}>Rand Koltan</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid> */}
           <Grid item xs={10} md={2}>
             {/* <Button variant="contained" onClick={() => { console.log(props)}}>Filter</Button> */}
             <Button variant="contained" fullWidth = "true" onClick={() => { selectVideoForAnalysis() }}>select</Button>
           </Grid>
         </Grid>
       </Box>
-      {/* <Stack spacing={2}>
-        <Pagination
-          count={10}
-          variant="outlined"
-          color="primary"
-          showFirstButton
-          showLastButton
-        />
-      </Stack> */}
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-      {videoAnalysis.data && videoAnalysis.data.length > 0 && videoAnalysis.data.map((value, i) => {
+        {videoAnalysis.data && videoAnalysis.data.length > 0 && videoAnalysis.data.map((value, i) => {
+          console.log(value);
           const labelId = `checkbox-list-secondary-label-${i}`;
           return (
             <React.Fragment key={i}>
@@ -134,29 +109,36 @@ function StrockAnalysisList(props) {
                 }
               >
                 <ListItemAvatar>
-                   <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                  <Avatar alt="Remy Sharp" height={value.height} width={value.width } src={value.thumbnail_url || "/static/images/avatar/1.jpg"} />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={`"Video ${i} ---- ${value.id}"`}
                   secondary={<p style={{ fontStyle: "italic", margin: 0 }}>
                     <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
+                        sx={{ display: "block" }}
+                        component="h2"
                         variant="body2"
                         color="text.primary"
-                      >
-                       {value.id}, by
-                      </Typography>
-                      <Link href="#">
-                         {" Sasha Frijanic (MOT2010)'s T-Log"}
-                       </Link>
+                    >
+                      <b>Title: </b>
+                      {value.title || value.id}
+                    </Typography>
+                    <Typography
+                      sx={{ display: "block" }}
+                      component="h2"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      <b>Author Name: </b>
+                      {value.author_name || value.id}
+                    </Typography>
+
                        <Typography
                          sx={{ display: "inline" }}
                          component="span"
                          variant="body2"
                          color="text.primary"
                        >
-                         , posted on: {value.date}
+                         , posted on: {moment(value.date).format('DD-MMM-YYYY')}
                       </Typography>
                   </p>}/>
 
