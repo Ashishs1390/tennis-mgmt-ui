@@ -7,6 +7,10 @@ import { useParams } from "react-router-dom";
 // import {fetchVideo}  from "./../../../redux/index";
 import { fetchVideo } from "./../../redux/index";
 import Button from "@mui/material/Button";
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 
 function VideoPlayerContainer(props) {
@@ -208,13 +212,20 @@ function VideoPlayerContainer(props) {
                     {startPlay && <Button variant="outlined" onClick={pauseAllVideo} style={{ marginLeft: '10px' }}>Pause</Button>}
                     {!mute && <Button variant="outlined" onClick={() => { muteUnmute(true) }} style={{ marginLeft: '10px' }}>Mute</Button>}
                     {mute && <Button variant="outlined" onClick={() => { muteUnmute(false) }} style={{ marginLeft: '10px' }}>Unmute</Button>}
-                    <select defaultValue={1} onChange={updatePlayBackSpeed} style={{ marginLeft: '10px' }}>
-                        {
-                            playBackSpeeds.map((x, i) => {
-                                return <option key={i} value={x}>{x}</option>;
-                            })
-                        }
-                    </select>
+                    <FormControl sx={{ minWidth: 100 }} size="small">
+                        {/* <InputLabel id="demo-select-small">Age</InputLabel> */}
+                        <Select
+                            className="select-play"
+                            variant="outlined"
+                            labelId="demo-select-small"
+                            defaultValue={1} onChange={updatePlayBackSpeed} style={{ marginLeft: '10px' }}>
+                            {
+                                playBackSpeeds.map((x, i) => {
+                                    return <MenuItem key={i} value={x}>{x}</MenuItem>;
+                                })
+                            }
+                        </Select>
+                    </FormControl>
                     {/* style={{ marginLeft: '10px' }} */}
                     <input type="range" name="vol" min="0" max="5000" style={{ width: '500px' }} onChange={(event) => {
                         console.log(event.target.value);
@@ -242,15 +253,12 @@ function VideoPlayerContainer(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchVideo: () => {
-            console.log("-------mapDispatchToProps---------")
             dispatch(fetchVideo())
         }
     };
 };
 
 const mapStateToProps = (state = {}) => {
-    console.log("---------state----------")
-    console.log(state);
     return {
         videoInfo: state.videoInfo,
         videoAnalysis: state.videoAnalysis

@@ -63,3 +63,45 @@
       clear: both;
       content: '';
     }
+
+    .select-play{
+      margin: 0 10px !important;
+      border: 1px solid #212121;
+      border-radius: 4px !important;
+    }
+
+        input[type="range"] {
+          -webkit-appearance: none;
+          margin-right: 15px;
+          width: 200px;
+          height: 7px;
+          /* background: rgba(255, 255, 255, 0.6); */
+          border-radius: 5px;
+      border: 1px solid #212121;
+          background-image: linear-gradient(#212121, #212121);
+          background-size: 70% 100%;
+          background-repeat: no-repeat;
+        }
+    
+        input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+      border: 1px solid #212121;
+          background: #212121;
+          cursor: ew-resize;
+          box-shadow: 0 0 2px 0 #555;
+          transition: background .3s ease-in-out;
+        }
+    
+        input[type=range]::-webkit-slider-runnable-track {
+          -webkit-appearance: none;
+          box-shadow: none;
+          border: none;
+          background: transparent;
+        }
+/* .custom-vid{
+  opacity: 0;
+  background-color: #000;
+} */
