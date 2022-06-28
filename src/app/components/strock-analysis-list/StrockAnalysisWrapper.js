@@ -26,7 +26,7 @@ const Root = styled(FusePageCarded)(({ theme }) => ({
 
 function StrockAnalysisWrapper() {
     return (<>
-        <Root header={<Header title="Strock Analysis List" />} content={<StrockAnalysisList />} innerScroll />;
+        <Root header={<Header title="Stroke Analysis List" />} content={<StrockAnalysisList />} innerScroll />;
     </>)
 
 

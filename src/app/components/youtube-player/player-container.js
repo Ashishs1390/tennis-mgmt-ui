@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
-
+import { useNavigate } from "react-router-dom";
 
 function VideoPlayerContainer(props) {
 
@@ -21,6 +21,7 @@ function VideoPlayerContainer(props) {
     const [mute, setMute] = useState(false);
     const [payBackSpeed, setPayBackSpeed] = useState(1);
     const { from } = useParams();
+    const navigate = useNavigate();
     const [frames, setFrame] = useState([
         {
             frameId: "frame1",
@@ -44,6 +45,7 @@ function VideoPlayerContainer(props) {
 
     const [errMsg, setErrorMsg] = useState({})
     const playBackSpeeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+
 
     const startAllVideos = () => {
         setStartPlay(true);
@@ -95,6 +97,11 @@ function VideoPlayerContainer(props) {
     const updatePlayBackSpeed = (event) => {
         setStartPlay(true);
         setPayBackSpeed(event.target.value);
+    }
+
+    const goToHistory = () => {
+        navigate("/strockanalysislist");
+
     }
     const getIdFromUrl = (url, id) => {
         var videoid = url.match(
@@ -197,7 +204,8 @@ function VideoPlayerContainer(props) {
 
             </ul>
             <div className="button-container">
-                {!showPlayerVideo && <Button className="video-submit" variant="contained" size="small" onClick={() => submitFrameInfo()}>submit</Button>}
+                {!showPlayerVideo && <Button className="video-submit" variant="contained" size="small" onClick={() => submitFrameInfo()}>Submit</Button>}
+                {!showPlayerVideo && <Button className="video-submit" variant="contained" size="small" onClick={() => goToHistory()}>History</Button>} 
 
                 {!(errMsg && Object.keys(errMsg).length === 0
                     && Object.getPrototypeOf(errMsg) === Object.prototype)
@@ -236,19 +244,6 @@ function VideoPlayerContainer(props) {
         </div>
     );
 }
-
-// function VideoPlayerContainer(props) { 
-//     const { fetchVideo } = props;
-//         useEffect(()=>{
-//         fetchVideo();
-//         }, [])
-
-//     return (
-//         <div>
-//             <p>dfsdfd</p>
-//         </div>
-//     )
-// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
