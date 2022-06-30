@@ -50,7 +50,7 @@ export const YoutubeComponent = (props) => {
         }
       };
     return (
-        <div className="video-player" style={{width: '100%', height: '100%'}}>
+        <div className="video-player" style={{width: '100%'}}>
             {props.id !== undefined && <YouTube className="custom-vid" videoId={props.id} opts={opts} onReady={onReady} ref={playerCtr} />}
         </div>
     )

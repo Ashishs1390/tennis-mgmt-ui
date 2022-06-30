@@ -65,14 +65,21 @@ function VideoPlayerContainer(props) {
     }, [])
 
     useEffect(() => {
+        console.log(showPlayerVideo)
         if (from == "analysis" && !showPlayerVideo) {
+
             if (videoData && videoData.length != 0) {
                 setYouTubeId({ ...videoData })
                 pauseAllVideo();
 
             } else {
+                
                 setErrorMsg({ ...error })
             }
+        } else {
+            console.log("----------analysis----else--------------");
+            // setYouTubeId({});
+            // setFrame([]);
         }
     }, [videoData]);
 
@@ -90,8 +97,27 @@ function VideoPlayerContainer(props) {
     }, [videoAnalysis.selectedVideos]);
 
     useEffect(() => {
-
-    }, [youtubeId])
+        if (from == "analysis") {
+            setFrame([
+                {
+                    frameId: "frame1",
+                    src: ""
+                },
+                {
+                    frameId: "frame2",
+                    src: ""
+                },
+                {
+                    frameId: "frame3",
+                    src: ""
+                },
+                {
+                    frameId: "frame4",
+                    src: ""
+                }
+            ]);
+        }
+    }, [from])
 
 
     const updatePlayBackSpeed = (event) => {
@@ -188,6 +214,8 @@ function VideoPlayerContainer(props) {
                     return (
                         <li className="video-item" key={ele.frameId + i}>
                             <div className="iframe-container">
+                                {/* <YoutubeComponent isStart={startPlay} startTime={startTime} id={ele.src !== 0 ? youtubeId[ele.frameId] : ele.frameId} isMute={mute} playbackSpeed={payBackSpeed} /> */}
+
                                 <YoutubeComponent isStart={startPlay} startTime={startTime} id={ele.src !== 0 ? youtubeId[ele.frameId] : ele.frameId} isMute={mute} playbackSpeed={payBackSpeed} />
                             </div>
                             <div className="searchbox-container">
