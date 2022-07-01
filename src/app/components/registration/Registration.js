@@ -130,7 +130,10 @@ function Registration(props) {
                             animate={{ opacity: 1, transition: { delay: 0.2 } }}
                         >
                             <div className="flex items-center mb-48">
-                                <img className="logo-icon w-48" src="assets/images/logos/fuse.svg" alt="logo" />
+                                <img className="logo-icon w-48" src="assets/images/logos/tlms.png"
+                  alt="logo"
+                  style={{width: '115px', marginRight: '5px'}}/>
+                                
                                 <div className="border-l-1 mr-4 w-1 h-40" />
                                 <div>
                                     <Typography className="text-24 font-semibold logo-text" color="inherit">

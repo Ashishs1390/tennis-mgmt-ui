@@ -16,6 +16,14 @@ const navigationConfig = [
     icon: 'apps',
     children: [
       {
+        id: 'profile',
+        title: 'Profile',
+        translate: 'PROFILE',
+        type: 'item',
+        icon: 'whatshot',
+        url: 'profilepage',
+      },
+      {
         id: 'contact-component',
         title: 'Contact',
         translate: 'Contact',
