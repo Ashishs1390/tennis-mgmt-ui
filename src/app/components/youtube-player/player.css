@@ -21,7 +21,7 @@
   
   .video-item {
     flex-basis: 48%;
-    min-height: 200px;
+    height: 300px;
     margin: 5px;
     border: 1px dashed rgba(15, 20, 130, 0.5);
   }
@@ -31,12 +31,12 @@
     border: 1px solid #000;
   }
   .searchbox-container{
-    padding: 10px 20px;
+    padding: 0px 0px;
   }
   .searchbox-container input{
     border: 2px solid #ccc;
     width: 100%;
-    margin: 8px 0;
+    /* margin: 8px 0; */
     padding: 12px 20px;
     box-sizing: border-box;
     border-radius: 4px;
@@ -54,6 +54,10 @@
   }
   .video-player-controls button{
     border: 1.3px solid #212121;
+  }
+
+  .video-player iframe{
+    height: 260px !important;
   }
   .button-container{
     width: 100%;

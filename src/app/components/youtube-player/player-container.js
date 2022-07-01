@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
-
+import { useNavigate } from "react-router-dom";
 
 function VideoPlayerContainer(props) {
 
@@ -21,6 +21,7 @@ function VideoPlayerContainer(props) {
     const [mute, setMute] = useState(false);
     const [payBackSpeed, setPayBackSpeed] = useState(1);
     const { from } = useParams();
+    const navigate = useNavigate();
     const [frames, setFrame] = useState([
         {
             frameId: "frame1",
@@ -45,6 +46,7 @@ function VideoPlayerContainer(props) {
     const [errMsg, setErrorMsg] = useState({})
     const playBackSpeeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
+
     const startAllVideos = () => {
         setStartPlay(true);
     };
@@ -63,14 +65,21 @@ function VideoPlayerContainer(props) {
     }, [])
 
     useEffect(() => {
+        console.log(showPlayerVideo)
         if (from == "analysis" && !showPlayerVideo) {
+
             if (videoData && videoData.length != 0) {
                 setYouTubeId({ ...videoData })
                 pauseAllVideo();
 
             } else {
+                
                 setErrorMsg({ ...error })
             }
+        } else {
+            console.log("----------analysis----else--------------");
+            // setYouTubeId({});
+            // setFrame([]);
         }
     }, [videoData]);
 
@@ -88,13 +97,37 @@ function VideoPlayerContainer(props) {
     }, [videoAnalysis.selectedVideos]);
 
     useEffect(() => {
-
-    }, [youtubeId])
+        if (from == "analysis") {
+            setFrame([
+                {
+                    frameId: "frame1",
+                    src: ""
+                },
+                {
+                    frameId: "frame2",
+                    src: ""
+                },
+                {
+                    frameId: "frame3",
+                    src: ""
+                },
+                {
+                    frameId: "frame4",
+                    src: ""
+                }
+            ]);
+        }
+    }, [from])
 
 
     const updatePlayBackSpeed = (event) => {
         setStartPlay(true);
         setPayBackSpeed(event.target.value);
+    }
+
+    const goToHistory = () => {
+        navigate("/strockanalysislist");
+
     }
     const getIdFromUrl = (url, id) => {
         var videoid = url.match(
@@ -181,6 +214,8 @@ function VideoPlayerContainer(props) {
                     return (
                         <li className="video-item" key={ele.frameId + i}>
                             <div className="iframe-container">
+                                {/* <YoutubeComponent isStart={startPlay} startTime={startTime} id={ele.src !== 0 ? youtubeId[ele.frameId] : ele.frameId} isMute={mute} playbackSpeed={payBackSpeed} /> */}
+
                                 <YoutubeComponent isStart={startPlay} startTime={startTime} id={ele.src !== 0 ? youtubeId[ele.frameId] : ele.frameId} isMute={mute} playbackSpeed={payBackSpeed} />
                             </div>
                             <div className="searchbox-container">
@@ -197,7 +232,8 @@ function VideoPlayerContainer(props) {
 
             </ul>
             <div className="button-container">
-                {!showPlayerVideo && <Button className="video-submit" variant="contained" size="small" onClick={() => submitFrameInfo()}>submit</Button>}
+                {!showPlayerVideo && <Button className="video-submit" variant="contained" size="small" onClick={() => submitFrameInfo()}>Submit</Button>}
+                {!showPlayerVideo && <Button className="video-submit" variant="contained" size="small" onClick={() => goToHistory()}>History</Button>} 
 
                 {!(errMsg && Object.keys(errMsg).length === 0
                     && Object.getPrototypeOf(errMsg) === Object.prototype)
@@ -236,19 +272,6 @@ function VideoPlayerContainer(props) {
         </div>
     );
 }
-
-// function VideoPlayerContainer(props) { 
-//     const { fetchVideo } = props;
-//         useEffect(()=>{
-//         fetchVideo();
-//         }, [])
-
-//     return (
-//         <div>
-//             <p>dfsdfd</p>
-//         </div>
-//     )
-// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
