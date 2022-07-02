@@ -24,7 +24,6 @@ export default function Rating(props) {
                     new Array(10).fill(1).map((x ,i)=> {
                         return (
                             <span>
-                                
                             <Button key={i+1} variant={currentWeight === (i+1) ? "contained" : "outlined" } size="small" className={classes.root} onClick={() => {updateWeight(i+1)}}>
                                     {
                                         prev_weight === (i + 1) &&

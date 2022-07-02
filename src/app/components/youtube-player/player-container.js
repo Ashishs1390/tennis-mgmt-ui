@@ -60,9 +60,9 @@ function VideoPlayerContainer(props) {
     }
 
 
-    useEffect(() => {
-        fetchVideo();
-    }, [])
+    // useEffect(() => {
+    //     fetchVideo();
+    // }, [])
 
     useEffect(() => {
         console.log(showPlayerVideo)
