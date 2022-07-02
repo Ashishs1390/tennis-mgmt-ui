@@ -130,10 +130,10 @@ function CompetancyRating(props) {
                       sx={{ display: "block" }}
                       component="p"
                       variant="h6"
-                      align="right"
+                      align="left"
                       color="text.primary"
                     >
-                      Player:
+                      Player
                     </Typography>
                   </td>
                   <td>
@@ -154,10 +154,10 @@ function CompetancyRating(props) {
                       sx={{ display: "block" }}
                       component="p"
                       variant="h6"
-                      align="right"
+                      align="left"
                       color="text.primary"
                     >
-                      Player description:
+                      Player description
                     </Typography>
                   </td>
                   <td>
@@ -178,10 +178,34 @@ function CompetancyRating(props) {
                       sx={{ display: "block" }}
                       component="p"
                       variant="h6"
-                      align="right"
+                      align="left"
                       color="text.primary"
                     >
-                      Player Evaluation: {current_level}
+                      Player Evaluation 
+                    </Typography>
+                  </td>
+                  <td>
+                    <Typography
+                      sx={{ display: "block" }}
+                      component="p"
+                      variant="h6"
+                      align="left"
+                      color="text.primary"
+                    >
+                      {current_level}
+                    </Typography>
+                  </td>
+                </tr>
+                <tr className="player-content">
+                  <td>
+                    <Typography
+                      sx={{ display: "block" }}
+                      component="p"
+                      variant="h6"
+                      align="left"
+                      color="text.primary"
+                    >
+                      Goal Level 
                     </Typography>
                   </td>
                   <td>
@@ -200,32 +224,10 @@ function CompetancyRating(props) {
                       sx={{ display: "block" }}
                       component="p"
                       variant="h6"
-                      align="right"
-                      color="text.primary"
-                    >
-                      Goal Level: 
-                    </Typography>
-                  </td>
-                  <td>
-                    <Typography
-                      sx={{ display: "block" }}
-                      component="p"
-                      variant="h6"
                       align="left"
                       color="text.primary"
-                    ></Typography>
-                  </td>
-                </tr>
-                <tr className="player-content">
-                  <td>
-                    <Typography
-                      sx={{ display: "block" }}
-                      component="p"
-                      variant="h6"
-                      align="right"
-                      color="text.primary"
                     >
-                      Timeframe:
+                      Timeframe
                     </Typography>
                   </td>
                   <td>
@@ -246,10 +248,10 @@ function CompetancyRating(props) {
                       sx={{ display: "block" }}
                       component="p"
                       variant="h6"
-                      align="right"
+                      align="left"
                       color="text.primary"
                     >
-                      Assessment Date:
+                      Assessment Date
                     </Typography>
                   </td>
                   <td>
@@ -298,9 +300,10 @@ function CompetancyRating(props) {
           noValidate
           autoComplete="off"
           className="fieldbox"
+          style={{display: 'flex', justifyContent: 'center'}}
         >
           <Button
-            fullWidth
+            style={{width: '350px'}}
             variant="contained"
             color="secondary"
             onClick={onSumbit}

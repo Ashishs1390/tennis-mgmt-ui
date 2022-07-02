@@ -153,8 +153,6 @@ function LinkPlayer(props) {
   };
 
   const getPlayerItnLevel = () => {
-    console.log("-1111-")
-  
       post("/api/tennismgmt/itn_level", { email: emailChecked },{withCredentials: true})
       .then((x) => {
         updateConnectedChildren(emailChecked);

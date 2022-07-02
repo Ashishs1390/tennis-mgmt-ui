@@ -14,8 +14,8 @@ export const YoutubePlayer = (props) => {
         setPlay(props.url + `?start=${props.startTime}&autoplay=1`);
     }, [props.startTime])
     return (
-        <div className="video-player" style={{width: '100%', height: '100%'}}>
-            <iframe width="100%" height="280" src={playUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div className="video-player" style={{width: '10%'}}>
+            <iframe width="10%" height="120" src={playUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     )
 };

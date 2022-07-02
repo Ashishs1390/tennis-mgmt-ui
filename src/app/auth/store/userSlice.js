@@ -191,12 +191,16 @@ export const updateUserData = (user) => async (dispatch, getState) => {
   }
 };
 
+let localData = localStorage.getItem("localStore");
+if(localData) {
+  localData = JSON.parse(localData);
+}
 const initialState = {
-  role: [], // guest
+  role: [localData ? localData.role : ''], // guest
   data: {
-    displayName: 'John Doe',
+    displayName: localData ? localData.first_name + ' ' + localData.last_name : '',
     photoURL: 'assets/images/avatars/Velazquez.jpg',
-    email: 'johndoe@withinpixels.com',
+    email: localData ? localData.email : '',
     shortcuts: ['calendar', 'mail', 'contacts', 'todo'],
   },
 };
@@ -207,10 +211,15 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => action.payload,
     userLoggedOut: (state, action) => initialState,
+    updateUser: (state, action) => {
+      state.data.displayName = action.payload.displayName;
+      state.data.email = action.payload.email;
+      state.role = [action.payload.role]
+    }
   },
   extraReducers: {},
 });
 
-export const { setUser, userLoggedOut } = userSlice.actions;
+export const { setUser, userLoggedOut, updateUser } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -42,14 +42,16 @@ export const YoutubeComponent = (props) => {
     const opts = {
         height: '300',
         width: '100%',
+        loading:"null",
         playerVars: {
           // https://developers.google.com/youtube/player_parameters
-          autoplay: 1
+            autoplay: 1,
+            // start: 15
         }
       };
     return (
-        <div className="video-player" style={{width: '100%', height: '100%'}}>
-         { props.id !== undefined &&  <YouTube videoId={props.id} opts={opts} onReady={onReady} ref={playerCtr} />}
+        <div className="video-player" style={{width: '100%'}}>
+            {props.id !== undefined && <YouTube className="custom-vid" videoId={props.id} opts={opts} onReady={onReady} ref={playerCtr} />}
         </div>
     )
 };

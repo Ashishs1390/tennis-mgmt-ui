@@ -13,7 +13,7 @@ import PhotosVideosTab from './tabs/PhotosVideosTab';
 import TimelineTab from './tabs/TimelineTab';
 import { removeAllNav, setParentCoachNav, resetNavigation} from './../../store/fuse/navigationSlice';
 import useManageNavState from "../../custom-hooks/nav-manage";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
   '& .FusePageSimple-topBg': {
@@ -57,7 +57,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 
 function ProfilePage() {
   const [selectedTab, setSelectedTab] = useState(0);
-
+  const user = useSelector(({ auth }) => auth.user);
   
 const dispatch = useDispatch();
 const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoachNav, resetNavigation});
@@ -94,7 +94,7 @@ const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoach
                   variant="h4"
                   color="inherit"
                 >
-                  John Doe
+                  {user.data.displayName}
                 </Typography>
               </motion.div>
 
