@@ -23,14 +23,14 @@ const navigationConfig = [
         icon: 'whatshot',
         url: 'profilepage',
       },
-      {
-        id: 'contact-component',
-        title: 'Contact',
-        translate: 'Contact',
-        type: 'item',
-        icon: 'whatshot',
-        url: 'contact',
-      },
+      // {
+      //   id: 'contact-component',
+      //   title: 'Contact',
+      //   translate: 'Contact',
+      //   type: 'item',
+      //   icon: 'whatshot',
+      //   url: 'contact',
+      // },
       {
         id: 'video-analysis',
         title: 'Video Analysis',
@@ -38,13 +38,14 @@ const navigationConfig = [
         icon: 'whatshot',
         url: 'videoanalysis/analysis'
       },
+      // {
+      //   id: 'strockanalysislist',
+      //   title: 'Strock Analysis List',
+      //   type: 'item',
+      //   icon: 'whatshot',
+      //   url: 'strockanalysislist'
+      // },
       {
-        id: 'strockanalysislist',
-        title: 'Strock Analysis List',
-        type: 'item',
-        icon: 'whatshot',
-        url: 'strockanalysislist'
-      }, {
         id: "comparelibrary",
         title: "Compare Library",
         type: "item",
@@ -85,14 +86,14 @@ export const navigationConfigParentCoach = [
         icon: 'whatshot',
         url: 'link/player',
       },
-      {
-        id: 'contact-component',
-        title: 'Contact',
-        translate: 'Contact',
-        type: 'item',
-        icon: 'whatshot',
-        url: 'contact',
-      },
+      // {
+      //   id: 'contact-component',
+      //   title: 'Contact',
+      //   translate: 'Contact',
+      //   type: 'item',
+      //   icon: 'whatshot',
+      //   url: 'contact',
+      // },
       {
         id: 'video-analysis',
         title: 'Video Analysis',
@@ -100,13 +101,14 @@ export const navigationConfigParentCoach = [
         icon: 'whatshot',
         url: 'videoanalysis/analysis'
       },
+      // {
+      //   id: 'strockanalysislist',
+      //   title: 'Strock Analysis List',
+      //   type: 'item',
+      //   icon: 'whatshot',
+      //   url: 'strockanalysislist'
+      // },
       {
-        id: 'strockanalysislist',
-        title: 'Strock Analysis List',
-        type: 'item',
-        icon: 'whatshot',
-        url: 'strockanalysislist'
-      }, {
         id: "comparelibrary",
         title: "Compare Library",
         type: "item",

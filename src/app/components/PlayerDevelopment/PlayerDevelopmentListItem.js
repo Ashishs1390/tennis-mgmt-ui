@@ -8,6 +8,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { makeStyles } from '@mui/styles';
 import { getDateDDMMYYYY, getDateYYYYMMDD, getDateMMDDYY } from '../../util/util';
+import moment from "moment";
 import "./PlayerDevelopment.css";
 
 const useStyles = makeStyles({
@@ -77,18 +78,39 @@ function LinearProgressWithLabel(props) {
 }
 
 function PlayerDevelopmentListItem(props) {
-  const { val, index, maxDate, displayRowArr, selectedRoles, hideScores } = props;
+  const { val = [], index, maxDate, displayRowArr, selectedRoles, hideScores, assessmentDate } = props;
   const propsStyle = {
     backgroundColor: "black",
     color: "red",
   };
+  let sameObjArr = [],
+    otherObjArr = [];
+  const newWeights = val.weights.reduce((acc, curr) => {
+    let assessmentDay = moment(curr.assessment_date).format('YY-MM-DD');
+    if (!acc[assessmentDay]) {
+      acc[assessmentDay] = [];
+    }
+    for (let key in acc) {
+      if (key && key == assessmentDay) {
+        acc[key].push(curr);
+      }
+    }
+    return acc;
+  }, {});
+  for (let w in newWeights) {
+    let bool = newWeights[w].some((x) => (x.role == "player")? true : false);
+    if (bool) {
+      sameObjArr.push(...newWeights[w])
+    } else {
+      otherObjArr.push(...newWeights[w]);
+    }
+  }
   const classes = useStyles(propsStyle);
   return (
     <ListItem className="CompetancyListItem" key={val.competency + index}>
-      <div>
-        <p className="displaycomp">{val.competency}</p>
-        {val.weights.filter(x => x.role === 'player').map((weight, index) => {
-          return (
+      <p className="displaycomp" key={val.competency + index}>{val.competency}</p>
+      {sameObjArr.filter(x => x.role === 'player').map((weight, index) => {
+        return (
             <Box
               key={weight.competency + index}
               sx={{ width: "100%" }}
@@ -109,7 +131,7 @@ function PlayerDevelopmentListItem(props) {
 
               </LinearProgressWithLabel>
               <div className="parent-coach-rating">
-                {val.weights.filter(x => x.role === 'parent' || x.role === 'coach').filter(x => !!selectedRoles.find(y => y === x.role)).map((weight1, index) => { // checkboxes
+                {sameObjArr.filter(x => x.role === 'parent' || x.role === 'coach').filter(x => !!selectedRoles.find(y => y === x.role)).map((weight1, index) => { // checkboxes
                   return (
                     <div className={`${getDateMMDDYY(weight.assessment_date) == getDateMMDDYY(weight1.assessment_date) ? 'pbshow' : 'pbHide'}`}>
                       <div title={`${weight1.role} has given ${weight1.assigned_weight} rating on ${getDateDDMMYYYY(new Date(weight1.assessment_date))}`} className={`score-dot ${weight1.role == "parent"
@@ -127,10 +149,50 @@ function PlayerDevelopmentListItem(props) {
                 })}
               </div>
             </Box>
-          );
-        })}
-      </div>
+        );
+      })}
+      {otherObjArr.filter(x => x.role === 'parent' || x.role === 'coach').map((weight, index) => {
+        return (
+          <Box
+            key={weight.competency + index}
+            sx={{ width: "100%" }}
 
+          >
+            <p className="displaydate">{`${getDateMMDDYY(weight.assessment_date)},${weight.role},(${weight.assigned_weight})`}</p>
+            <LinearProgressWithLabel
+              colors="success"
+              classes={
+                weight.assigned_weight <= 4
+                  ? { root: classes.rootRed }
+                  : weight.assigned_weight >= 5 && weight.assigned_weight <= 7
+                    ? { root: classes.rootYellow }
+                    : { root: classes.rootGreen }
+              }
+              value={parseInt(`${weight.assigned_weight || 0}0`)}
+            >
+
+            </LinearProgressWithLabel>
+            <div className="parent-coach-rating">
+              {otherObjArr.filter(x => x.role === 'parent' || x.role === 'coach').filter(x => !!selectedRoles.find(y => y === x.role)).map((weight1, index) => { // checkboxes
+                return (
+                  <div className={`${getDateMMDDYY(weight.assessment_date) == getDateMMDDYY(weight1.assessment_date) && weight.role == weight1.role ? 'pbshow' : 'pbHide'}`}>
+                    <div title={`${weight1.role} has given ${weight1.assigned_weight} rating on ${getDateDDMMYYYY(new Date(weight1.assessment_date))}`} className={`score-dot ${weight1.role == "parent"
+                      ? 'parent-bg' : 'coach-bg'}`} key={weight1.role} data-rating={`${weight1.assigned_weight}`} style={{ left: weight1.assigned_weight + '0%' }} >
+                      <div className={`${weight1.role === 'coach' ? 'coachPosition' : 'parentPosition'} ${weight1.assigned_weight <= 4
+                        ? 'sd-red' : weight1.assigned_weight >= 5 && weight1.assigned_weight <= 7
+                          ? 'sd-yellow' : 'sd-green'} ${hideScores == true ? 'pbshow' : 'pbHide'}`} >
+                        {weight1.assigned_weight}
+                      </div>
+                      {weight1.role === 'coach' ? 'C' : 'P'}
+                    </div>
+                  </div>
+
+                );
+              })}
+            </div>
+          </Box>
+        );
+      })}
     </ListItem>
   );
 }

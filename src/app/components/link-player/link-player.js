@@ -370,9 +370,9 @@ function LinkPlayer(props) {
           </Grid>
         </Grid>
       </Box>
-      {/* <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }}>
       <PlayersList />
-    </Box> */}
+    </Box>
       {!props.loadingSearchedPlayerList &&
       props.searchedPlayerList &&
       props.searchedPlayerList.length > 0 ? (

@@ -9,10 +9,8 @@ const useStyles = makeStyles({
 });
 
 function BundelCompetancy(props) {
-  console.log("---------------BundelCompetancy-------------------")
   const classes = useStyles();
   const { competency_bundle, values, updateBundelCompetancyRating } = props;
-
   const updateCompetancyRating = (i, weight) => {
     updateBundelCompetancyRating(i, weight)
   };
