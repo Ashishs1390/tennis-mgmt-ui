@@ -16,7 +16,6 @@ export default function Competancy(props) {
     const classes = useStyles();
     const context = useContext(AssessmentContext);
   const { updateCompetancyRating, questionNo, competency, y } = props;
-  console.log(y)
     const updateRating = (i) => {
       updateCompetancyRating(i);
     }

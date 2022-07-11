@@ -12,6 +12,8 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
+import { getDateWithTime } from '../../util/util';
 
 function VideoPlayerContainer(props) {
 
@@ -191,7 +193,7 @@ function VideoPlayerContainer(props) {
             }
             return acc;
         }, {})
-        finalObj.date = new Date().toISOString();
+        finalObj.date = getDateWithTime(new Date());
         postVideoUrls(finalObj)
     }
 
