@@ -54,6 +54,7 @@ import useManageNavState from "../../custom-hooks/nav-manage";
 import PlayersList from "./player-list";
 
 import "./link-player.css";
+import { fetchLinkedPlayerListNew } from "app/redux/link-player/linkPlayerAction";
 
 // function DisablingControl(props) {
 //     const disabled = props.disabled;
@@ -100,6 +101,7 @@ function LinkPlayer(props) {
       setRole(localStore.role);
     }, 100);
     props.fetchLinkedPlayerList();
+    props.fetchLinkedPlayerListNew();
 
   }, []);
 
@@ -370,9 +372,9 @@ function LinkPlayer(props) {
           </Grid>
         </Grid>
       </Box>
-      {/* <Box sx={{ flexGrow: 1 }}>
-      <PlayersList />
-    </Box> */}
+      <Box sx={{ flexGrow: 1 }}>
+      <PlayersList searchedPlayerListNew={props.searchedPlayerListNew} handleToggle={handleToggle.bind(this)}/>
+    </Box>
       {!props.loadingSearchedPlayerList &&
       props.searchedPlayerList &&
       props.searchedPlayerList.length > 0 ? (
@@ -423,6 +425,7 @@ const mapDispatchToProps = (dispatch) => {
     getSearchedPlayerByEmail: (email) =>
       dispatch(getSearchedPlayerByEmail(email)),
     fetchLinkedPlayerList: () => dispatch(fetchLinkedPlayerList()),
+    fetchLinkedPlayerListNew: () => dispatch(fetchLinkedPlayerListNew()),
     addPlayerToList: (details) => dispatch(addPlayerToList(details)),
     updateConnectedChildren: (email) =>
       dispatch(updateConnectedChildren(email)),
@@ -439,6 +442,7 @@ const mapStateToProps = (state) => {
     loadingSearchedPlayerList: stateData.loadingSearchedPlayerList,
     loadingAddPlayer: stateData.loadingAddPlayer,
     basicInfo: stateData.getData ? stateData.getData.data : {},
+    searchedPlayerListNew: stateData.searchedPlayerListNew,
   };
 };
 

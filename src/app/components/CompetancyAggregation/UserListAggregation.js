@@ -18,8 +18,8 @@ import "./compentacy.css";
 function UserListAggregation(props) {
     const navigate = useNavigate();
     const { fetchLinkedPlayerList, searchedPlayerList } = props;
-    const [showAggrePage, setShowAggrePage] = useState(false);
-    const [selectedPlayers, setSelectedPlayers] = useState([]);
+    const [showAggrePage, setShowAggrePage] = useState(true);
+    const [selectedPlayers, setSelectedPlayers] = useState([...props.selectedPlayerList]);
     const updateCheckBoxSelection = (value) => {
         if (!selectedPlayers.includes(value)) {
             selectedPlayers.push(value);

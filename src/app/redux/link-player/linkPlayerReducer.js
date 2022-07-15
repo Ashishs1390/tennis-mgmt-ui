@@ -8,6 +8,13 @@ import {
     FETCH_PLAYER_EMAIL_LIST,
     FETCH_PLAYER_EMAIL_LIST_SUCCESS,
     FETCH_PLAYER_EMAIL_LIST_FAILURE,
+    FETCH_PLAYER_EMAIL_LIST_NEW,
+    FETCH_PLAYER_EMAIL_LIST_SUCCESS_NEW,
+    FETCH_PLAYER_EMAIL_LIST_FAILURE_NEW,
+    SELECTED_PLAYER_EMAIL_LIST_ADD,
+    SELECTED_PLAYER_EMAIL_LIST_REMOVE,
+    SELECTED_PLAYER_EMAIL_LIST_ADDALL,
+    SELECTED_PLAYER_EMAIL_LIST_REMOVEALL,
   } from "./linkPlayerActionsTypes";
   
 const initalVideoAnalysisState = {
@@ -19,6 +26,10 @@ const initalVideoAnalysisState = {
     searchedPlayerList: [],
     loadingSearchedPlayerList: false,
     errorSearhList: false,
+    searchedPlayerListNew: [],
+    loadingSearchedPlayerListNew: false,
+    errorSearhListNew: false,
+    selectedPlayerList: [],
 }
 
 export const linkPlayerReducer = (state = initalVideoAnalysisState, action)=>{
@@ -79,6 +90,45 @@ export const linkPlayerReducer = (state = initalVideoAnalysisState, action)=>{
                 errorSearhList: action.payload
             };
 
+        case FETCH_PLAYER_EMAIL_LIST_NEW: 
+            return {
+                ...state,
+                loadingSearchedPlayerListNew: true
+            };
+        case FETCH_PLAYER_EMAIL_LIST_SUCCESS_NEW: 
+            return {
+                ...state,
+                searchedPlayerListNew: action.payload,
+                loadingSearchedPlayerListNew: false,
+                errorSearhListNew: null
+            };
+        case FETCH_PLAYER_EMAIL_LIST_FAILURE_NEW: 
+            return {
+                ...state,
+                loadingSearchedPlayerListNew: false,
+                errorSearhListNew: action.payload
+            };
+
+        case SELECTED_PLAYER_EMAIL_LIST_ADD: 
+            return {
+                ...state,
+                selectedPlayerList: [...state.selectedPlayerList, action.payload]
+            };
+        case SELECTED_PLAYER_EMAIL_LIST_REMOVE:
+            return {
+                ...state,
+                selectedPlayerList: state.selectedPlayerList.filter(x => x !== action.payload)
+            };
+        case SELECTED_PLAYER_EMAIL_LIST_ADDALL:
+            return {
+                ...state,
+                selectedPlayerList: state.searchedPlayerListNew.map(x => x.email)
+            };
+        case SELECTED_PLAYER_EMAIL_LIST_REMOVEALL:
+            return {
+                ...state,
+                selectedPlayerList: []
+            };
         default: return state;
     }
 

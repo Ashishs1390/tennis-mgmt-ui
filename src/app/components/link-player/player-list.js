@@ -8,6 +8,10 @@ import { useMemo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import ContactsMultiSelectMenu from './ContactsMultiSelectMenu';
 import PlayersTable from './player-table';
+
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 // import {
 //   openEditContactDialog,
 //   removeContact,
@@ -18,27 +22,34 @@ import PlayersTable from './player-table';
 function ContactsList(props) {
   const dispatch = useDispatch();
   //const contacts = useSelector(selectContacts);
-  const contacts = useMemo(()=>[{
-    name: 'abcd',
-    lastName: 'efgh',
+  const contacts = useMemo(()=> props.searchedPlayerListNew
+  /*[{
+    first_name: 'abcd',
+    last_name: 'efgh',
     email: 'abdc.efgh@gmail.com',
     avatar: ''
   },{
-    name: 'abcd1111111',
-    lastName: 'efgh11111',
+    first_name: 'abcd1111111',
+    last_name: 'efgh11111',
     email: 'abdc111111.efgh@gmail.com',
     avatar: ''
   },
   {
-    name: 'abcd222222',
-    lastName: 'efgh222222',
+    first_name: 'abcd222222',
+    last_name: 'efgh222222',
     email: 'abdc222222.efgh@gmail.com',
     avatar: ''
-  }], []);
+  }]
+  */
+  , [props.searchedPlayerListNew]);
   // const searchText = useSelector(({ contactsApp }) => contactsApp.contacts.searchText)
   // const user = useSelector(({ contactsApp }) => contactsApp.user);
-  console.log(contacts);
+
   const [filteredData, setFilteredData] = useState(null);
+  const handleToggle = (value) => {
+    props.handleToggle(value);
+  }
+
   const columns = useMemo(
     () => [
       {
@@ -62,13 +73,13 @@ function ContactsList(props) {
       },
       {
         Header: 'First Name',
-        accessor: 'name',
+        accessor: 'first_name',
         className: 'font-medium',
         sortable: true,
       },
       {
         Header: 'Last Name',
-        accessor: 'lastName',
+        accessor: 'last_name',
         className: 'font-medium',
         sortable: true,
       },
@@ -83,19 +94,13 @@ function ContactsList(props) {
         sortable: false,
         Cell: ({ row }) => (
           <div className="flex items-center">
-            <IconButton
-              onClick={(ev) => {
-                ev.stopPropagation();
-                // dispatch(toggleStarredContact(row.original.id));
-              }}
-              size="large"
-            >
-              {1 === 0 ? (
-                <Icon className="text-yellow-700">star</Icon>
-              ) : (
-                <Icon>star_border</Icon>
-              )}
-            </IconButton>
+            <FormControlLabel
+                              value={row.original.email}
+                              onChange={handleToggle.bind(this, row.original.email)}
+                              inputprops={{ "aria-labelledby": row.original.email  }}
+                              control={<Radio />}
+                              label=""
+                            />
           </div>
         ),
       },
@@ -131,12 +136,18 @@ function ContactsList(props) {
     );
   }
 
+
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
       className="flex flex-auto w-full max-h-full"
     >
+      <RadioGroup
+                aria-label="gender"
+                defaultValue="0"
+                name="radio-buttons-group"
+              >
       <PlayersTable
         columns={columns}
         data={filteredData}
@@ -146,6 +157,7 @@ function ContactsList(props) {
           }
         }}
       />
+      </RadioGroup>
     </motion.div>
   );
 }
