@@ -25,10 +25,6 @@ const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
   const resolvedRef = ref || defaultRef;
 
   useEffect(() => {
-    selectedEmailRemoveAll();
-  }, []);
-
-  useEffect(() => {
     resolvedRef.current.indeterminate = indeterminate;
   }, [resolvedRef, indeterminate]);
 
@@ -48,10 +44,14 @@ const EnhancedTable = ({
   selectedEmailAddAll,
   selectedEmailRemoveAll}) => {
 
+  
+    useEffect(() => {
+      selectedEmailRemoveAll();
+    }, []);
+
   const selectedEmailAddOrRemove = (event) => {
-    console.log('---#####---', event);
-    if (event.index) {
-      if (!!event.isSelected) {
+    if (event.index || event.index === 0) {
+      if (!event.isSelected) {
         selectedEmailAdd(event.original.email);
       } else {
         selectedEmailRemove(event.original.email);
@@ -63,8 +63,6 @@ const EnhancedTable = ({
         selectedEmailRemoveAll();
       }
     }
-    
-    event.stopPropagation();
   }; 
     
   const {
@@ -101,9 +99,9 @@ const EnhancedTable = ({
             <div>
               <IndeterminateCheckbox {...a.getToggleAllRowsSelectedProps()} 
               onClick={(ev) => {
+                // console.log('---OOOOO---', ev, a);
+                selectedEmailAddOrRemove(a);
                 ev.stopPropagation();
-                console.log('---OOOOO---', ev, a);
-                selectedEmailAddOrRemove(ev);
               }
               }
               />
@@ -116,8 +114,9 @@ const EnhancedTable = ({
               <IndeterminateCheckbox
                 {...row.getToggleRowSelectedProps()}
                 onClick={(ev) => {
+                  // console.log('---XXXX---', ev, row);
+                  selectedEmailAddOrRemove(row);
                   ev.stopPropagation();
-                  console.log('---XXXX---', ev, row);
                 }
                 }
               />

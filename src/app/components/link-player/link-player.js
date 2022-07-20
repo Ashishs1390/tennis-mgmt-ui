@@ -168,6 +168,10 @@ function LinkPlayer(props) {
       });
   };
 
+  const getPlayerData = () => {
+    navigate(`/competancyaggregation`);
+  };
+
   return (
     <div>
       {/* <NavBarParent></NavBarParent> */}
@@ -177,7 +181,6 @@ function LinkPlayer(props) {
 
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={10} md={2}></Grid>
           <Grid item xs={10} md={6}>
             <Typography
               className="welcome-user"
@@ -189,12 +192,12 @@ function LinkPlayer(props) {
               {`Welcome ${userDetails.role} : ${userDetails.first_name} ${userDetails.last_name}`} 
             </Typography>
           </Grid>
+          <Grid item xs={2} md={2}></Grid>
         </Grid>
       </Box>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={10} md={2}></Grid>
-          <Grid item xs={10} md={4}>
+          <Grid item xs={12} md={6}>
             <Box sx={{ minWidth: 120 }}>
               <TextField
                 required
@@ -306,7 +309,7 @@ function LinkPlayer(props) {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ flexGrow: 1 }}>
+      {/* <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={10} md={2}></Grid>
           <Grid item xs={10} md={6}>
@@ -371,16 +374,26 @@ function LinkPlayer(props) {
             )}
           </Grid>
         </Grid>
+      </Box> */}
+      <Box sx={{ flexGrow: 1, marginTop: '20px'  }}>
+        <PlayersList searchedPlayerListNew={props.searchedPlayerListNew} handleToggle={handleToggle.bind(this)}/>
       </Box>
-      <Box sx={{ flexGrow: 1 }}>
-      <PlayersList searchedPlayerListNew={props.searchedPlayerListNew} handleToggle={handleToggle.bind(this)}/>
-    </Box>
       {!props.loadingSearchedPlayerList &&
       props.searchedPlayerList &&
       props.searchedPlayerList.length > 0 ? (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, marginTop: '20px' }}>
           <Grid container spacing={2}>
-            <Grid item xs={10} md={6}></Grid>
+            <Grid item xs={10} md={6}>
+            <Button
+                  variant="contained"
+                  className="searchBtn player_data"
+                onClick={(e) => {
+                  getPlayerData();
+                }}
+              >
+                Player Data
+              </Button>
+            </Grid>
             <Grid item xs={10} md={2}>
               <Button
                   variant="contained"

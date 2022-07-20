@@ -17,9 +17,9 @@ import "./compentacy.css";
 // import NavBarParent from "../../player-coach/NavBarParent/NarBarParent";
 function UserListAggregation(props) {
     const navigate = useNavigate();
-    const { fetchLinkedPlayerList, searchedPlayerList } = props;
+    const { fetchLinkedPlayerList, selectedPlayerList } = props;
     const [showAggrePage, setShowAggrePage] = useState(true);
-    const [selectedPlayers, setSelectedPlayers] = useState([...props.selectedPlayerList]);
+    const [selectedPlayers, setSelectedPlayers] = useState([...selectedPlayerList]);
     const updateCheckBoxSelection = (value) => {
         if (!selectedPlayers.includes(value)) {
             selectedPlayers.push(value);
