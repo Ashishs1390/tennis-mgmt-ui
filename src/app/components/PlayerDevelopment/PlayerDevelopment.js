@@ -152,7 +152,7 @@ function PlayerDevelopment(props) {
 
   const updateNav = (link) => {
     navigate(link);
-    setMenuOpen(false);
+    // setMenuOpen(false);
   };
 
   useEffect(() => {
