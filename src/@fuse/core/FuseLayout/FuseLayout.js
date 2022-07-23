@@ -74,7 +74,6 @@ const inputGlobalStyles = (
 );
 
 function FuseLayout(props) {
-  console.log(props);
   const dispatch = useDispatch();
   const settings = useSelector(({ fuse }) => fuse.settings.current);
   const defaultSettings = useSelector(({ fuse }) => fuse.settings.defaults);

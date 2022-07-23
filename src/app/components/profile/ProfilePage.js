@@ -97,15 +97,15 @@ const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoach
                   {user.data.displayName}
                 </Typography>
               </motion.div>
-
-              <div className="flex items-center justify-end -mx-4 mt-24 md:mt-0">
-                <Button className="mx-8" variant="contained" color="secondary" aria-label="Follow">
-                  Follow
-                </Button>
-                <Button variant="contained" color="primary" aria-label="Send Message">
-                  Send Message
-                </Button>
-              </div>
+  {/* 
+                <div className="flex items-center justify-end -mx-4 mt-24 md:mt-0">
+                  <Button className="mx-8" variant="contained" color="secondary" aria-label="Follow">
+                    Follow
+                  </Button>
+                  <Button variant="contained" color="primary" aria-label="Send Message">
+                    Send Message
+                  </Button>
+                </div> */}
             </div>
           </div>
           <Tabs

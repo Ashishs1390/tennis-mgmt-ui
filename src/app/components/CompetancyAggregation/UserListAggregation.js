@@ -46,7 +46,7 @@ function UserListAggregation(props) {
     return (
         <Box sx={{ flexGrow: 1 }} className="AggregationWrapper">
             <Typography variant="h4" gutterBottom component="div" align="center" className="HomePageHeader">
-                Competancy Aggregation
+                Player Comparison
             </Typography>
             {!showAggrePage &&
             <Grid container spacing={2}>

@@ -46,7 +46,7 @@ const navigationConfig = [
       // },
       {
         id: "comparelibrary",
-        title: "Compare Library",
+        title: "Compare Strokes",
         type: "item",
         url: "comparelibrary",
         icon: 'whatshot'
@@ -109,7 +109,7 @@ export const navigationConfigParentCoach = [
       // },
       {
         id: "comparelibrary",
-        title: "Compare Library",
+        title: "Compare Strokes",
         type: "item",
         url: "comparelibrary",
         icon: 'whatshot'
