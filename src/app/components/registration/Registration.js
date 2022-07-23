@@ -154,7 +154,6 @@ function Registration(props) {
                             noValidate
                             className="flex flex-col justify-center w-full"
                             onSubmit={handleSubmit((data) => {
-                                console.log(data);
                                 onSubmit(data)
                             })}
                         >
