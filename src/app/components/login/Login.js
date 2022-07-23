@@ -143,8 +143,8 @@ function Login3Page(props) {
                   alt="logo"
                   style={{width: '115px', marginRight: '5px'}}
                 />
-                <div className="border-l-1 mr-4 w-1 h-40" />
-                <div>
+                {/* <div className="border-l-1 mr-4 w-1 h-40" /> */}
+                {/* <div>
                   <Typography
                     className="text-24 font-semibold logo-text"
                     color="inherit"
@@ -157,7 +157,7 @@ function Login3Page(props) {
                   >
                     LMS
                   </Typography>
-                </div>
+                </div> */}
               </div>
             </motion.div>
 

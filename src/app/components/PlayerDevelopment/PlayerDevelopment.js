@@ -20,6 +20,8 @@ import FormatBoldIcon from '@mui/icons-material/FormatBold';
 // import DatesPopUp from './../../css-components/DatesPopUp/DatesPopUp';
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
+import moment from 'moment';
+import { getDateWithTime } from './../../util/util';
 
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -62,7 +64,7 @@ function PlayerDevelopment(props) {
   const [selectedCheckBox, setSelectedCheckBox] = useState({ player: [], parent: [], coach: [] });
   const {
     getPersonalDevPageInfo,
-    pdpData: { progressBarData, assessmentDates, assessmentTestDates, loading = false },
+    pdpData: { progressBarData, assessmentDates, assessmentNewDates, loading = false },
     userInfo
   } = props;
   //const [selectedRadios, setSelectedRadios] = useState({player: radioSelectionList.player[0], parent: radioSelectionList.parent[0], coach: radioSelectionList.coach[0]});
@@ -150,18 +152,15 @@ function PlayerDevelopment(props) {
 
   const updateNav = (link) => {
     navigate(link);
-    setMenuOpen(false);
+    // setMenuOpen(false);
   };
 
   useEffect(() => {
     if (
-      progressBarData &&
-      assessmentTestDates &&
-      progressBarData.length != 0 &&
-      assessmentTestDates.length != 0
+      progressBarData && assessmentNewDates && assessmentNewDates.length != 0
     ) {
       setCompetancyData([...progressBarData]);
-      const data = radioSelectionList([...assessmentTestDates]);
+      const data = radioSelectionList([...assessmentNewDates]);
       const orderedData = orderByRoles(data, rolesOrder);
       const splicedData = splicedByRoles(orderedData);
       const getValue = (val) => {
@@ -184,10 +183,10 @@ function PlayerDevelopment(props) {
       }
       setDatesArr(orderedData);
       let getMaxDate = new Date(
-        Math.max(...assessmentTestDates.map((e) => new Date(e.assessment_date)))
+        Math.max(...assessmentNewDates.map((e) => new Date(e.assessment_date)))
       );
 
-      getMaxDate = getMaxDate.toISOString();
+      getMaxDate = getDateWithTime(getMaxDate);
       setMaxDate(getMaxDate);
       setDisplayRow([getMaxDate]);
     }
@@ -319,7 +318,8 @@ function PlayerDevelopment(props) {
                           maxDate={maxDate}
                           displayRowArr={displayRowArr}
                           selectedRoles={selectedRoles}
-                          hideScores = {hideScores}
+                          hideScores={hideScores}
+                          assessmentDates={assessmentNewDates}
                         ></PlayerDevelopmentListItem>
                       );
                     })}

@@ -378,6 +378,9 @@ function LinkPlayer(props) {
       <Box sx={{ flexGrow: 1, marginTop: '20px'  }}>
         <PlayersList searchedPlayerListNew={props.searchedPlayerListNew} handleToggle={handleToggle.bind(this)}/>
       </Box>
+      <Box sx={{ flexGrow: 1 }}>
+      <PlayersList />
+    </Box>
       {!props.loadingSearchedPlayerList &&
       props.searchedPlayerList &&
       props.searchedPlayerList.length > 0 ? (

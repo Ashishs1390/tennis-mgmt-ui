@@ -14,6 +14,8 @@ import Loading from "./../common/loading/loading";
 import TextField from "@mui/material/TextField";
 import { getDateYYYYMMDD } from "../../util/util";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
+import { getDateWithTime } from '../../util/util';
 
 import "./competancy.css";
 
@@ -52,7 +54,7 @@ function CompetancyRating(props) {
     if (competancyDataHandel.length <= 0) {
       props.competancyData.forEach((comp) => {
         comp.values.forEach((co) => {
-          if (!co.prev_weight) {
+          if (co.prev_weight) {
             co.prev_weight = co.assigned_weight;
           } else {
             co.prev_weight = null;
@@ -85,8 +87,7 @@ function CompetancyRating(props) {
             ...x,
             assessment_date: assDate.match(/T/g)
               ? assDate
-              : new Date().toISOString(),
-            // assessment_date: new Date().toISOString(),
+              : getDateWithTime(new Date()),
           };
         })
       );
@@ -105,7 +106,7 @@ function CompetancyRating(props) {
   return (
     <AssessmentContext.Provider value={{ getDotPosition }}>
       <div id="CompetancyDetails">
-        { dotPosition.y > 0 && <div className="dot-indicator" style={{top: dotPosition.y + 'px', left:  dotPosition.x + 'px'}}></div>}
+        {/* { dotPosition.y > 0 && <div className="dot-indicator" style={{top: dotPosition.y + 'px', left:  dotPosition.x + 'px'}}></div>} */}
         <Typography
           sx={{ display: "block" }}
           component="h3"

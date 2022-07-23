@@ -10,3 +10,7 @@ export function getDateDDMMYYYY(date) {
 export function getDateMMDDYY(date){
     return moment(date).format('MM-DD-YY')
 }
+export function getDateWithTime(date) {
+    // return moment(date).format('YYYY-MM-DDTHH:mm:ss.sssZ');
+    return date.toISOString();
+}
