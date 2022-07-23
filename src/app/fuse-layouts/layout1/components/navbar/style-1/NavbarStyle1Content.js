@@ -5,8 +5,10 @@ import Logo from 'app/fuse-layouts/shared-components/Logo';
 import NavbarToggleButton from 'app/fuse-layouts/shared-components/NavbarToggleButton';
 import Navigation from 'app/fuse-layouts/shared-components/Navigation';
 import UserNavbarHeader from 'app/fuse-layouts/shared-components/UserNavbarHeader';
+import { useNavigate, Link } from "react-router-dom";
 import clsx from 'clsx';
 import { memo } from 'react';
+import './style-1.css'
 
 const Root = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -37,7 +39,18 @@ const StyledContent = styled(FuseScrollbars)(({ theme }) => ({
 
 function NavbarStyle1Content(props) {
   const theme = useTheme();
+  let localData = localStorage.getItem("localStore");
+  localData = JSON.parse(localData);
+  let { role } = localData;
+  const navigate = useNavigate();
 
+  const handleImgClick = () => {
+    if (role == "parent" || role == "coach") {
+      navigate('/link/player');
+    } else {
+      navigate('/profilepage');
+    }
+  }
   return (
     <Root className={clsx('flex flex-auto flex-col overflow-hidden h-full', props.className)}>
       <AppBar
@@ -45,7 +58,7 @@ function NavbarStyle1Content(props) {
         position="static"
         className="flex flex-row items-center shrink h-48 md:h-64 min-h-48 md:min-h-64 px-12 shadow-0"
       >
-        <div className="flex flex-1 mx-4">
+        <div className="flex flex-1 mx-4" onClick={handleImgClick}>
           <Logo />
         </div>
 

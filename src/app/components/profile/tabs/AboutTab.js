@@ -108,23 +108,29 @@ function AboutTab(props) {
                 <Typography className="font-semibold mb-4 text-15">Role</Typography>
                 <Typography>{data.role}</Typography>
               </div>
-              <div className="mb-24">
-                <Typography className="font-semibold mb-4 text-15">Current Level</Typography>
-                <Typography>{data.current_level}</Typography>
-              </div>
-              <div className="mb-24">
+              {data.current_level &&
+                <div className="mb-24">
+                  <Typography className="font-semibold mb-4 text-15">Current Level</Typography>
+                  <Typography>{data.current_level}</Typography>
+                </div>
+              }
+              {data.parent_email && data.parent_email.length > 0 && <div className="mb-24">
                 <Typography className="font-semibold mb-4 text-15">Parent Email</Typography>
-                {data.parent_email && data.parent_email.map((em,index) => {
+                {data.parent_email.map((em, index) => {
                   return (<Typography key={em}>{em || "Parent not assigned"}</Typography>)
-                }) }
-              </div>
-              <div className="mb-24">
+                })}
+              </div>}
+
+
+              {data.coach_email && data.coach_email.length > 0 && <div className="mb-24">
                 <Typography className="font-semibold mb-4 text-15">Coach Email</Typography>
-                {data.coach_email && data.coach_email.map((em, index) => {
+                {data.coach_email.map((em, index) => {
                   return (<Typography key={em}>{em || "Coach not assigned"}</Typography>)
                 })}
+              </div>}
+              
 
-              </div>
+
             </CardContent>
           </Card>
         </div>
