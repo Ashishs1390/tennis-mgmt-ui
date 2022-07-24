@@ -34,7 +34,7 @@ function CompetancyAggregationWrapper() {
     const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoachNav, resetNavigation });
     // return <div>Video Analyaia page</div>
     return (<>
-        <Root header={<Header title="Competancy Aggregation" />} content={<UserListAggregation />} innerScroll />;
+        <Root header={<Header title="Player Comparison" />} content={<UserListAggregation />} innerScroll />;
     </>)
 
 

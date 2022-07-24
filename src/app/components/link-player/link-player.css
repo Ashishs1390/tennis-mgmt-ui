@@ -24,7 +24,11 @@
 }
 
 .searchBtn {
-  width: 70px;
+  width: 90px;
   height: 50px;
   border-radius: 0px;
+}
+
+.player_data {
+  width: 150px;
 }

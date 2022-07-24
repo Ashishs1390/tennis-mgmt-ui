@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
+import { useNavigate, Link } from "react-router-dom";
+
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   '& .username, & .email': {
@@ -27,7 +29,10 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 function UserNavbarHeader(props) {
   const user = useSelector(({ auth }) => auth.user);
-
+  const navigate = useNavigate();
+  const handleProfileClick = () => {
+    navigate('/profilepage');
+  }
   return (
     <StyledAppBar
       position="static"
@@ -52,6 +57,7 @@ function UserNavbarHeader(props) {
               ? user.data.photoURL
               : 'assets/images/avatars/profile.jpg'
           }
+          onClick={handleProfileClick}
         />
       </div>
     </StyledAppBar>

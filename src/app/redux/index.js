@@ -9,7 +9,18 @@ export {
   saveCompetancy,
   emptyCompetancySave,
 } from "./competancy/competancyActions";
-export { getPersonalDevPageInfo, getPersonalDevOnDate } from "./player-development/playerDevelopmentActions";
+export {
+  getPersonalDevPageInfo,
+  getPersonalDevOnDate,
+} from "./player-development/playerDevelopmentActions";
 export * from "./basicInfo/basicInfoActions";
-export { getSearchedPlayerByEmail, fetchLinkedPlayerList, addPlayerToList } from "./link-player/linkPlayerAction";
-export { getCompetancyDetails } from './competancy-aggregation/competancyAggregationAction';
+export {
+  getSearchedPlayerByEmail,
+  fetchLinkedPlayerList,
+  addPlayerToList,
+  selectedEmailAdd,
+  selectedEmailRemove,
+  selectedEmailAddAll,
+  selectedEmailRemoveAll,
+} from "./link-player/linkPlayerAction";
+export { getCompetancyDetails } from "./competancy-aggregation/competancyAggregationAction";

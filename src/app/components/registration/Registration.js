@@ -154,7 +154,6 @@ function Registration(props) {
                             noValidate
                             className="flex flex-col justify-center w-full"
                             onSubmit={handleSubmit((data) => {
-                                console.log(data);
                                 onSubmit(data)
                             })}
                         >
@@ -186,7 +185,7 @@ function Registration(props) {
                                         {...register("last_name")}
                                         className="mb-16"
                                         label="Last Name"
-                                        autoFocus
+                                        // autoFocus
                                         type="name"
                                         error={!!errors.last_name}
                                         helperText={errors?.last_name?.message}

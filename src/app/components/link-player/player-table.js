@@ -12,7 +12,13 @@ import { useGlobalFilter, usePagination, useRowSelect, useSortBy, useTable } fro
 import clsx from 'clsx';
 // import ContactsTablePaginationActions from './ContactsTablePaginationActions';
 import PropTypes from 'prop-types';
-
+import { connect } from "react-redux";
+import {
+  selectedEmailAdd,
+  selectedEmailRemove,
+  selectedEmailAddAll,
+  selectedEmailRemoveAll,
+} from "./../../redux/index";
 
 const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
   const defaultRef = useRef();
@@ -29,8 +35,36 @@ const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
   );
 });
 
-const EnhancedTable = ({ columns, data, onRowClick }) => {
-  console.log(columns);
+const EnhancedTable = ({
+  columns,
+  data,
+  onRowClick,
+  selectedEmailAdd,
+  selectedEmailRemove,
+  selectedEmailAddAll,
+  selectedEmailRemoveAll}) => {
+
+  
+    useEffect(() => {
+      selectedEmailRemoveAll();
+    }, []);
+
+  const selectedEmailAddOrRemove = (event) => {
+    if (event.index || event.index === 0) {
+      if (!event.isSelected) {
+        selectedEmailAdd(event.original.email);
+      } else {
+        selectedEmailRemove(event.original.email);
+      }
+    } else {
+      if(!event.isAllPageRowsSelected) {
+        selectedEmailAddAll();
+      } else {
+        selectedEmailRemoveAll();
+      }
+    }
+  }; 
+    
   const {
     getTableProps,
     headerGroups,
@@ -61,9 +95,16 @@ const EnhancedTable = ({ columns, data, onRowClick }) => {
           // be server side pagination.  For one, the clients should not download all
           // rows in most cases.  The client should only download data for the current page.
           // In that case, getToggleAllRowsSelectedProps works fine.
-          Header: ({ getToggleAllRowsSelectedProps }) => (
+          Header: (a) => (
             <div>
-              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+              <IndeterminateCheckbox {...a.getToggleAllRowsSelectedProps()} 
+              onClick={(ev) => {
+                // console.log('---OOOOO---', ev, a);
+                selectedEmailAddOrRemove(a);
+                ev.stopPropagation();
+              }
+              }
+              />
             </div>
           ),
           // The cell can use the individual row's getToggleRowSelectedProps method
@@ -72,7 +113,12 @@ const EnhancedTable = ({ columns, data, onRowClick }) => {
             <div>
               <IndeterminateCheckbox
                 {...row.getToggleRowSelectedProps()}
-                onClick={(ev) => ev.stopPropagation()}
+                onClick={(ev) => {
+                  // console.log('---XXXX---', ev, row);
+                  selectedEmailAddOrRemove(row);
+                  ev.stopPropagation();
+                }
+                }
               />
             </div>
           ),
@@ -171,4 +217,21 @@ EnhancedTable.propTypes = {
   onRowClick: PropTypes.func,
 };
 
-export default EnhancedTable;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectedEmailAdd: (email) =>
+      dispatch(selectedEmailAdd(email)),
+    selectedEmailRemove: (email) => dispatch(selectedEmailRemove(email)),
+    selectedEmailAddAll: () => dispatch(selectedEmailAddAll()),
+    selectedEmailRemoveAll: () => dispatch(selectedEmailRemoveAll()),
+  };
+};
+
+const mapStateToProps = (state) => {
+  const stateData = state.linkPlayerReducer;
+  return {
+    selectedPlayerList: stateData.selectedPlayerList ? stateData.selectedPlayerList : [],
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EnhancedTable);

@@ -11,7 +11,6 @@ const navigationConfig = [
   {
     id: 'applications',
     title: 'Applications',
-    translate: 'APPLICATIONS',
     type: 'group',
     icon: 'apps',
     children: [
@@ -47,7 +46,7 @@ const navigationConfig = [
       // },
       {
         id: "comparelibrary",
-        title: "Compare Library",
+        title: "Compare Strokes",
         type: "item",
         url: "comparelibrary",
         icon: 'whatshot'
@@ -73,8 +72,8 @@ const navigationConfig = [
 export const navigationConfigParentCoach = [
   {
     id: 'applications',
-    title: 'Applications',
-    translate: 'APPLICATIONS',
+    title: '',
+    // translate: 'APPLICATIONS',
     type: 'group',
     icon: 'apps',
     children: [
@@ -110,7 +109,7 @@ export const navigationConfigParentCoach = [
       // },
       {
         id: "comparelibrary",
-        title: "Compare Library",
+        title: "Compare Strokes",
         type: "item",
         url: "comparelibrary",
         icon: 'whatshot'
@@ -137,8 +136,8 @@ export const navigationConfigParentCoach = [
 export const navigationConfigPC = [
   {
     id: 'applications',
-    title: 'Applications',
-    translate: 'APPLICATIONS',
+    title: '',
+    // translate: 'APPLICATIONS',
     type: 'group',
     icon: 'apps',
     children: [
