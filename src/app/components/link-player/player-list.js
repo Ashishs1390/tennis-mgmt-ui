@@ -12,35 +12,12 @@ import PlayersTable from './player-table';
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-// import {
-//   openEditContactDialog,
-//   removeContact,
-//   toggleStarredContact,
-//   selectContacts,
-// } from './store/contactsSlice';
+
 
 function ContactsList(props) {
   const dispatch = useDispatch();
-  //const contacts = useSelector(selectContacts);
   const contacts = useMemo(()=> props.searchedPlayerListNew
-  /*[{
-    first_name: 'abcd',
-    last_name: 'efgh',
-    email: 'abdc.efgh@gmail.com',
-    avatar: ''
-  },{
-    first_name: 'abcd1111111',
-    last_name: 'efgh11111',
-    email: 'abdc111111.efgh@gmail.com',
-    avatar: ''
-  },
-  {
-    first_name: 'abcd222222',
-    last_name: 'efgh222222',
-    email: 'abdc222222.efgh@gmail.com',
-    avatar: ''
-  }]
-  */
+
   , [props.searchedPlayerListNew]);
   // const searchText = useSelector(({ contactsApp }) => contactsApp.contacts.searchText)
   // const user = useSelector(({ contactsApp }) => contactsApp.user);
@@ -105,7 +82,6 @@ function ContactsList(props) {
         ),
       },
     ],
-    //[dispatch, user.starred]
     [dispatch]
   );
 

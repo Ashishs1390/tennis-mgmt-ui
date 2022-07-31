@@ -25,7 +25,7 @@ const Root = styled(FusePageCarded)(({ theme }) => ({
 
 function PlayerDevelopmentWrapper() {
     return (<>
-        <Root header={<Header title="Player Development" />} content={<PlayerDevelopment />} innerScroll />;
+        <Root header={<Header title="Player Assessment" />} content={<PlayerDevelopment />} innerScroll />;
     </>)
 
 

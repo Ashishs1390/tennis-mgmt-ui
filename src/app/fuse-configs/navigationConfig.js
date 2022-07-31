@@ -52,15 +52,9 @@ const navigationConfig = [
         icon: 'whatshot'
         
       }, {
-        id: "assessments",
-        title: "Assessments",
-        type: "item",
-        url: "assessments",
-        icon:"whatshot"
-      }, {
         
         id: "playerdevelopment",
-        title: "playerdevelopment",
+        title: "Player Assessment",
         type: "item",
         url: "playerdevelopment",
         icon: "whatshot"
@@ -115,15 +109,9 @@ export const navigationConfigParentCoach = [
         icon: 'whatshot'
         
       }, {
-        id: "assessments",
-        title: "Assessments",
-        type: "item",
-        url: "assessments",
-        icon:"whatshot"
-      }, {
         
         id: "playerdevelopment",
-        title: "playerdevelopment",
+        title: "Player Assessment",
         type: "item",
         url: "playerdevelopment",
         icon: "whatshot"
