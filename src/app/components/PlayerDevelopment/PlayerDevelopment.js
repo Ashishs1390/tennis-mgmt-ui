@@ -71,10 +71,17 @@ function PlayerDevelopment(props) {
   const [selectedRadios, setSelectedRadios] = useState({ player: '', parent: '', coach: '' });
   const child_email = localStorage.getItem("child_email")
   const localStore = localStorage.getItem("localStore");
-  const [{ playerName }] = useState({
-    playerName: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? `${JSON.parse(localStorage.getItem("childInfo")).first_name} ${JSON.parse(localStorage.getItem("childInfo")).last_name}`
-      : `${JSON.parse(localStorage.getItem("localStore")).first_name} ${JSON.parse(localStorage.getItem("localStore")).last_name}`,
-  });
+  console.log('----------userInfo------------')
+  console.log(userInfo.data);
+
+  useEffect(() => {
+    localStorage.setItem("childInfo", JSON.stringify(userInfo.data));
+  }, [userInfo]);
+
+  // const [{ playerName }] = useState({
+  //   playerName: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? `${JSON.parse(localStorage.getItem("childInfo")).first_name} ${JSON.parse(localStorage.getItem("childInfo")).last_name}`
+  //     : `${JSON.parse(localStorage.getItem("localStore")).first_name} ${JSON.parse(localStorage.getItem("localStore")).last_name}`,
+  // });
   const [userName, setUserName] = useState("");
   const [childEmail, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -104,9 +111,7 @@ function PlayerDevelopment(props) {
     }
   }, [role]);
 
-  useEffect(() => {
-    localStorage.setItem("childInfo", JSON.stringify(userInfo.data));
-  }, [userInfo]);
+
 
   const updateCheckBoxSelection = (value, role) => {
     if (!selectedCheckBox[role].includes(value)) {
@@ -244,7 +249,7 @@ function PlayerDevelopment(props) {
         <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div" className="assessmentheader">
           Player assessment -skill view
         </Typography>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">Name:{playerName}</Typography>
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">Name:{userInfo.data.first_name} {userInfo.data.last_name}</Typography>
       </Box>
 
       <div className="NewAssessment">
