@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-
+import Box from "@mui/material/Box";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -71,6 +71,10 @@ function PlayerDevelopment(props) {
   const [selectedRadios, setSelectedRadios] = useState({ player: '', parent: '', coach: '' });
   const child_email = localStorage.getItem("child_email")
   const localStore = localStorage.getItem("localStore");
+  const [{ playerName }] = useState({
+    playerName: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? `${JSON.parse(localStorage.getItem("childInfo")).first_name} ${JSON.parse(localStorage.getItem("childInfo")).last_name}`
+      : `${JSON.parse(localStorage.getItem("localStore")).first_name} ${JSON.parse(localStorage.getItem("localStore")).last_name}`,
+  });
   const [userName, setUserName] = useState("");
   const [childEmail, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -111,12 +115,12 @@ function PlayerDevelopment(props) {
       const index = selectedCheckBox[role].indexOf(value);
       if (index > -1) {
         selectedCheckBox[role].splice(index, 1);
-        if (selectedCheckBox[role].length >= 0) { 
+        if (selectedCheckBox[role].length >= 0) {
           selectedCheckBox[role].push([]);
-        } 
+        }
       }
     }
-    props.getPersonalDevOnDate({ ...selectedCheckBox});
+    props.getPersonalDevOnDate({ ...selectedCheckBox });
     setSelectedCheckBox({ ...selectedCheckBox });
   }
 
@@ -198,7 +202,7 @@ function PlayerDevelopment(props) {
   }
 
   const updateRadioSelections = (value, object) => {
-    console.log({[object]: value})
+    console.log({ [object]: value })
     const selectedDates = { ...selectedRadios, [object]: value };
     console.log(selectedDates);
     props.getPersonalDevOnDate(selectedDates);
@@ -229,17 +233,20 @@ function PlayerDevelopment(props) {
           })}
         </FormGroup>
       </div>
-      <div className = "hideScoreContainer">
+      <div className="hideScoreContainer">
         <FormGroup>
           <FormControlLabel control={<Checkbox defaultChecked />} label="show scores" onChange={(ev) => {
             handleHideScores(ev);
-          }}/>
+          }} />
         </FormGroup>
       </div>
-     
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div" className="assessmentheader">
-        player development plans -skill view
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div" className="assessmentheader">
+          Player assessment -skill view
+        </Typography>
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">Name:{playerName}</Typography>
+      </Box>
+
       <div className="NewAssessment">
         <Button className="assessment-btn" variant="contained"
           onClick={() => {
@@ -277,7 +284,7 @@ function PlayerDevelopment(props) {
                                   value={value}
                                   onChange={() => {
                                     // updateRadioSelections(value, x, false);
-                                    updateCheckBoxSelection(value,x)
+                                    updateCheckBoxSelection(value, x)
                                   }}
                                   // inputprops={{ "aria-labelledby": labelId }}
                                   control={<Checkbox />}
@@ -292,10 +299,10 @@ function PlayerDevelopment(props) {
                     }
                   </List>
                 </Item>
-               </Grid>
+              </Grid>
             )
           })
-          }
+        }
       </div>
       <Grid container spacing={2}>
         <Grid item xs={12} lg={12}>
@@ -348,7 +355,7 @@ const mapStateToProps = (state) => {
   return {
     pdpData: state.personalDevelopment.pdpData,
     userInfo: state.getData
-};
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerDevelopment);

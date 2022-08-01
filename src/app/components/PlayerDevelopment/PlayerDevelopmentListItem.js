@@ -100,9 +100,14 @@ function PlayerDevelopmentListItem(props) {
   for (let w in newWeights) {
     let bool = newWeights[w].some((x) => (x.role == "player")? true : false);
     if (bool) {
+      // console.log('-----------sameObjArr-------------')
+      // console.log(sameObjArr);
       sameObjArr.push(...newWeights[w])
     } else {
+  
       otherObjArr.push(...newWeights[w]);
+          console.log('--------otherObjArr---------')
+      console.log(otherObjArr);
     }
   }
   const classes = useStyles(propsStyle);
@@ -175,7 +180,7 @@ function PlayerDevelopmentListItem(props) {
             <div className="parent-coach-rating">
               {otherObjArr.filter(x => x.role === 'parent' || x.role === 'coach').filter(x => !!selectedRoles.find(y => y === x.role)).map((weight1, index) => { // checkboxes
                 return (
-                  <div className={`${getDateMMDDYY(weight.assessment_date) == getDateMMDDYY(weight1.assessment_date) && weight.role == weight1.role ? 'pbshow' : 'pbHide'}`}>
+                  <div className={`${weight.assessment_date == weight1.assessment_date && weight.role == weight1.role ? 'pbshow' : 'pbHide'}`}>
                     <div title={`${weight1.role} has given ${weight1.assigned_weight} rating on ${getDateDDMMYYYY(new Date(weight1.assessment_date))}`} className={`score-dot ${weight1.role == "parent"
                       ? 'parent-bg' : 'coach-bg'}`} key={weight1.role} data-rating={`${weight1.assigned_weight}`} style={{ left: weight1.assigned_weight + '0%' }} >
                       <div className={`${weight1.role === 'coach' ? 'coachPosition' : 'parentPosition'} ${weight1.assigned_weight <= 4
