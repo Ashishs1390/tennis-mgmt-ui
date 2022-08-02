@@ -50,7 +50,7 @@
   }
 
   .video-player-controls {
-    float: right;
+    float:  left;
   }
   .video-player-controls button{
     border: 1.3px solid #212121;

@@ -144,15 +144,16 @@ export const navigationConfigPC = [
         type: 'item',
         icon: 'whatshot',
         url: 'profilepage',
-      },
-      {
-        id: 'player-data',
-        title: 'PLAYER DATA',
-        //translate: 'PLAYER DATA',
-        type: 'item',
-        icon: 'whatshot',
-        url: 'competancyaggregation',
       }
+      // ,
+      // {
+      //   id: 'player-data',
+      //   title: 'PLAYER DATA',
+      //   //translate: 'PLAYER DATA',
+      //   type: 'item',
+      //   icon: 'whatshot',
+      //   url: 'competancyaggregation',
+      // }
     ]
   }
 ]
