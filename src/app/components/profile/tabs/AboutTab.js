@@ -16,6 +16,8 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { emailValidation, fetchDetails } from "./../../../redux/index";
 import { connect } from 'react-redux';
+import { Box } from '@mui/system';
+import "./tabs.css"
 
 
 function AboutTab(props) {
@@ -43,21 +45,9 @@ function AboutTab(props) {
     if (getData.data.length != 0) {
       console.log(getData);
       setData(getData.data);
-      // const obj = {
-      //   first_name: getData.data.first_name,
-      //   last_name: getData.data.last_name,
-      //   email: getData.data.email
-      // }
-      // updateValue(obj, setInputs, inputs, 'registrationForm')
+
     }
-  }, [getData])
-
-
-  // if (!data) {
-  //   return null;
-  // }
-
-  // const { general, work, contact, groups, friends } = data;
+  }, [getData]);
 
   const container = {
     show: {
@@ -128,33 +118,95 @@ function AboutTab(props) {
                   return (<Typography key={em}>{em || "Coach not assigned"}</Typography>)
                 })}
               </div>}
+
+              {data.children_email && data.children_email.length > 0 && <div className="mb-24">
+                <Typography className="font-semibold mb-4 text-15">Player Emails</Typography>
+                {data.children_email.map((em, index) => {
+                  return (<Typography key={em}>{em || "Coach not assigned"}</Typography>)
+                })}
+              </div>}
               
 
 
             </CardContent>
           </Card>
         </div>
-
+        
         <div className="flex flex-col md:w-320">
-          <Card component={motion.div} variants={item} className="w-full mb-32 rounded-16 shadow">
-            <AppBar position="static" elevation={0}>
-              <Toolbar className="px-8">
-                <Typography
-                  variant="subtitle1"
-                  color="inherit"
-                  className="flex-1 px-12 font-medium"
-                >
-                  Friends
-                </Typography>
-                <Button color="inherit" size="small">
-                  See 454 more
-                </Button>
-              </Toolbar>
-            </AppBar>
+          {data.children_email && data.children_email.length > 0 && 
+            <Card component={motion.div} variants={item} className="w-full mb-32 rounded-16 shadow">
+              <AppBar position="static" elevation={0}>
+                <Toolbar className="px-8">
+                  <Typography
+                    variant="subtitle1"
+                    color="inherit"
+                    className="flex-1 px-12 font-medium"
+                  >
+                    Players
+                  </Typography>
+                  <Button color="inherit" size="small">
+                    {data.children_email.length}
+                  </Button>
+                </Toolbar>
+                <Box className="tabs-content">
+                  {data.children_email.map((ele, index) => { 
+                    return (<Typography key={ele}>{ ele} </Typography>)
+                  })}
+                </Box>
+              </AppBar>
      
-          </Card>
+            </Card>
+          }
+          {data.parent_email && data.parent_email.length > 0 &&
+            <Card component={motion.div} variants={item} className="w-full mb-32 rounded-16 shadow">
+              <AppBar position="static" elevation={0}>
+                <Toolbar className="px-8">
+                  <Typography
+                    variant="subtitle1"
+                    color="inherit"
+                    className="flex-1 px-12 font-medium"
+                  >
+                    Parent
+                  </Typography>
+                  <Button color="inherit" size="small">
+                    {data.parent_email.length}
+                  </Button>
+                </Toolbar>
+                <Box className="tabs-content">
+                  {data.parent_email.map((ele, index) => {
+                    return (<Typography key={ele}>{ele} </Typography>)
+                  })}
+                </Box>
+              </AppBar>
 
-          <Card component={motion.div} variants={item} className="w-full mb-32 rounded-16 shadow">
+            </Card>
+          }
+          {data.coach_email && data.coach_email.length > 0 &&
+            <Card component={motion.div} variants={item} className="w-full mb-32 rounded-16 shadow">
+              <AppBar position="static" elevation={0}>
+                <Toolbar className="px-8">
+                  <Typography
+                    variant="subtitle1"
+                    color="inherit"
+                    className="flex-1 px-12 font-medium"
+                  >
+                    Coaches
+                  </Typography>
+                  <Button color="inherit" size="small">
+                    {data.coach_email.length}
+                  </Button>
+                </Toolbar>
+                <Box className="tabs-content">
+                  {data.coach_email.map((ele, index) => {
+                    return (<Typography key={ele}>{ele} </Typography>)
+                  })}
+                </Box>
+              </AppBar>
+
+            </Card>
+          }
+
+          {/* <Card component={motion.div} variants={item} className="w-full mb-32 rounded-16 shadow">
             <AppBar position="static" elevation={0}>
               <Toolbar className="px-8">
                 <Typography
@@ -169,7 +221,7 @@ function AboutTab(props) {
                 </Button>
               </Toolbar>
             </AppBar>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </motion.div>

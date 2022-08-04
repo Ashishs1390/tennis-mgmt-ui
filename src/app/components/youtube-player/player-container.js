@@ -79,7 +79,6 @@ function VideoPlayerContainer(props) {
                 setErrorMsg({ ...error })
             }
         } else {
-            console.log("----------analysis----else--------------");
             // setYouTubeId({});
             // setFrame([]);
         }
@@ -246,10 +245,10 @@ function VideoPlayerContainer(props) {
                     </div>}
                 <p>{startPlay}</p>
                 <div className="video-player-controls" style={{ paddingLeft: '50px' }}>
-                    {!startPlay && <Button variant="outlined" onClick={startAllVideos} style={{ marginLeft: '10px' }}>Play</Button>}
-                    {startPlay && <Button variant="outlined" onClick={pauseAllVideo} style={{ marginLeft: '10px' }}>Pause</Button>}
-                    {!mute && <Button variant="outlined" onClick={() => { muteUnmute(true) }} style={{ marginLeft: '10px' }}>Mute</Button>}
-                    {mute && <Button variant="outlined" onClick={() => { muteUnmute(false) }} style={{ marginLeft: '10px' }}>Unmute</Button>}
+                    {!startPlay && <Button variant="outlined" onClick={startAllVideos} style={{ marginLeft: '10px' }}>Play All</Button>}
+                    {startPlay && <Button variant="outlined" onClick={pauseAllVideo} style={{ marginLeft: '10px' }}>Pause All</Button>}
+                    {!mute && <Button variant="outlined" onClick={() => { muteUnmute(true) }} style={{ marginLeft: '10px' }}>Mute All</Button>}
+                    {mute && <Button variant="outlined" onClick={() => { muteUnmute(false) }} style={{ marginLeft: '10px' }}>Unmute All</Button>}
                     <FormControl sx={{ minWidth: 100 }} size="small">
                         {/* <InputLabel id="demo-select-small">Age</InputLabel> */}
                         <Select
@@ -265,10 +264,7 @@ function VideoPlayerContainer(props) {
                         </Select>
                     </FormControl>
                     {/* style={{ marginLeft: '10px' }} */}
-                    <input type="range" name="vol" min="0" max="5000" style={{ width: '500px' }} onChange={(event) => {
-                        console.log(event.target.value);
-                        setStartTime(event.target.value);
-                    }}></input><span>{(startTime / 60).toFixed(2)} (sec)</span>
+                  
                 </div>
             </div>
         </div>
