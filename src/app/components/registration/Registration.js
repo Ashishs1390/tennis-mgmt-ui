@@ -90,8 +90,6 @@ function Registration(props) {
         if (role === "player") {
             get("/api/tennismgmt/list/agegrouplist")
                 .then((x) => {
-                    console.log(x.data.data.itn_level_mapping);
-                    console.log(x.data.data.itn_level);
                     setLevels({
                         itn_level_mapping: x.data.data.itn_level_mapping,
                         itn_level: x.data.data.itn_level
@@ -134,8 +132,8 @@ function Registration(props) {
                   alt="logo"
                   style={{width: '115px', marginRight: '5px'}}/>
                                 
-                                <div className="border-l-1 mr-4 w-1 h-40" />
-                                <div>
+                                {/* <div className="border-l-1 mr-4 w-1 h-40" /> */}
+                                {/* <div>
                                     <Typography className="text-24 font-semibold logo-text" color="inherit">
                                         Tennis
                                     </Typography>
@@ -145,7 +143,7 @@ function Registration(props) {
                                     >
                                         LMS
                                     </Typography>
-                                </div>
+                                </div> */}
                             </div>
                         </motion.div>
 
