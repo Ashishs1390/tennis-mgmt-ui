@@ -58,6 +58,14 @@ const navigationConfig = [
         type: "item",
         url: "playerdevelopment",
         icon: "whatshot"
+      },
+      {
+
+        id: "pricing",
+        title: "Pricing",
+        type: "item",
+        url: "pricing",
+        icon: "whatshot"
       }
     ],
   },
@@ -115,6 +123,14 @@ export const navigationConfigParentCoach = [
         type: "item",
         url: "playerdevelopment",
         icon: "whatshot"
+      },
+      {
+
+        id: "pricing",
+        title: "Pricing",
+        type: "item",
+        url: "pricing",
+        icon: "whatshot"
       }
     ],
   },
@@ -144,6 +160,14 @@ export const navigationConfigPC = [
         type: 'item',
         icon: 'whatshot',
         url: 'profilepage',
+      },
+      {
+
+        id: "pricing",
+        title: "Pricing",
+        type: "item",
+        url: "pricing",
+        icon: "whatshot"
       }
       // ,
       // {
