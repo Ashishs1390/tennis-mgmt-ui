@@ -56,29 +56,6 @@ import PlayersList from "./player-list";
 import "./link-player.css";
 import { fetchLinkedPlayerListNew } from "app/redux/link-player/linkPlayerAction";
 
-// function DisablingControl(props) {
-//     const disabled = props.disabled;
-//     delete props.disabled;
-//     return (<>
-//      {
-//          disabled ? (
-//             <Button
-//               {...props}
-//               disabled={true}
-//             >
-//               { props.loadingSearchedPlayer ?  <CircularProgress color="inherit" /> : 'Search'}
-//             </Button>
-//          ) : (
-//             <Button
-//               {...props}
-//             >
-//               { props.loadingSearchedPlayer ?  <CircularProgress color="inherit" /> : 'Search'}
-//             </Button>
-//          )
-//      }
-//     </>);
-// }
-
 function LinkPlayer(props) {
   const [searchEmail, setSearchEmail] = useState("");
   const [emailChecked, setEmailChecked] = useState("");
