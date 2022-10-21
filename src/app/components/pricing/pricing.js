@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -7,6 +8,11 @@ import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import PayPalComponent from './PayPalComponent';
+
+// import { emailValidation, fetchDetails } from "./../../../redux/index";
+import { emailValidation, fetchDetails } from "./../../redux/index";
+
+import { connect } from 'react-redux';
 
 
 const Root = styled('div')(({ theme }) => ({
@@ -17,7 +23,24 @@ const Root = styled('div')(({ theme }) => ({
     },
 }));
 
-function PricingStyle1Page() {
+function PricingStyle1Page(props) {
+    const [data, setData] = useState({});
+    const {
+        getData,
+        emailValidation,
+        fetchDetails
+    } = props;
+    useEffect(() => {
+        fetchDetails();
+    }, []);
+    useEffect(() => {
+        if (getData.data.length != 0) {
+            console.log(getData.data);
+            setData(getData.data);
+
+        }
+    }, [getData]);
+
     const container = {
         show: {
             transition: {
@@ -36,6 +59,12 @@ function PricingStyle1Page() {
             <div className="PricingStyle1Page-header flex">
                 <div className="p-24 w-full max-w-2xl mx-auto">
                     <div className="text-center my-128 mx-24">
+                        {data.isPayment && <motion.div>
+                            <Typography color="inherit" className="font-bold text-32 md:text-52">
+                                Payment has been done successfully..!!!!!!!
+                            </Typography>
+                        </motion.div>}
+                        {!data.isPayment &&<div>
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
@@ -52,7 +81,9 @@ function PricingStyle1Page() {
                                 The most advanced customer support tools with a simple and affordable pricing. And
                                 you can always try for 30 days, free!
                             </Typography>
-                        </motion.div>
+                            </motion.div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -271,4 +302,14 @@ function PricingStyle1Page() {
     );
 }
 
-export default PricingStyle1Page;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchDetails: () => dispatch(fetchDetails())
+    };
+};
+
+const mapStateToProps = (state) => {
+    return state;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PricingStyle1Page);

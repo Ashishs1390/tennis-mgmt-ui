@@ -23,12 +23,24 @@ const ButtonWrapper = ({ type }) => {
         createSubscription={(data, actions) => {
             return actions.subscription
                 .create({
-                    plan_id: "P-9YV83304XY091001FMM2JZ7A",
+                    plan_id: "P-75X13699FF2899931MNJHWWA",
                 })
-                .then((orderId) => {
-                    // Your code here after create the order
-                    return orderId;
-                });
+                // .then((orderId) => {
+                //     // Your code here after create the order
+                //     console.log(orderId);
+                //     return orderId;
+                // });
+        }}
+        onApprove={(data, actions) => {
+            console.log(actions);
+            console.log(data);
+            if (data.orderID) {
+                const order_id = data.orderID;
+                post('/api/tennismgmt/pricing', { order_id: order_id, isPayment: 'true' }).then((x) => {
+                    console.log('flag updated successfully');
+                })
+            }
+           
         }}
         style={{
             label: "subscribe",
@@ -67,7 +79,7 @@ const PayPalComponent = () => {
         // </PayPalScriptProvider>
         <PayPalScriptProvider
             options={{
-                "client-id": "Af4Z6QMz5Or2YhRaAeJrotvYNPoQArQVOMkruS-B7oBrmgJSnCCqc3IeieIVs5bZ4fjWvveDg_9F01WE",
+                "client-id": "AWZZHYqrjiKpPSMF11GT_2f6YiBbCoEUWcm92uglg-I0Sq0C5LdrpwM-VW6ZZ_tMFHDv0Y0iRWHJmBQX",
                 components: "buttons",
                 intent: "subscription",
                 vault: true,
