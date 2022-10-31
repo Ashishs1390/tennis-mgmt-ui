@@ -62,7 +62,7 @@ const navigationConfig = [
       {
 
         id: "pricing",
-        title: "Pricing",
+        title: "Subscription",
         type: "item",
         url: "pricing",
         icon: "whatshot"
@@ -127,7 +127,7 @@ export const navigationConfigParentCoach = [
       {
 
         id: "pricing",
-        title: "Pricing",
+        title: "Subscription",
         type: "item",
         url: "pricing",
         icon: "whatshot"
@@ -164,7 +164,7 @@ export const navigationConfigPC = [
       {
 
         id: "pricing",
-        title: "Pricing",
+        title: "Subscription",
         type: "item",
         url: "pricing",
         icon: "whatshot"

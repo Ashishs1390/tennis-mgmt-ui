@@ -112,7 +112,7 @@ function AboutTab(props) {
               </div>}
 
 
-              {data.coach_email && data.coach_email.length > 0 && <div className="mb-24">
+              {/* {data.coach_email && data.coach_email.length > 0 && <div className="mb-24">
                 <Typography className="font-semibold mb-4 text-15">Coach Email</Typography>
                 {data.coach_email.map((em, index) => {
                   return (<Typography key={em}>{em || "Coach not assigned"}</Typography>)
@@ -124,7 +124,7 @@ function AboutTab(props) {
                 {data.children_email.map((em, index) => {
                   return (<Typography key={em}>{em || "Coach not assigned"}</Typography>)
                 })}
-              </div>}
+              </div>} */}
               
 
 
