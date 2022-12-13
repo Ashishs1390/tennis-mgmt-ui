@@ -43,7 +43,6 @@ function CompetancyAggregation(props) {
 
 
     const routePlayerDevelop = (selectedEmail, current_level) => {
-        console.log(selectedEmail)
         get("/api/tennismgmt/linktoplayer/itn_level", {
             params: { email: selectedEmail},
         })

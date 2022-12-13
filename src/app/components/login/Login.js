@@ -86,8 +86,6 @@ function Login3Page(props) {
         // onAuth(true);
         localStorage.setItem("localStore", JSON.stringify(localStore));
         localStorage.setItem("current_level", response.data.current_level);
-        console.log("-------------level check----------------");
-        console.log(response.data.role);
         dispatch(
             updateUser({
               displayName: `${localStore.first_name} ${localStore.last_name}`,
@@ -99,13 +97,11 @@ function Login3Page(props) {
           // navigate(`/user/${response.data.role}`);
           navigate("/profilepage");
         } else {
-          console.log("---------else-------------");
           navigate(`/link/player`);
         }
         
       })
       .catch((error) => {
-        console.log("-------error--------");
         console.log(error);
         setErrmsg({ ...error.response.data });
       });

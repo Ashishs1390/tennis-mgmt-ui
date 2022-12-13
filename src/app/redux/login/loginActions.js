@@ -26,15 +26,12 @@ export const fetchLoginRequest = () => {
   }
   //change login api to support role
   export const fetchLoginDetails = (fields) => {
-    console.log(fields)
     return (dispatch) => {
       dispatch(fetchLoginRequest);
 
       axios
         .post(`/api/tennismgmt/login/${fields.role}`,{...fields})
         .then( (response)=> {
-          console.log("sucess")
-          console.log(response);
           // handle success
           dispatch(fetchLoginSuccess([response.data]));
   

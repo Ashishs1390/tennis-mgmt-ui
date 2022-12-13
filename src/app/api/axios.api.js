@@ -18,7 +18,6 @@ const defaultConfig = (config) => {
 
     }
 }
-console.log("------error----------");
 
 
 const success = (data) => ({
@@ -44,7 +43,6 @@ const failure = (error) => {
 
 // get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
 const get = async (url, config = {}) => {
-    console.log(url);
     try {
         const response = await axios.get(host + url, (defaultConfig(config)));
         return success(response);
@@ -60,7 +58,6 @@ const post = async (url, data, config = {}) => {
         const response = await axios.post(host+url,{...data},defaultConfig(config));
         return success(response);
     } catch(error) {
-        console.log("---------error----------")
         return failure(error);
     }
 }
@@ -92,3 +89,4 @@ export {
    deleteData 
 }
 
+// https://progressivetennisparents.com/

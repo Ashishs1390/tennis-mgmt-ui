@@ -32,7 +32,6 @@ const Root = styled('div')(({ theme, config }) => ({
 }));
 
 function Layout1(props) {
-  console.log(props.children);
 
   const [isLoggedIn, setISLoggedIn] = useState(
     document.cookie == '' ? false : true
@@ -42,7 +41,6 @@ function Layout1(props) {
       setISLoggedIn(true);
     }
   }, [document.cookie]);
-  console.log(isLoggedIn);
   const config = useSelector(({ fuse }) => fuse.settings.current.layout.config);
   const appContext = useContext(AppContext);
   const { routes } = appContext;

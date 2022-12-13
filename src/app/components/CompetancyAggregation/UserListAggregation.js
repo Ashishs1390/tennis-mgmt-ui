@@ -25,7 +25,6 @@ function UserListAggregation(props) {
             selectedPlayers.push(value);
         } else {
             const index = selectedPlayers.indexOf(value);
-            console.log(index);
             if (index > -1) {
                 selectedPlayers.splice(index, 1);
             }

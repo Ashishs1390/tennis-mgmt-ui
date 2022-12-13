@@ -11,8 +11,6 @@ import { selectMainTheme } from 'app/store/fuse/settingsSlice';
 // import { setProductsSearchText } from '../store/productsSlice';
 
 function Header(props) {
-    console.log("---------props-----------")
-    console.log(props)
     const dispatch = useDispatch();
     const mainTheme = useSelector(selectMainTheme);
 

@@ -32,8 +32,6 @@ const ButtonWrapper = ({ type }) => {
                 // });
         }}
         onApprove={(data, actions) => {
-            console.log(actions);
-            console.log(data);
             if (data.orderID) {
                 const order_id = data.orderID;
                 post('/api/tennismgmt/pricing', { order_id: order_id, isPayment: 'true' }).then((x) => {

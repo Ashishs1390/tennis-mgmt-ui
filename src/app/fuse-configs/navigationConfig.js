@@ -66,6 +66,13 @@ const navigationConfig = [
         type: "item",
         url: "pricing",
         icon: "whatshot"
+      },
+      {
+        id: 'academy',
+        title: 'Academy',
+        type: 'item',
+        icon: 'whatshot',
+        url: 'academy/courses'
       }
     ],
   },
@@ -131,6 +138,13 @@ export const navigationConfigParentCoach = [
         type: "item",
         url: "pricing",
         icon: "whatshot"
+      },
+      {
+        id: 'academy',
+        title: 'Academy',
+        type: 'item',
+        icon: 'whatshot',
+        url: 'academy/courses'
       }
     ],
   },
@@ -168,6 +182,13 @@ export const navigationConfigPC = [
         type: "item",
         url: "pricing",
         icon: "whatshot"
+      },
+      {
+        id: 'academy',
+        title: 'Academy',
+        type: 'item',
+        icon: 'whatshot',
+        url: 'academy/courses'
       }
       // ,
       // {
@@ -183,3 +204,5 @@ export const navigationConfigPC = [
 ]
 
 export default navigationConfig;
+
+// ZF6PQTIK11

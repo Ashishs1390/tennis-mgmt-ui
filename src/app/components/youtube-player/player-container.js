@@ -176,7 +176,6 @@ function VideoPlayerContainer(props) {
         const arr = [];
         frames.forEach((frame) => {
             // console.log(youtubeId[yt])
-            console.log(frame.src);
             console.log(!frame.src.includes(youtubeId[frame.frameId]))
             if (!frame.src.includes(youtubeId[frame.frameId])) {
                 if (frame.src !== "") {
@@ -197,7 +196,6 @@ function VideoPlayerContainer(props) {
     }
 
     const setDynamicValue = (event) => {
-        console.log(event.target)
         const { id, value } = event.target;
         let newFrame = frames.map((f) => {
             if (id == f.frameId) {
