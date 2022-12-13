@@ -31,7 +31,6 @@ export const getCompetancyDetails = (selectedPlayers) => {
         get('/api/tennismgmt/bundleaggdata', {
             params: { selectedPlayers },
         }).then((resp) => {
-            console.log(resp.data.data);
             dispatch(fetchCompetancyDetails(resp.data.data));
         }).catch((error) => {
             console.log(error.response.data)

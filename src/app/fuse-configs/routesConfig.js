@@ -19,7 +19,12 @@ import ContactsApp from "./../components/link-player/contacts/ContactsApp";
 import Pricing from "./../components/pricing/pricing";
 const routeConfigs = [ExampleConfig];
 import CompetancyAggregationWrapper from "../components/CompetancyAggregation/CompetancyAggregationWrapper"
-import CompetancyAssessmentWrapper from "../components/competancy_rating/CompetancyWrapper"
+import CompetancyAssessmentWrapper from "../components/competancy_rating/CompetancyWrapper";
+import Boards from "../components/scrumboard/boards/Boards";
+import Board from "../components/scrumboard/board/Board";
+import Course from '../components/academy/course/Course';
+import Courses from '../components/academy/courses/Courses';
+
 
 const routes = () => {
   return [
@@ -86,7 +91,22 @@ const routes = () => {
     path: 'pricing',
       element: <ValidateRoute> <Pricing /> </ValidateRoute>
     },
-
+    {
+      path: 'boards',
+      element: <ValidateRoute> <Boards /> </ValidateRoute>    
+    },
+    {
+      path: 'board/:boardId',
+      element: <ValidateRoute> <Board /> </ValidateRoute>
+    },
+    {
+      path: 'academy/courses',
+      element: <ValidateRoute><Courses /></ValidateRoute>
+    },
+    {
+      path: 'academy/courses/:courseId/*',
+      element: <ValidateRoute><Course /></ValidateRoute>
+    },
     {
       path: '404',
       element: <Error404Page />,

@@ -24,3 +24,7 @@ export {
   selectedEmailRemoveAll,
 } from "./link-player/linkPlayerAction";
 export { getCompetancyDetails } from "./competancy-aggregation/competancyAggregationAction";
+
+export { getBoardData, postBoardData } from "./boards/boardActions";
+
+export { getAcademyData } from "./academy/academyActions";

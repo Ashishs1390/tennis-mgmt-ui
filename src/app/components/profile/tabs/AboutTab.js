@@ -43,7 +43,6 @@ function AboutTab(props) {
   }, []);
   useEffect(() => {
     if (getData.data.length != 0) {
-      console.log(getData);
       setData(getData.data);
 
     }

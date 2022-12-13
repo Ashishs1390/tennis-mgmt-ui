@@ -106,8 +106,6 @@ function PlayerDevelopmentListItem(props) {
     } else {
   
       otherObjArr.push(...newWeights[w]);
-          console.log('--------otherObjArr---------')
-      console.log(otherObjArr);
     }
   }
   const classes = useStyles(propsStyle);

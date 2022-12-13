@@ -77,8 +77,6 @@ function StrockAnalysisList(props) {
   const isChecked = (i) => {
     return checkedVideo.findIndex(x => x.id === i.id) === -1 ? true : false;
   };
-  console.log('----------------');
-  console.log(videoAnalysis.data);
   videoAnalysis.data.sort(function (a, b) {
 
     return new Date(b.date) - new Date(a.date);

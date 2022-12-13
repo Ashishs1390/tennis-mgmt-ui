@@ -85,7 +85,6 @@ function ContactsList(props) {
               onClick={(ev) => {
                 ev.stopPropagation();
                 // dispatch(toggleStarredContact(row.original.id));
-                console.log(row);
               }}
               size="large"
             >
@@ -99,7 +98,6 @@ function ContactsList(props) {
               onClick={(ev) => {
                 ev.stopPropagation();
                 // dispatch(removeContact(row.original.id));
-                console.log(row);
               }}
               size="large"
             >

@@ -25,6 +25,8 @@ import {
 } from "./../redux/videoanalysis/videoAnalysisReducer";
 import { linkPlayerReducer } from "./../redux/link-player/linkPlayerReducer";
 import { initalAggrReducer } from "./../redux/competancy-aggregation/competancyAggregationReducer";
+import { boardReducer, newBoardReducer } from "./../redux/boards/boardReducers"
+import { academyReducer } from "./../redux/academy/academyReducer"
 
 
 const createReducer = (asyncReducers) => (state, action) => {
@@ -42,6 +44,9 @@ const createReducer = (asyncReducers) => (state, action) => {
     personalDevelopment: initalPDPReducer,
     linkPlayerReducer: linkPlayerReducer,
     aggregatedCompData: initalAggrReducer,
+    boardData: boardReducer,
+    newBoardData: newBoardReducer,
+    academyData: academyReducer,
     ...asyncReducers,
   });
 

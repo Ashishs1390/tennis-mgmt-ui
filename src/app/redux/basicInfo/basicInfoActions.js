@@ -47,7 +47,6 @@ export const postDetails = (fields) => {
     
       post(`/api/tennismgmt/registration/${fields.role}`,{...fields})
       .then( (response)=> {
-        console.log("sucess")
         // handle success
         dispatch(postDetailsSuccess([...response.data]));
 
@@ -91,7 +90,6 @@ export const emailValidation = (fields) => {
     axios
       .get(`/api/tennismgmt/registration/emailvalidation?email=${fields.email}`)
       .then( (response)=> {
-        console.log("sucess")
         // handle success
         dispatch(emailValidationSuccess(response.data.isUnique));
 

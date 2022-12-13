@@ -71,8 +71,6 @@ function PlayerDevelopment(props) {
   const [selectedRadios, setSelectedRadios] = useState({ player: '', parent: '', coach: '' });
   const child_email = localStorage.getItem("child_email")
   const localStore = localStorage.getItem("localStore");
-  console.log('----------userInfo------------')
-  console.log(userInfo.data);
 
   useEffect(() => {
     localStorage.setItem("childInfo", JSON.stringify(userInfo.data));
@@ -105,7 +103,6 @@ function PlayerDevelopment(props) {
   }, [child_email]);
 
   useEffect(() => {
-    console.log(childEmail)
     if (role == "parent" || role == "coach") {
       props.fetchDetails(childEmail);
     }
@@ -207,9 +204,7 @@ function PlayerDevelopment(props) {
   }
 
   const updateRadioSelections = (value, object) => {
-    console.log({ [object]: value })
     const selectedDates = { ...selectedRadios, [object]: value };
-    console.log(selectedDates);
     props.getPersonalDevOnDate(selectedDates);
     setSelectedRadios(selectedDates);
   }
