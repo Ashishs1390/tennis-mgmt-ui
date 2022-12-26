@@ -268,16 +268,17 @@ function LinkPlayer(props) {
             ) : (
               <Button
                   variant="contained"
-                  className="searchBtn"
+                  className={props.loadingSearchedPlayer &&
+            !props.loadingAddPlayer ? "view-player-btn" :"color-green-btn"}
                 onClick={() => {
                   addSelectedEmailToList();
                 }}
               >
                 {props.loadingAddPlayer ? (
-                  <>
+                  <span>
                     {"Adding..."}
                     <CircularProgress color="inherit" />
-                  </>
+                  </span>
                 ) : (
                   "Add"
                 )}
@@ -286,72 +287,6 @@ function LinkPlayer(props) {
           </Grid>
         </Grid>
       </Box>
-      {/* <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={10} md={2}></Grid>
-          <Grid item xs={10} md={6}>
-            {!props.loadingSearchedPlayerList ? (
-              <RadioGroup
-                aria-label="gender"
-                defaultValue="0"
-                name="radio-buttons-group"
-              >
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    bgcolor: "background.paper",
-                  }}
-                  subheader={
-                    <ListSubheader component="div" id="nested-list-subheader">
-                      Select player for assessment.
-                    </ListSubheader>
-                  }
-                >
-                  {props.searchedPlayerList &&
-                    [...props.searchedPlayerList].map((value, i) => {
-                      const labelId = `checkbox-list-secondary-label-${i}`;
-                      return (
-                        <ListItem
-                          key={value}
-                          secondaryAction={
-                            <FormControlLabel
-                              value={value}
-                              onChange={handleToggle.bind(this, value)}
-                              inputprops={{ "aria-labelledby": labelId }}
-                              control={<Radio />}
-                              label=""
-                            />
-                          }
-                          disablePadding
-                        >
-                          <ListItemButton>
-                            <ListItemAvatar>
-                              <Avatar alt={`S`} src={``} />
-                            </ListItemAvatar>
-                            <ListItemText id={labelId} primary={`${value}`} />
-                          </ListItemButton>
-                        </ListItem>
-                      );
-                    })}
-                </List>
-              </RadioGroup>
-            ) : (
-              <>
-                <Typography
-                  className="alert-email"
-                  variant="p"
-                  component="span"
-                  align="left"
-                >
-                  Loading player list...
-                </Typography>
-                <CircularProgress color="inherit" />
-              </>
-            )}
-          </Grid>
-        </Grid>
-      </Box> */}
       <Box sx={{ flexGrow: 1, marginTop: '20px'  }}>
         <PlayersList searchedPlayerListNew={props.searchedPlayerListNew} handleToggle={handleToggle.bind(this)}/>
       </Box>
@@ -371,18 +306,18 @@ function LinkPlayer(props) {
                   getPlayerData();
                 }}
               >
-                Player Data
+                Compare Player
               </Button>
             </Grid>
             <Grid item xs={10} md={2}>
               <Button
                   variant="contained"
-                  className="searchBtn"
+                  className="view-player-btn"
                 onClick={(e) => {
                   getPlayerItnLevel();
                 }}
               >
-                Continue
+                View Player
               </Button>
             </Grid>
           </Grid>

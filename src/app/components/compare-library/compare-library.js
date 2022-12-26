@@ -43,7 +43,7 @@ function CompareLibrary(props) {
     const val = url.match(
       /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/
     );
-    setCompareVideo(url);
+    setCompareVideo(val[1]);
     selectVideoAnalysis([{ src: val[1] }, { src: libraryVideo }]);
   };
   const handleChange = (event) => {

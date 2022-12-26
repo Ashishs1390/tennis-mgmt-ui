@@ -29,6 +29,32 @@
   border-radius: 0px;
 }
 
+.view-player-btn {
+  width: 120px;
+  height: 50px;
+  border-radius: 0px;
+  position: relative;
+  left: -26px;
+}
+
 .player_data {
   width: 150px;
+}
+.displaylist-home{
+  display: contents !important;
+}
+
+.children-section {
+  width: 58%;
+}
+
+.color-green-btn {
+  width: 90px;
+  height: 50px;
+  border-radius: 0px;
+  background-color: #00cc00;
+}
+
+.color-green-btn:hover{
+  background-color: #00cc00;
 }

@@ -117,12 +117,14 @@ function ContactsList(props) {
     <motion.div
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-      className="flex flex-auto w-full max-h-full"
+      className="flex flex-auto children-section"
     >
       <RadioGroup
                 aria-label="gender"
                 defaultValue="0"
                 name="radio-buttons-group"
+                className="displaylist-home"
+                
               >
       <PlayersTable
         columns={columns}
