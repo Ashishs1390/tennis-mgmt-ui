@@ -71,9 +71,10 @@ const put = async (url, data, config) => {
     }
 }
 // delete<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
-const deleteData = async (url, config) => {
+const deleteData = async (url, config = {}) => {
     try {
-        const response = await axios.delete(host+url,defaultConfig(config));
+        console.log(defaultConfig(config));
+        const response = await axios.delete(host + url, defaultConfig(config));
         return success(response);
     } catch(error) {
         return failure(error);

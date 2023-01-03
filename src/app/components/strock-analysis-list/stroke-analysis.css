@@ -30,7 +30,17 @@
     width: 70%;
     border-radius: 0px;
     position: absolute;
-    top: 50%;
+    top: 25%;
+    left: 15%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.btn-delete {
+    width: 70%;
+    border-radius: 0px;
+    position: absolute;
+    top: 75%;
     left: 15%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);

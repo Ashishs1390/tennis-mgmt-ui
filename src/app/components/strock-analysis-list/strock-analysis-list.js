@@ -17,6 +17,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { connect } from "react-redux";
@@ -25,6 +27,13 @@ import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 import Paper from '@mui/material/Paper';
 import './stroke-analysis.css'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { deleteData } from './../../api/axios.api';
+
 // import { SELECT_VIDEO_FOR_ANALYSIS } from "../../../redux/videoanalysis/videoAnalysisActionsTypes";
 
 
@@ -32,7 +41,26 @@ function StrockAnalysisList(props) {
   const [checkedVideo, setCheckedVideo] = React.useState([]);
   const [disableChecked, setDisableChecked] = React.useState(false);
   const [age, setAge] = React.useState("");
+  const [open, setOpen] = React.useState(false);
   const { getVideosForAnalysis, selectVideoAnalysis, videoAnalysis = { email: '', frames: [] } } = props;
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleSubmitForDel = () => {
+    console.log(checkedVideo)
+    deleteData('/api/tennismgmt/videoanalysis/history', { data: { videos: checkedVideo } }).then((res) => {
+      console.log(res);
+      getVideosForAnalysis();
+
+    });
+    setOpen(false);
+  }
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -49,16 +77,17 @@ function StrockAnalysisList(props) {
     navigate("/videoanalysis/strockanalysislist");
   }
 
+
+
   const handleToggle = (value) => () => {
+    // console.log(value.target);
     const currentIndex = checkedVideo.findIndex(x => x.id === value.id);
     const currentSelectedList = [...checkedVideo];
     if (currentIndex === -1) {
-      if (currentSelectedList.length > 4) {
-        alert('not allowed');
-      } else {
+      if (!(currentSelectedList.length > 4)){
         currentSelectedList.push(value);
         setTimeout(() => {
-          if (currentSelectedList.length > 3) {
+          if (currentSelectedList.length > 4) {
             setDisableChecked(true);
           } else {
             setDisableChecked(false);
@@ -69,10 +98,15 @@ function StrockAnalysisList(props) {
       setDisableChecked(false);
       currentSelectedList.splice(currentIndex, 1);
     }
-
+    console.log(currentSelectedList);
     setCheckedVideo(currentSelectedList);
     selectVideoAnalysis(currentSelectedList);
+    
   };
+
+  const handleDelete = () => {
+    // checkedVideo
+  }
 
   const isChecked = (i) => {
     return checkedVideo.findIndex(x => x.id === i.id) === -1 ? true : false;
@@ -93,10 +127,10 @@ function StrockAnalysisList(props) {
           <div className="wrapper1">
             <List sx={{ width: "100%", bgcolor: "background.paper" }}>
               {videoAnalysis.data && videoAnalysis.data.length > 0 && videoAnalysis.data.map((value, i) => {
-                console.log(value);
                 const labelId = `checkbox-list-secondary-label-${i}`;
                 return (
                   <React.Fragment key={i}>
+                   
                     <ListItem
                       alignItems="flex-start"
                       secondaryAction={
@@ -104,7 +138,7 @@ function StrockAnalysisList(props) {
                           edge="false"
                           onChange={handleToggle(value)}
                           inputProps={{ "aria-labelledby": labelId }}
-                          disabled={isChecked(value) && disableChecked}
+                          // disabled={isChecked(value)}
                         />
                       }
                     >
@@ -165,13 +199,41 @@ function StrockAnalysisList(props) {
                 },
               }}
             >
-              <Paper elevation={3}>
-                <Button className="btn-select" variant="contained" fullWidth="true" onClick={() => { selectVideoForAnalysis() }}>select</Button>
+              <Paper elevation={1}>
+                <Button className="btn-select" variant="contained" disabled={disableChecked} fullWidth="true" onClick={() => { selectVideoForAnalysis() }}>Compare</Button>
+              </Paper>
+              <Paper elevation={2}>
+                <Button className="btn-delete" variant="contained" fullWidth="true" onClick= { handleClickOpen }>delete</Button>
               </Paper>
             </Box>
           </Box>
         </Grid>
       </Grid>
+      <div>
+        
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Use Google's location service?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Let Google help apps determine location. This means sending anonymous
+              location data to Google, even when no apps are running.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Disagree</Button>
+            <Button onClick={handleSubmitForDel} autoFocus>
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </>
 
   );
