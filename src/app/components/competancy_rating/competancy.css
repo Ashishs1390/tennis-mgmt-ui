@@ -33,9 +33,9 @@
     display: none;
 }
 
-.muiltr-uls1yk-MuiDivider-root[role=separator] {
+/* .muiltr-uls1yk-MuiDivider-root[role=separator] {
     display: none;
-}
+} */
 .dot-indicator {
     position: absolute;
     width: 10px;
@@ -60,9 +60,14 @@
     display: none;
 }
 
-.muiltr-uls1yk-MuiDivider-root[role=separator] {
+/* .muiltr-uls1yk-MuiDivider-root[role=separator] {
+    display: none;
+} */
+
+.MuiDivider-root[role=separator] {
     display: none;
 }
+
 
 @keyframes glowDot {
     0% {

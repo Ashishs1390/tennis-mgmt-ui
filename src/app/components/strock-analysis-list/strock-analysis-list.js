@@ -40,6 +40,8 @@ import { deleteData } from './../../api/axios.api';
 function StrockAnalysisList(props) {
   const [checkedVideo, setCheckedVideo] = React.useState([]);
   const [disableChecked, setDisableChecked] = React.useState(false);
+  const [disableCheckedDel, setDisableCheckedDel] = React.useState(false);
+
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const { getVideosForAnalysis, selectVideoAnalysis, videoAnalysis = { email: '', frames: [] } } = props;
@@ -53,9 +55,7 @@ function StrockAnalysisList(props) {
     setOpen(false);
   };
   const handleSubmitForDel = () => {
-    console.log(checkedVideo)
     deleteData('/api/tennismgmt/videoanalysis/history', { data: { videos: checkedVideo } }).then((res) => {
-      console.log(res);
       getVideosForAnalysis();
 
     });
@@ -77,6 +77,14 @@ function StrockAnalysisList(props) {
     navigate("/videoanalysis/strockanalysislist");
   }
 
+  useEffect(() => {
+    if (checkedVideo.length == 0) {
+      setDisableChecked(true);
+      setDisableCheckedDel(true);
+    } else {
+      setDisableCheckedDel(false)
+    }
+  }, [checkedVideo])
 
 
   const handleToggle = (value) => () => {
@@ -87,6 +95,7 @@ function StrockAnalysisList(props) {
       if (!(currentSelectedList.length > 4)){
         currentSelectedList.push(value);
         setTimeout(() => {
+          console.log(currentSelectedList);
           if (currentSelectedList.length > 4) {
             setDisableChecked(true);
           } else {
@@ -203,7 +212,7 @@ function StrockAnalysisList(props) {
                 <Button className="btn-select" variant="contained" disabled={disableChecked} fullWidth="true" onClick={() => { selectVideoForAnalysis() }}>Compare</Button>
               </Paper>
               <Paper elevation={2}>
-                <Button className="btn-delete" variant="contained" fullWidth="true" onClick= { handleClickOpen }>delete</Button>
+                <Button className="btn-delete" variant="contained" disabled={disableCheckedDel}  fullWidth="true" onClick= { handleClickOpen }>Delete</Button>
               </Paper>
             </Box>
           </Box>
@@ -218,19 +227,19 @@ function StrockAnalysisList(props) {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Use Google's location service?"}
+            {"Are you sure that you want to delete this items?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous
-              location data to Google, even when no apps are running.
+             {/* Are you sure that you want to delete this items. */}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Disagree</Button>
+            
             <Button onClick={handleSubmitForDel} autoFocus>
-              Agree
+              Yes
             </Button>
+            <Button onClick={handleClose}>No</Button>
           </DialogActions>
         </Dialog>
       </div>
