@@ -167,6 +167,7 @@ function PlayerDevelopment(props) {
     ) {
       setCompetancyData([...progressBarData]);
       const data = radioSelectionList([...assessmentNewDates]);
+      console.log(data, 'data');
       const orderedData = orderByRoles(data, rolesOrder);
       const splicedData = splicedByRoles(orderedData);
       const getValue = (val) => {
@@ -186,6 +187,27 @@ function PlayerDevelopment(props) {
         obj.coach.push(getValue(data?.coach));
 
         setSelectedCheckBox({ ...obj });
+      } else {
+        let newDates = Object.keys(data).reduce((acc, curr) => {
+          if (!acc[curr]) {
+            acc[curr] = [];
+          }
+          const datesArray = data[curr].map((element) => new Date(element));
+          acc[curr].push(getDateWithTime(new Date((Math.max(...datesArray)))));
+          return acc;
+        }, {});
+        setSelectedCheckBox({ ...newDates });
+
+        // let dates = Object.keys(data).reduce((acc, curr) => {
+        //   if (curr == coach) {
+              
+        //     }
+        // }, {
+        //   coach: [],
+        //   player: [],
+        //   parent:[]
+        // })
+
       }
       setDatesArr(orderedData);
       let getMaxDate = new Date(
@@ -202,6 +224,11 @@ function PlayerDevelopment(props) {
     setHideScore(!hideScores);
 
   }
+  useEffect(() => {
+    console.log('----selectedCheckBox-----')
+    console.log(selectedCheckBox);
+  }, [selectedCheckBox])
+
 
   const updateRadioSelections = (value, object) => {
     const selectedDates = { ...selectedRadios, [object]: value };
