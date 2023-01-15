@@ -41,7 +41,7 @@ export default function Competancy(props) {
                         variant="body2"
                         color="text.primary"
                       >
-                       {competency} 
+                       <span className={'' + (y.invalidWeight ? 'invalid-weight' : '')}>{competency}</span> 
                       </Typography>
                        <Typography
                          sx={{ display: "inline" }}

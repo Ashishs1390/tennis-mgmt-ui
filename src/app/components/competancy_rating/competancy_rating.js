@@ -38,7 +38,7 @@ function CompetancyRating(props) {
     //updateCompetancyWeight(i, j, weight);
     const data = competancyData;
     data[i].values[j].assigned_weight = weight;
-    SetCompetancyData(data);
+    data[i].values[j].invalidWeight = false;
   };
   useEffect(() => {
     getCompetancy(current_level);
@@ -80,6 +80,25 @@ function CompetancyRating(props) {
       flag =
         x.values.every((y) => y.hasOwnProperty('assigned_weight') && y.assigned_weight > 0) && flag;
     });
+    const assignedWeights = competancyData.map((x) => {
+      return {
+        ...x,
+        values: x.values.map(y => {
+          if (y.assigned_weight && y.assigned_weight > 0) {
+            return {
+              ...y,
+              invalidWeight: false
+            }
+          } else {
+            return {
+              ...y,
+              invalidWeight: true
+            }
+          }
+        })
+      }
+    });
+    SetCompetancyDataHandel(assignedWeights);
     if (flag) {
       saveCompetancy(
         competancyData.map((x) => {
