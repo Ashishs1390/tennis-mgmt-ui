@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -41,7 +41,7 @@ function StrockAnalysisList(props) {
   const [checkedVideo, setCheckedVideo] = React.useState([]);
   const [disableChecked, setDisableChecked] = React.useState(false);
   const [disableCheckedDel, setDisableCheckedDel] = React.useState(false);
-
+  const [deleteItem, setDeleteItem] = React.useState([]);
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const { getVideosForAnalysis, selectVideoAnalysis, videoAnalysis = { email: '', frames: [] } } = props;
@@ -55,7 +55,7 @@ function StrockAnalysisList(props) {
     setOpen(false);
   };
   const handleSubmitForDel = () => {
-    deleteData('/api/tennismgmt/videoanalysis/history', { data: { videos: checkedVideo } }).then((res) => {
+    deleteData('/api/tennismgmt/videoanalysis/history', { data: { videos: deleteItem } }).then((res) => {
       getVideosForAnalysis();
 
     });
@@ -77,6 +77,11 @@ function StrockAnalysisList(props) {
     navigate("/videoanalysis/strockanalysislist");
   }
 
+  const handleDelete = (val) => {
+    setDeleteItem([{ src: val.src }]);
+    handleClickOpen();
+  }
+
   useEffect(() => {
     if (checkedVideo.length == 0) {
       setDisableChecked(true);
@@ -95,7 +100,6 @@ function StrockAnalysisList(props) {
       if (!(currentSelectedList.length > 4)){
         currentSelectedList.push(value);
         setTimeout(() => {
-          console.log(currentSelectedList);
           if (currentSelectedList.length > 4) {
             setDisableChecked(true);
           } else {
@@ -107,15 +111,12 @@ function StrockAnalysisList(props) {
       setDisableChecked(false);
       currentSelectedList.splice(currentIndex, 1);
     }
-    console.log(currentSelectedList);
     setCheckedVideo(currentSelectedList);
     selectVideoAnalysis(currentSelectedList);
     
   };
 
-  const handleDelete = () => {
-    // checkedVideo
-  }
+
 
   const isChecked = (i) => {
     return checkedVideo.findIndex(x => x.id === i.id) === -1 ? true : false;
@@ -143,12 +144,15 @@ function StrockAnalysisList(props) {
                     <ListItem
                       alignItems="flex-start"
                       secondaryAction={
+                        <div>
                         <Checkbox
                           edge="false"
                           onChange={handleToggle(value)}
                           inputProps={{ "aria-labelledby": labelId }}
                           // disabled={isChecked(value)}
-                        />
+                          />
+                          <DeleteIcon onClick={()=> handleDelete(value)} />
+                        </div>
                       }
                     >
                       <ListItemAvatar>
@@ -181,6 +185,7 @@ function StrockAnalysisList(props) {
                             variant="body2"
                             color="text.primary"
                           >
+                            {value.role}
                             , posted on: {moment(value.date).format('DD-MMM-YYYY')}
                           </Typography>
                         </p>} />
@@ -211,9 +216,9 @@ function StrockAnalysisList(props) {
               <Paper elevation={1}>
                 <Button className="btn-select" variant="contained" disabled={disableChecked} fullWidth="true" onClick={() => { selectVideoForAnalysis() }}>Compare</Button>
               </Paper>
-              <Paper elevation={2}>
+              {/* <Paper elevation={2}>
                 <Button className="btn-delete" variant="contained" disabled={disableCheckedDel}  fullWidth="true" onClick= { handleClickOpen }>Delete</Button>
-              </Paper>
+              </Paper> */}
             </Box>
           </Box>
         </Grid>
