@@ -33,7 +33,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { deleteData } from './../../api/axios.api';
-
+import useUserDetails from './../../custom-hooks/get-userDetails';
 // import { SELECT_VIDEO_FOR_ANALYSIS } from "../../../redux/videoanalysis/videoAnalysisActionsTypes";
 
 
@@ -45,8 +45,7 @@ function StrockAnalysisList(props) {
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const { getVideosForAnalysis, selectVideoAnalysis, videoAnalysis = { email: '', frames: [] } } = props;
-
-
+  const [playerName] = useUserDetails(); 
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -132,7 +131,7 @@ function StrockAnalysisList(props) {
       <Grid container spacing={2}>
         <Grid item md={12}>
           <Typography className= "stroke-header" variant="h4" gutterBottom component="div">
-            Stroke (Video) Analysis List
+            Stroke (Video) Analysis List for {playerName}
           </Typography>
           <div className="wrapper1">
             <List sx={{ width: "100%", bgcolor: "background.paper" }}>

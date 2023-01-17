@@ -102,15 +102,15 @@ function ContactsList(props) {
     return null;
   }
 
-  if (filteredData.length === 0) {
-    return (
-      <div className="flex flex-1 items-center justify-center h-full">
-        <Typography color="textSecondary" variant="h5">
-          There are no contacts!
-        </Typography>
-      </div>
-    );
-  }
+  // if (filteredData.length === 0) {
+  //   return (
+  //     <div className="flex flex-1 items-center justify-center h-full">
+  //       <Typography color="textSecondary" variant="h5">
+  //         There are no contacts!
+  //       </Typography>
+  //     </div>
+  //   );
+  // }
 
 
   return (

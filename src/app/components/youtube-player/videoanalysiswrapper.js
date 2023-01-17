@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 // import Header from './ProductsHeader';
 import Header from '../common-components/header/Header';
 import VideoPlayerContainer from './player-container';
+import useUserDetails from './../../custom-hooks/get-userDetails';
 const Root = styled(FusePageCarded)(({ theme }) => ({
     '& .FusePageCarded-header': {
         minHeight: 72,
@@ -24,9 +25,11 @@ const Root = styled(FusePageCarded)(({ theme }) => ({
 }));
 
 function VideoAnalysis() {
+    const [playerName] = useUserDetails();
+    const title = `Video Analysis for ${playerName}`
     // return <div>Video Analyaia page</div>
     return(<>
-        <Root header={<Header title= "Video Analysis" />} content={<VideoPlayerContainer/> } innerScroll  />;
+        <Root header={<Header title={title} />} content={<VideoPlayerContainer/> } innerScroll  />;
     </>)
     
    

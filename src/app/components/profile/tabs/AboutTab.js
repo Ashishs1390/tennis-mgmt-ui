@@ -103,12 +103,12 @@ function AboutTab(props) {
                   <Typography>{data.current_level}</Typography>
                 </div>
               }
-              {data.parent_email && data.parent_email.length > 0 && <div className="mb-24">
+              {/* {data.parent_email && data.parent_email.length > 0 && <div className="mb-24">
                 <Typography className="font-semibold mb-4 text-15">Parent Email</Typography>
                 {data.parent_email.map((em, index) => {
                   return (<Typography key={em}>{em || "Parent not assigned"}</Typography>)
                 })}
-              </div>}
+              </div>} */}
 
 
               {/* {data.coach_email && data.coach_email.length > 0 && <div className="mb-24">
