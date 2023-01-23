@@ -23,17 +23,21 @@ import { useDispatch } from 'react-redux';
 function CompetancyAggregation(props) {
     const navigate = useNavigate();
     const { getCompetancyDetails, aggregatedCompData: { aggrData }, selectedPlayers } = props;
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
     const [role, setRole] = useState("");
     // const [player,setPlayers] = useState([]);
     const dispatch = useDispatch();
     const [userDetails] = useManageNavState({ dispatch, removeAllNav, setParentCoachNav, resetNavigation });
-
     useEffect(() => {
-        getCompetancyDetails(selectedPlayers)
+        if (selectedPlayers.length == 0) {
+            selectedPlayers.push(...JSON.parse(localStorage.getItem("child_email_aggr")));
+        } else {
+            localStorage.setItem("child_email_aggr", JSON.stringify(selectedPlayers));
+        }
+        getCompetancyDetails(selectedPlayers);
     }, []);
     useEffect(() => {
-        setData(aggrData);
+        setData({ ...aggrData });
     }, [aggrData]);
     useEffect(() => {
             let localStore = localStorage.getItem("localStore");
@@ -73,18 +77,18 @@ function CompetancyAggregation(props) {
             >
 
                 {
-                    data.map((d, index) => {
+                    Object.keys(data).map((d, index) => {
                         
                         return (
                             <Card sx={{ minWidth: 275 }}>
                                 <CardContent>
-                                    <Button onClick={() => routePlayerDevelop(d.email, d.current_level)}>
+                                    <Button onClick={() => routePlayerDevelop(d, 'u12Boys')}>
                                     <Typography sx={{ fontSize: 14 }} color="text.secondary" variant="h5">
-                                        {d.email}
+                                        {d}
                                         </Typography>
                                     </Button>
                                     <div>
-                                        <CompetancyAggrGraph data={ d.data}></CompetancyAggrGraph>
+                                        <CompetancyAggrGraph data={ data[d]}></CompetancyAggrGraph>
                                     </div>
                                     
                                 </CardContent>
@@ -102,6 +106,7 @@ function CompetancyAggregation(props) {
 
 
 const mapStateToProps = (state) => {
+    console.log(state.aggregatedCompData),'-------------aggregatedCompData---------------';
     return {
         aggregatedCompData: state.aggregatedCompData,
         basicInfo: state.getData ? state.getData.data : {},

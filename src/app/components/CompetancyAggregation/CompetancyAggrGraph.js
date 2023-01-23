@@ -9,6 +9,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { forEach } from "lodash";
 
 ChartJS.register(
     CategoryScale,
@@ -21,11 +22,30 @@ ChartJS.register(
 
 function CompetancyAggrGraph(props) {
     const [labels, setLabels] = useState([]);
-    const [graphData, setGraphData] = useState([]);
+    const [graphDataPlayer, setGraphDataPlayer] = useState([]);
+    const [graphDataCoach, setGraphDataCoach] = useState([]);
+    const [graphDataParent, setGraphDataParent] = useState([]);
 
+
+    console.log(props,'----props----');
     useEffect(() => {
-        setLabels(Object.keys(props.data));
-        setGraphData(Object.values(props.data));
+        console.log('useEffect');
+        props.data.forEach((each) => {
+            console.log(each);
+            for (let e in each) {
+                if (e == "player") {
+                    console.log(each[e]);
+                    setLabels(Object.keys(each[e]));
+                    setGraphDataPlayer(Object.values(each[e]));
+                }
+                if (e == "coach") {
+                    setGraphDataCoach(Object.values(each[e]));
+                }
+                if (e == "parent") {
+                    setGraphDataParent(Object.values(each[e]));
+                }
+            }
+        })
     }, [props]);
     const options = {
         indexAxis: 'y',
@@ -41,7 +61,7 @@ function CompetancyAggrGraph(props) {
         },
         elements: {
             bar: {
-                borderWidth: 1,
+                borderWidth: 2,
             },
         },
         responsive: true,
@@ -61,16 +81,34 @@ function CompetancyAggrGraph(props) {
         labels: [...labels],
         datasets: [
             {
-                barPercentage: 0.5,
-                barThickness: 6,
                 maxBarThickness: 8,
                 minBarLength: 2,
-                backgroundColor: '#EC932F',
-                borderColor: 'rgba(255,99,132,1)',
+                backgroundColor: '#ea3943',
+                borderColor: '#ea3943',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [...graphData]
+                hoverBackgroundColor: '#ea3943',
+                hoverBorderColor: '#ea3943',
+                data: [...graphDataPlayer]
+            },
+            {
+                maxBarThickness: 8,
+                minBarLength: 2,
+                backgroundColor: '#0c96f3',
+                borderColor: '#0c96f3',
+                borderWidth: 1,
+                hoverBackgroundColor: '#0c96f3',
+                hoverBorderColor: '#0c96f3',
+                data: [...graphDataCoach]
+            },
+            {
+                maxBarThickness: 8,
+                minBarLength: 2,
+                backgroundColor: 'rgba(25, 210, 116, 0.85)',
+                borderColor: 'rgba(25, 210, 116, 0.85)',
+                borderWidth: 1,
+                hoverBackgroundColor: 'rgba(25, 210, 116, 0.85)',
+                hoverBorderColor: 'rgba(25, 210, 116, 0.85)',
+                data: [...graphDataParent]
             }
         ]
     };
