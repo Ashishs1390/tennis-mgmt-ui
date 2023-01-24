@@ -71,7 +71,7 @@ function CompetancyAggregation(props) {
                     '& > :not(style)': {
                         m: 1,
                         width: 428,
-                        height: 428,
+                        height: 328,
                     },
                 }}
             >
@@ -80,13 +80,13 @@ function CompetancyAggregation(props) {
                     Object.keys(data).map((d, index) => {
                         
                         return (
-                            <Card sx={{ minWidth: 275 }}>
+                            <Card sx={{ minWidth: 275 ,minHeight:100}}>
                                 <CardContent>
-                                    <Button onClick={() => routePlayerDevelop(d, 'u12Boys')}>
-                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" variant="h5">
+                                    {/* <Button onClick={() => routePlayerDevelop(d, 'u12Boys')}> */}
+                                    <Typography className = "graph_title" sx={{ fontSize: 14 }} color="text.secondary" variant="h5">
                                         {d}
                                         </Typography>
-                                    </Button>
+                                    {/* </Button> */}
                                     <div>
                                         <CompetancyAggrGraph data={ data[d]}></CompetancyAggrGraph>
                                     </div>

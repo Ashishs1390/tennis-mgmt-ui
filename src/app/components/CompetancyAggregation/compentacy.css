@@ -17,3 +17,7 @@
 .AggregationWrapper{
     padding:10px 20px;
 }
+
+.graph_title {
+    padding-bottom: 20px;
+}

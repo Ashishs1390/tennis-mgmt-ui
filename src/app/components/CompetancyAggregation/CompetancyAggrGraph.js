@@ -22,31 +22,70 @@ ChartJS.register(
 
 function CompetancyAggrGraph(props) {
     const [labels, setLabels] = useState([]);
-    const [graphDataPlayer, setGraphDataPlayer] = useState([]);
-    const [graphDataCoach, setGraphDataCoach] = useState([]);
-    const [graphDataParent, setGraphDataParent] = useState([]);
+    const [graphDataPlayer, setGraphDataPlayer] = useState({});
+    const [graphDataCoach, setGraphDataCoach] = useState({});
+    const [graphDataParent, setGraphDataParent] = useState({});
+    const [dataSet, setDataSet] = useState([]);
 
 
-    console.log(props,'----props----');
     useEffect(() => {
-        console.log('useEffect');
         props.data.forEach((each) => {
-            console.log(each);
             for (let e in each) {
                 if (e == "player") {
                     console.log(each[e]);
                     setLabels(Object.keys(each[e]));
-                    setGraphDataPlayer(Object.values(each[e]));
+                    setDataSet(oldArray => [...oldArray,{
+                        label: 'Player',
+                        maxBarThickness: 8,
+                        minBarLength: 2,
+                        backgroundColor: '#ea3943',
+                        borderColor: '#ea3943',
+                        borderWidth: 1,
+                        hoverBackgroundColor: '#ea3943',
+                        hoverBorderColor: '#ea3943',
+                        data: Object.values(each[e])
+                    }]);
                 }
                 if (e == "coach") {
-                    setGraphDataCoach(Object.values(each[e]));
+                    setDataSet(oldArray => [...oldArray, {
+                        label: 'Coach',
+                        maxBarThickness: 8,
+                        minBarLength: 2,
+                        backgroundColor: '#0c96f3',
+                        borderColor: '#0c96f3',
+                        borderWidth: 1,
+                        hoverBackgroundColor: '#0c96f3',
+                        hoverBorderColor: '#0c96f3',
+                        data: Object.values(each[e])
+                    }]);
                 }
                 if (e == "parent") {
-                    setGraphDataParent(Object.values(each[e]));
+                    setDataSet(oldArray => [...oldArray, {
+                        label: 'Parent',
+                        maxBarThickness: 8,
+                        minBarLength: 2,
+                        backgroundColor: 'rgba(25, 210, 116, 0.85)',
+                        borderColor: 'rgba(25, 210, 116, 0.85)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(25, 210, 116, 0.85)',
+                        hoverBorderColor: 'rgba(25, 210, 116, 0.85)',
+                        data: Object.values(each[e])
+                    }]);
                 }
             }
         })
     }, [props]);
+
+    // useEffect(() => {
+    //     return (() => {
+    //         setDataSet([]);
+    //     })   
+    // })
+
+    useEffect(() => {
+        console.log('--------dataSet----------')
+        console.log(dataSet);
+    }, [dataSet])
     const options = {
         indexAxis: 'y',
         legend: {
@@ -67,7 +106,7 @@ function CompetancyAggrGraph(props) {
         responsive: true,
         plugins: {
             legend: {
-                display: false
+                position: 'right'
             }
         },
         layout: {
@@ -80,36 +119,7 @@ function CompetancyAggrGraph(props) {
     const dataBar = {
         labels: [...labels],
         datasets: [
-            {
-                maxBarThickness: 8,
-                minBarLength: 2,
-                backgroundColor: '#ea3943',
-                borderColor: '#ea3943',
-                borderWidth: 1,
-                hoverBackgroundColor: '#ea3943',
-                hoverBorderColor: '#ea3943',
-                data: [...graphDataPlayer]
-            },
-            {
-                maxBarThickness: 8,
-                minBarLength: 2,
-                backgroundColor: '#0c96f3',
-                borderColor: '#0c96f3',
-                borderWidth: 1,
-                hoverBackgroundColor: '#0c96f3',
-                hoverBorderColor: '#0c96f3',
-                data: [...graphDataCoach]
-            },
-            {
-                maxBarThickness: 8,
-                minBarLength: 2,
-                backgroundColor: 'rgba(25, 210, 116, 0.85)',
-                borderColor: 'rgba(25, 210, 116, 0.85)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(25, 210, 116, 0.85)',
-                hoverBorderColor: 'rgba(25, 210, 116, 0.85)',
-                data: [...graphDataParent]
-            }
+            ...dataSet
         ]
     };
 

@@ -48,15 +48,15 @@ function UserListAggregation(props) {
                 Player Comparison
             </Typography>
             {!showAggrePage &&
-            <Grid container spacing={2}>
-                    <Grid item xs={10} md={12}>
+            <Grid container spacing={2} className="Ashish">
+                    <Grid item xs={10} md={12} className="Ashish1">
                         {/* <NavBarParent></NavBarParent> */}
 
                     {
                         searchedPlayerList && searchedPlayerList.map((value) => {
                             return (
                                 //className="aggregationList"
-                                <ListItem key={value} > 
+                                <ListItem key={value} className="Ashish2" > 
                                     <FormGroup>
                                         <FormControlLabel value={value}
                                             onChange={() => {
