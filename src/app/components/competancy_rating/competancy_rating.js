@@ -111,7 +111,7 @@ function CompetancyRating(props) {
         })
       );
     } else {
-      alert("Please select the all assessment");
+      alert("Please rate all the questions.");
     }
   };
 

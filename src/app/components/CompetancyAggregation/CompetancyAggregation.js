@@ -68,6 +68,7 @@ function CompetancyAggregation(props) {
             <Box
                 sx={{
                     display: 'flex',
+                    flexWrap:'wrap',
                     '& > :not(style)': {
                         m: 1,
                         width: 428,

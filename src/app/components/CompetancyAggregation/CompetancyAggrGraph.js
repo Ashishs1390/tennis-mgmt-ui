@@ -45,7 +45,7 @@ function CompetancyAggrGraph(props) {
                         hoverBorderColor: '#ea3943',
                         data: Object.values(each[e])
                     }]);
-                }
+                }else
                 if (e == "coach") {
                     setDataSet(oldArray => [...oldArray, {
                         label: 'Coach',
@@ -58,7 +58,7 @@ function CompetancyAggrGraph(props) {
                         hoverBorderColor: '#0c96f3',
                         data: Object.values(each[e])
                     }]);
-                }
+                }else
                 if (e == "parent") {
                     setDataSet(oldArray => [...oldArray, {
                         label: 'Parent',
