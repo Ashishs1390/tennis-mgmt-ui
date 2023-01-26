@@ -46,9 +46,9 @@ const defaultValues = {
     height_type: '',
     player_type: '',
     plays: '',
-    racquet: '',
-    racquet_string: '',
-    racquet_tension: '',
+    recquet: '',
+    recquet_string: '',
+    recquet_tension: '',
     time_frame: '',
     weight: '',
     weight_type: '',
@@ -76,7 +76,7 @@ function UpdateUser(props) {
     //     height_type: '',
     //     player_type: 'aggressive',
     //     plays: 'left',
-    //     racquet: 'abct',
+    //     recquet: 'abct',
     //     string: 'qbrte',
     //     tension: 'pics',
     //     time_frame: '12.35',
@@ -156,9 +156,9 @@ function UpdateUser(props) {
         setValue('height_type', prevValues.height_type);
         setValue('player_type', prevValues.player_type);
         setValue('plays', prevValues.plays);
-        setValue('racquet', prevValues.racquet);
-        setValue('racquet_string', prevValues.racquet_string);
-        setValue('racquet_tension', prevValues.racquet_tension);
+        setValue('recquet', prevValues.recquet);
+        setValue('recquet_string', prevValues.recquet_string);
+        setValue('recquet_tension', prevValues.recquet_tension);
         setValue('time_frame', prevValues.time_frame);
         setValue('weight', prevValues.weight);
         setValue('weight_type', prevValues.weight_type);
@@ -254,16 +254,16 @@ function UpdateUser(props) {
                                     <Typography>{prevValues.time_frame}</Typography>
                                 </div>
                                 <div className="mb-24">
-                                    <Typography className="font-semibold mb-4 text-15">racquet</Typography>
-                                    <Typography>{prevValues.racquet}</Typography>
+                                    <Typography className="font-semibold mb-4 text-15">recquet</Typography>
+                                    <Typography>{prevValues.recquet}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">String</Typography>
-                                    <Typography>{prevValues.racquet_string}</Typography>
+                                    <Typography>{prevValues.recquet_string}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">Tension</Typography>
-                                    <Typography>{prevValues.racquet_tension}</Typography>
+                                    <Typography>{prevValues.recquet_tension}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">Plays</Typography>
@@ -489,26 +489,26 @@ function UpdateUser(props) {
                                     />
                                     <CardContent className='flex flex-row w-1/2 max-w-620 justify-left p-0'>
                                         <Controller
-                                            name='racquet'
+                                            name='recquet'
                                             control={control}
                                             render={({ field }) => (
                                                 <TextField
                                                     {...field}
-                                                    {...register('racquet')}
+                                                    {...register('recquet')}
                                                     className='mb-16'
-                                                    label='Racquet'
+                                                    label='recquet'
                                                     type='text'
                                                     variant='outlined'
                                                 />
                                             )}
                                         />
                                         <Controller
-                                            name='racquet_string'
+                                            name='recquet_string'
                                             control={control}
                                             render={({ field }) => (
                                                 <TextField
                                                     {...field}
-                                                    {...register('racquet_string')}
+                                                    {...register('recquet_string')}
                                                     className='mb-16 ml-8'
                                                     label='String'
                                                     type='text'
@@ -518,12 +518,12 @@ function UpdateUser(props) {
                                         />
 
                                         <Controller
-                                            name='racquet_tension'
+                                            name='recquet_tension'
                                             control={control}
                                             render={({ field }) => (
                                                 <TextField
                                                     {...field}
-                                                    {...register('racquet_tension')}
+                                                    {...register('recquet_tension')}
                                                     className='mb-16 ml-8'
                                                     label='Tension'
                                                     type='text'
