@@ -27,6 +27,18 @@
   width: 90px;
   height: 50px;
   border-radius: 0px;
+  position: relative;
+}
+
+.searchBtn::before{
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  position: absolute;
+  top: 18px;
+  left: 7px;
 }
 
 .view-player-btn {
@@ -35,6 +47,19 @@
   border-radius: 0px;
   position: relative;
   left: -26px;
+  position: relative;
+}
+
+.view-player-btn::before{
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  position: absolute;
+  top: 18px;
+  left: 7px;
 }
 
 .player_data {
