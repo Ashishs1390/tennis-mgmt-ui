@@ -25,6 +25,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { cloneDeep } from 'lodash';
 
 /**
  * Form Validation Schema
@@ -46,9 +47,9 @@ const defaultValues = {
     height_type: '',
     player_type: '',
     plays: '',
-    recquet: '',
-    recquet_string: '',
-    recquet_tension: '',
+    racquet: '',
+    racquet_string: '',
+    racquet_tension: '',
     time_frame: '',
     weight: '',
     weight_type: '',
@@ -76,7 +77,7 @@ function UpdateUser(props) {
     //     height_type: '',
     //     player_type: 'aggressive',
     //     plays: 'left',
-    //     recquet: 'abct',
+    //     racquet: 'abct',
     //     string: 'qbrte',
     //     tension: 'pics',
     //     time_frame: '12.35',
@@ -93,9 +94,10 @@ function UpdateUser(props) {
     });
     const [levels, setLevels] = useState({ itn_level: [] });
     const [errMessage, setErrMessage] = useState(null);
+    const [isDataSet, setIsDataSet] = useState(false);
     const { isValid, dirtyFields, errors } = formState;
 
-    console.log('BIB:', formState, errors);
+    console.log('BIB#####:', getValues());
     const params = useParams();
     const { role } = params;
     const container = {
@@ -142,46 +144,68 @@ function UpdateUser(props) {
     }, []);
 
     useEffect(() => {
-        setPrevValues({...profileData});
+        setPrevValues({ ...profileData });
     }, [profileData]);
 
     useEffect(() => {
-        setValue('first_name', prevValues.first_name);
-        setValue('last_name', prevValues.last_name);
-        setValue('backhand', prevValues.backhand);
-        setValue('current_level', prevValues.current_level);
-        setValue('forehand', prevValues.forehand);
-        setValue('goal_level', prevValues.goal_level);
-        setValue('height', prevValues.height);
-        setValue('height_type', prevValues.height_type);
-        setValue('player_type', prevValues.player_type);
-        setValue('plays', prevValues.plays);
-        setValue('recquet', prevValues.recquet);
-        setValue('recquet_string', prevValues.recquet_string);
-        setValue('recquet_tension', prevValues.recquet_tension);
-        setValue('time_frame', prevValues.time_frame);
-        setValue('weight', prevValues.weight);
-        setValue('weight_type', prevValues.weight_type);
-        setValue('yob', prevValues.yob);
-        setValue('notes', prevValues.notes);
+        if (prevValues.first_name && !isDataSet) {
+            setIsDataSet(true);
+            setValue('first_name', prevValues.first_name);
+            setValue('last_name', prevValues.last_name);
+            setValue('backhand', prevValues.backhand);
+            setValue('current_level', prevValues.current_level);
+            setValue('forehand', prevValues.forehand);
+            setValue('goal_level', prevValues.goal_level);
+            setValue('height', prevValues.height);
+            setValue('height_type', prevValues.height_type);
+            setValue('player_type', prevValues.player_type);
+            setValue('plays', prevValues.plays);
+            setValue('racquet', prevValues.racquet);
+            setValue('racquet_string', prevValues.racquet_string);
+            setValue('racquet_tension', prevValues.racquet_tension);
+            setValue('time_frame', prevValues.time_frame);
+            setValue('weight', prevValues.weight);
+            setValue('weight_type', prevValues.weight_type);
+            setValue('yob', prevValues.yob);
+            setValue('notes', prevValues.notes);
+        } else {
+
+        }
     }, [prevValues]);
 
     const onChangeRadio = (control, event) => {
-        setPrevValues({...prevValues, [control]: event.target.value});
+        setValue(control, event.target.value);
+        setPrevValues({ ...prevValues, [control]: event.target.value });
+    }
+
+    const removeOtherControls = () => {
+        const prevData = cloneDeep(prevValues);
+        delete prevData.current_level;
+        delete prevData.first_name;
+        delete prevData.last_name;
+        delete prevData.racquet;
+        delete prevData.racquet_string;
+        delete prevData.racquet_tension;
+        delete prevData.time_frame;
+        delete prevData.weight;
+        delete prevData.height;
+        delete prevData.time_frame;
+        delete prevData.goal_level;
+        delete prevData.yob;
+        delete prevData.notes;
+        return prevData;
     }
 
     const onSubmit = (data) => {
         console.log('BIB@:', data, getValues());
         delete data.current_level;
         delete data.email;
-        put('/api/tennismgmt/registration/authed', { ...prevValues }).then((x) => {
-            // window.location.reload();
+        put('/api/tennismgmt/registration/authed', { ...data, ...removeOtherControls() }).then((x) => {
+            window.location.reload();
         }).catch(err => {
             setErrMessage('Some thing went wrong. Please retry or connect admin.');
         });
     }
-
-
 
     return (
         <motion.div variants={container} initial="hidden" animate="show">
@@ -254,16 +278,16 @@ function UpdateUser(props) {
                                     <Typography>{prevValues.time_frame}</Typography>
                                 </div>
                                 <div className="mb-24">
-                                    <Typography className="font-semibold mb-4 text-15">recquet</Typography>
-                                    <Typography>{prevValues.recquet}</Typography>
+                                    <Typography className="font-semibold mb-4 text-15">Racquet</Typography>
+                                    <Typography>{prevValues.racquet}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">String</Typography>
-                                    <Typography>{prevValues.recquet_string}</Typography>
+                                    <Typography>{prevValues.racquet_string}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">Tension</Typography>
-                                    <Typography>{prevValues.recquet_tension}</Typography>
+                                    <Typography>{prevValues.racquet_tension}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">Plays</Typography>
@@ -287,14 +311,14 @@ function UpdateUser(props) {
                                 </div>
                             </CardContent> :
                                 <CardContent className='flex flex-col items-left justify-left w-full py-10 max-w-620'>
-                                    { errMessage ? <Box
+                                    {errMessage ? <Box
                                         sx={{
                                             display: 'block',
                                             color: '#f00'
                                         }}
                                     >
                                         {errMessage}
-                                    </Box>: ''}
+                                    </Box> : ''}
                                     <div className="mb-24">
                                         <Typography className="font-semibold mb-4 text-15">Email</Typography>
                                         <Typography>{prevValues.email}</Typography>
@@ -314,6 +338,7 @@ function UpdateUser(props) {
                                                 helperText={errors?.first_name?.message}
                                                 variant='outlined'
                                                 required
+                                            // onChange={(event) => onChangeRadio('first_name', event)}
                                             />
                                         )}
                                     />
@@ -331,6 +356,7 @@ function UpdateUser(props) {
                                                 helperText={errors?.last_name?.message}
                                                 variant='outlined'
                                                 required
+                                            // onChange={(event) => onChangeRadio('last_name', event)}
                                             />
                                         )}
                                     />
@@ -349,6 +375,7 @@ function UpdateUser(props) {
                                                 helperText={errors?.yob?.message}
                                                 variant='outlined'
                                                 required
+                                            // onChange={(event) => onChangeRadio('yob', event)}
                                             />
                                         )}
                                     />
@@ -365,6 +392,7 @@ function UpdateUser(props) {
                                                     label='Weight'
                                                     type='number'
                                                     variant='outlined'
+                                                // onChange={(event) => onChangeRadio('weight', event)}
                                                 />
                                             )}
                                         />
@@ -403,6 +431,7 @@ function UpdateUser(props) {
                                                     label='height'
                                                     variant='outlined'
                                                     {...register('height')}
+                                                // onChange={(event) => onChangeRadio('height', event)}
                                                 />
                                             )}
                                         />
@@ -463,6 +492,7 @@ function UpdateUser(props) {
                                                     label='Goal level'
                                                     {...register('goal_level')}
                                                     control={control}
+                                                    onChange={(event) => onChangeRadio('goal_level', event)}
                                                 >
                                                     {
                                                         levels.itn_level.map((level) => {
@@ -483,51 +513,54 @@ function UpdateUser(props) {
                                                 type='text'
                                                 variant='outlined'
                                                 {...register('time_frame')}
-
+                                            // onChange={(event) => onChangeRadio('time_frame', event)}
                                             />
                                         )}
                                     />
                                     <CardContent className='flex flex-row w-1/2 max-w-620 justify-left p-0'>
                                         <Controller
-                                            name='recquet'
+                                            name='racquet'
                                             control={control}
                                             render={({ field }) => (
                                                 <TextField
                                                     {...field}
-                                                    {...register('recquet')}
+                                                    {...register('racquet')}
                                                     className='mb-16'
-                                                    label='recquet'
+                                                    label='racquet'
                                                     type='text'
                                                     variant='outlined'
+                                                // onChange={(event) => onChangeRadio('racquet', event)}
                                                 />
                                             )}
                                         />
                                         <Controller
-                                            name='recquet_string'
+                                            name='racquet_string'
                                             control={control}
                                             render={({ field }) => (
                                                 <TextField
                                                     {...field}
-                                                    {...register('recquet_string')}
+                                                    {...register('racquet_string')}
                                                     className='mb-16 ml-8'
                                                     label='String'
                                                     type='text'
                                                     variant='outlined'
+                                                // onChange={(event) => onChangeRadio('racquet_string', event)}
                                                 />
                                             )}
                                         />
 
                                         <Controller
-                                            name='recquet_tension'
+                                            name='racquet_tension'
                                             control={control}
                                             render={({ field }) => (
                                                 <TextField
                                                     {...field}
-                                                    {...register('recquet_tension')}
+                                                    {...register('racquet_tension')}
                                                     className='mb-16 ml-8'
                                                     label='Tension'
                                                     type='text'
                                                     variant='outlined'
+                                                // onChange={(event) => onChangeRadio('racquet_tension', event)}
                                                 />
                                             )}
                                         />
@@ -650,7 +683,6 @@ function UpdateUser(props) {
                                                 multiline
                                                 rows={5}
                                                 variant='outlined'
-                                                required
                                             />
                                         )}
                                     />
