@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import "./courses.css";
+
 // import withReducer from 'app/store/withReducer';
 import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
@@ -125,7 +127,15 @@ function Courses(props) {
   const [courses, setCourses] = useState([]);
   const [categories, setCategory] = useState([]);
   const { getAcademyData, academyData } = props;
-
+  const [isPayment,setIsPayment] = useState(true)
+  let localData = localStorage.getItem("localStore");
+  localData = JSON.parse(localData)
+  // const isPayment = localData.isPayment;
+  useEffect(() => {
+    console.log(typeof localData.isPayment);
+    setIsPayment(localData.isPayment);
+    
+  }, [localData])
   useEffect(() => {
     getAcademyData();
   }, []);
@@ -137,12 +147,13 @@ function Courses(props) {
         return val;
       });
       setCourses([...data]);
-
       let cats = academyData.academyStepsData[0].categories.map((val) => {
-        val.color = colorObj[val.color][500];
-        return val;
-      });
+          val.color1 = colorObj[val.color][500];
+          return val;
+      });  
+      console.log(cats);
       setCategory([...cats]);
+
     }
   }, [academyData]);
   useEffect(() => {
@@ -186,172 +197,172 @@ function Courses(props) {
         return 'Continue';
     }
   }
-
+  console.log(isPayment,'-----------')
   return (
-    <Root className="flex flex-col flex-auto shrink-0 w-full">
-      <div className="header relative overflow-hidden flex shrink-0 items-center justify-center h-200 sm:h-288">
-        <div className="flex flex-col max-w-2xl mx-auto w-full p-24 sm:p-32">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0 } }}>
-            <Typography color="inherit" className="text-24 sm:text-44 font-bold tracking-tight">
-              Welcome to Academy
-            </Typography>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }}>
-            <Typography
-              color="inherit"
-              className="text-12 sm:text-14 mt-8 sm:mt-16 opacity-75 leading-tight sm:leading-loose"
-            >
-              Our courses will step you through the process of building a small application, or
-              adding a new feature to an existing application. Our courses will step you through the
-              process of building a small application, or adding a new feature to an existing
-              application.
-            </Typography>
-          </motion.div>
-        </div>
-
-        <Icon className="header-icon">school</Icon>
-      </div>
-      <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto px-8 sm:px-16 py-24">
-        <div className="flex flex-col shrink-0 sm:flex-row items-center justify-between py-24">
-          <TextField
-            label="Search for a course"
-            placeholder="Enter a keyword..."
-            className="flex w-full sm:w-320 mb-16 sm:mb-0 mx-16"
-            value={searchText}
-            inputProps={{
-              'aria-label': 'Search',
-            }}
-            onChange={handleSearchText}
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <FormControl className="flex w-full sm:w-320 mx-16" variant="outlined">
-            <InputLabel id="category-select-label">Category</InputLabel>
-            <Select
-              labelId="category-select-label"
-              id="category-select"
-              label="Category"
-              value={selectedCategory}
-              onChange={handleSelectedCategory}
-            >
-              <MenuItem value="all">
-                <em> All </em>
-              </MenuItem>
-              {categories.map((category) => (
-                <MenuItem value={category.value} key={category.id}>
-                  {category.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-        {useMemo(() => {
-          const container = {
-            show: {
-              transition: {
-                staggerChildren: 0.1,
-              },
-            },
-          };
-
-          const item = {
-            hidden: {
-              opacity: 0,
-              y: 20,
-            },
-            show: {
-              opacity: 1,
-              y: 0,
-            },
-          };
-
-          return (
-            filteredData &&
-            (filteredData.length > 0 ? (
-              <motion.div
-                className="flex flex-wrap py-24"
-                variants={container}
-                initial="hidden"
-                animate="show"
+      <Root className="flex flex-col flex-auto shrink-0 w-full">
+        <div className="header relative overflow-hidden flex shrink-0 items-center justify-center h-200 sm:h-288">
+          <div className="flex flex-col max-w-2xl mx-auto w-full p-24 sm:p-32">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0 } }}>
+              <Typography color="inherit" className="text-24 sm:text-44 font-bold tracking-tight">
+                Welcome to Academy
+              </Typography>
+            </motion.div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }}>
+              <Typography
+                color="inherit"
+                className="text-12 sm:text-14 mt-8 sm:mt-16 opacity-75 leading-tight sm:leading-loose"
               >
-                {filteredData.map((course) => {
-                  const category = categories.find((_cat) => _cat.value === course.category);
-                  return (
-                    <motion.div
-                      variants={item}
-                      className="w-full pb-24 sm:w-1/2 lg:w-1/3 sm:p-16"
-                      key={course.id}
-                    >
-                      <Card className="flex flex-col h-256 shadow">
-                        <div
-                          className="flex shrink-0 items-center justify-between px-24 h-64"
-                          style={{
-                            background: category.color,
-                            color: theme.palette.getContrastText(category.color),
-                          }}
-                        >
-                          <Typography className="font-medium truncate" color="inherit">
-                            {category.label}
-                          </Typography>
-                          <div className="flex items-center justify-center opacity-75">
-                            <Icon className="text-20 mx-8" color="inherit">
-                              access_time
-                            </Icon>
-                            <div className="text-14 font-medium whitespace-nowrap">
-                              {course.length}
-                              min
+                Our courses will step you through the process of building a small application, or
+                adding a new feature to an existing application. Our courses will step you through the
+                process of building a small application, or adding a new feature to an existing
+                application.
+              </Typography>
+            </motion.div>
+          </div>
+
+          <Icon className="header-icon">school</Icon>
+        </div>
+        <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto px-8 sm:px-16 py-24">
+          <div className="flex flex-col shrink-0 sm:flex-row items-center justify-between py-24">
+            <TextField
+              label="Search for a course"
+              placeholder="Enter a keyword..."
+              className="flex w-full sm:w-320 mb-16 sm:mb-0 mx-16"
+              value={searchText}
+              inputProps={{
+                'aria-label': 'Search',
+              }}
+              onChange={handleSearchText}
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <FormControl className="flex w-full sm:w-320 mx-16" variant="outlined">
+              <InputLabel id="category-select-label">Category</InputLabel>
+              <Select
+                labelId="category-select-label"
+                id="category-select"
+                label="Category"
+                value={selectedCategory}
+                onChange={handleSelectedCategory}
+              >
+                <MenuItem value="all">
+                  <em> All </em>
+                </MenuItem>
+                {categories.map((category) => (
+                  <MenuItem value={category.value} key={category.id}>
+                    {category.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          {useMemo(() => {
+            const container = {
+              show: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            };
+
+            const item = {
+              hidden: {
+                opacity: 0,
+                y: 20,
+              },
+              show: {
+                opacity: 1,
+                y: 0,
+              },
+            };
+
+            return (
+              filteredData &&
+              (filteredData.length > 0 ? (
+                <motion.div
+                  className="flex flex-wrap py-24"
+                  variants={container}
+                  initial="hidden"
+                  animate="show"
+                >
+                  {filteredData.map((course) => {
+                    const category = categories.find((_cat) => _cat.value === course.category);
+                    return (
+                      <motion.div
+                        variants={item}
+                        className="w-full pb-24 sm:w-1/2 lg:w-1/3 sm:p-16"
+                        key={course.id}
+                      >
+                        <Card className="flex flex-col h-256 shadow">
+                          <div
+                            className="flex shrink-0 items-center justify-between px-24 h-64"
+                            style={{
+                              background: category.color1,
+                              color: theme.palette.getContrastText(category.color1),
+                            }}
+                          >
+                            <Typography className="font-medium truncate" color="inherit">
+                              {category.label}
+                            </Typography>
+                            <div className="flex items-center justify-center opacity-75">
+                              <Icon className="text-20 mx-8" color="inherit">
+                                access_time
+                              </Icon>
+                              <div className="text-14 font-medium whitespace-nowrap">
+                                {course.length}
+                                min
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <CardContent className="flex flex-col flex-auto items-center justify-center">
-                          <Typography className="text-center text-16 font-medium">
-                            {course.title}
-                          </Typography>
-                          <Typography
-                            className="text-center text-13 mt-8 font-normal"
-                            color="textSecondary"
-                          >
-                            {course.updated}
-                          </Typography>
-                        </CardContent>
-                        <CardActions className="justify-center pb-24">
-                          <Button
-                            to={`/academy/courses/${course.id}/${course.slug}`}
-                            component={Link}
-                            className="justify-start px-32"
-                            color="primary"
-                            variant="outlined"
-                          >
-                            {buttonStatus(course)}
-                          </Button>
-                        </CardActions>
-                        <LinearProgress
-                          className="w-full"
-                          variant="determinate"
-                          value={(course.activeStep * 100) / course.totalSteps}  // need to move to localstorage
-                          color="secondary"
-                        />
-                        <div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            ) : (
-              <div className="flex flex-1 items-center justify-center">
-                <Typography color="textSecondary" className="text-24 my-24">
-                  No courses found!
-                </Typography>
-              </div>
-            ))
-          );
-        }, [filteredData, categories, theme.palette])}
-      </div>
-    </Root>
-  );
+                          <CardContent className="flex flex-col flex-auto items-center justify-center">
+                            <Typography className="text-center text-16 font-medium">
+                              {course.title}
+                            </Typography>
+                            <Typography
+                              className="text-center text-13 mt-8 font-normal"
+                              color="textSecondary"
+                            >
+                              {course.updated}
+                            </Typography>
+                          </CardContent>
+                          <CardActions className="justify-center pb-24">
+                            <Button
+                              to={`/academy/courses/${course.id}/${course.slug}`}
+                              component={Link}
+                              className="justify-start px-32"
+                              color="primary"
+                              variant="outlined"
+                            >
+                              {buttonStatus(course)}
+                            </Button>
+                          </CardActions>
+                          <LinearProgress
+                            className="w-full"
+                            variant="determinate"
+                            value={(course.activeStep * 100) / course.totalSteps}  // need to move to localstorage
+                            color="secondary"
+                          />
+                          <div>
+                          </div>
+                        </Card>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              ) : (
+                <div className="flex flex-1 items-center justify-center">
+                  <Typography color="textSecondary" className="text-24 my-24">
+                    No courses found!
+                  </Typography>
+                </div>
+              ))
+            );
+          }, [filteredData, categories, theme.palette])}
+        </div>
+      </Root >
+    );
 }
 
 const mapDispatchToProps = (dispatch) => {

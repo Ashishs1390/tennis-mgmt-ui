@@ -30,7 +30,7 @@
   position: relative;
 }
 
-.searchBtn::before{
+.player_data::before{
   content: '';
   width: 12px;
   height: 12px;
@@ -50,7 +50,7 @@
   position: relative;
 }
 
-.view-player-btn::before{
+/* .view-player-btn::before{
   content: '';
   width: 12px;
   height: 12px;
@@ -60,7 +60,7 @@
   position: absolute;
   top: 18px;
   left: 7px;
-}
+} */
 
 .player_data {
   width: 150px;

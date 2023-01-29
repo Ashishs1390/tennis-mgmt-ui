@@ -131,13 +131,13 @@ function LinkPlayer(props) {
     setSentForAdd(true);
   };
 
-  const getPlayerItnLevel = () => {
-      post("/api/tennismgmt/itn_level", { email: emailChecked },{withCredentials: true})
+  const getPlayerItnLevel = (email) => {
+      post("/api/tennismgmt/itn_level", {email},{withCredentials: true})
       .then((x) => {
-        updateConnectedChildren(emailChecked);
-        localStorage.setItem("child_email", emailChecked);
+        updateConnectedChildren(email);
+        localStorage.setItem("child_email", email);
         localStorage.setItem("current_level", x.data.data.current_level);
-        sessionStorage.setItem("child_email", emailChecked);
+        sessionStorage.setItem("child_email", email);
         navigate(`/playerdevelopment`);
       })
       .catch((err) => {
@@ -288,7 +288,7 @@ function LinkPlayer(props) {
         </Grid>
       </Box>
       <Box sx={{ flexGrow: 1, marginTop: '20px'  }}>
-        <PlayersList searchedPlayerListNew={props.searchedPlayerListNew} handleToggle={handleToggle.bind(this)}/>
+        <PlayersList searchedPlayerListNew={props.searchedPlayerListNew} getPlayerItnLevel={getPlayerItnLevel} handleToggle={handleToggle.bind(this)}/>
       </Box>
       <Box sx={{ flexGrow: 1 }}>
       <PlayersList />
@@ -309,7 +309,7 @@ function LinkPlayer(props) {
                 Compare Player
               </Button>
             </Grid>
-            <Grid item xs={10} md={2}>
+            {/* <Grid item xs={10} md={2}>
               <Button
                   variant="contained"
                   className="view-player-btn"
@@ -319,7 +319,7 @@ function LinkPlayer(props) {
               >
                 View Player
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
           </Box>
           

@@ -8,6 +8,7 @@ import { useMemo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import ContactsMultiSelectMenu from './ContactsMultiSelectMenu';
 import PlayersTable from './player-table';
+import Button from '@mui/material/Button';
 
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -25,6 +26,10 @@ function ContactsList(props) {
   const [filteredData, setFilteredData] = useState(null);
   const handleToggle = (value) => {
     props.handleToggle(value);
+  }
+
+  const getPlayerItnLevel = (email) => {
+    props.getPlayerItnLevel(email);
   }
 
   const columns = useMemo(
@@ -71,13 +76,14 @@ function ContactsList(props) {
         sortable: false,
         Cell: ({ row }) => (
           <div className="flex items-center">
-            <FormControlLabel
-                              value={row.original.email}
-                              onChange={handleToggle.bind(this, row.original.email)}
-                              inputprops={{ "aria-labelledby": row.original.email  }}
-                              control={<Radio />}
-                              label=""
-                            />
+            <Button onClick = {() => getPlayerItnLevel(row.original.email) }>view player</Button>
+            {/* <FormControlLabel
+                value={row.original.email}
+                onChange={handleToggle.bind(this, row.original.email)}
+                inputprops={{ "aria-labelledby": row.original.email  }}
+                control={<Radio />}
+                label=""
+                            /> */}
           </div>
         ),
       },

@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
 const Course = lazy(() => import('./course/Course'));
-const Courses = lazy(() => import('./courses/Courses'));
+const CoursesWrapper = lazy(() => import('./coursesWrapper'));
 
 const AcademyAppConfig = {
   settings: {
@@ -15,7 +15,7 @@ const AcademyAppConfig = {
     },
     {
       path: 'apps/academy/courses',
-      element: <Courses />,
+      element: <CoursesWrapper />,
     },
     {
       path: 'apps/academy',

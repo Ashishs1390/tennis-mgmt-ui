@@ -84,6 +84,7 @@ function Login3Page(props) {
         localStore.first_name = response.data.first_name;
         localStore.last_name = response.data.last_name;
         localStore.role = response.data.role;
+        localStore.isPayment = response.data.isPayment;
 
         // onAuth(true);
         localStorage.setItem("localStore", JSON.stringify(localStore));

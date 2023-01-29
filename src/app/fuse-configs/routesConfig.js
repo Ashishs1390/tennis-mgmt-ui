@@ -23,7 +23,7 @@ import CompetancyAssessmentWrapper from "../components/competancy_rating/Competa
 import Boards from "../components/scrumboard/boards/Boards";
 import Board from "../components/scrumboard/board/Board";
 import Course from '../components/academy/course/Course';
-import Courses from '../components/academy/courses/Courses';
+import Courses from '../components/academy/coursesWrapper';
 
 
 const routes = () => {
