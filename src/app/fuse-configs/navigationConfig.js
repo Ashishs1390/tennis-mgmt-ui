@@ -17,7 +17,7 @@ const navigationConfig = [
       {
         id: 'profile',
         title: 'Profile',
-        translate: 'PROFILE',
+        // translate: 'PROFILE',
         type: 'item',
         icon: 'whatshot',
         url: 'profilepage',
@@ -30,6 +30,14 @@ const navigationConfig = [
       //   icon: 'whatshot',
       //   url: 'contact',
       // },
+      {
+
+        id: "playerdevelopment",
+        title: "Player Assessment",
+        type: "item",
+        url: "playerdevelopment",
+        icon: "whatshot"
+      },
       {
         id: 'video-analysis',
         title: 'Video Analysis',
@@ -51,14 +59,7 @@ const navigationConfig = [
         url: "comparelibrary",
         icon: 'whatshot'
         
-      }, {
-        
-        id: "playerdevelopment",
-        title: "Player Assessment",
-        type: "item",
-        url: "playerdevelopment",
-        icon: "whatshot"
-      },
+      }, 
       {
 
         id: "pricing",
@@ -94,6 +95,14 @@ export const navigationConfigParentCoach = [
         icon: 'whatshot',
         url: 'link/player',
       },
+      {
+
+        id: "playerdevelopment",
+        title: "Player Assessment",
+        type: "item",
+        url: "playerdevelopment",
+        icon: "whatshot"
+      },
       // {
       //   id: 'contact-component',
       //   title: 'Contact',
@@ -123,13 +132,6 @@ export const navigationConfigParentCoach = [
         url: "comparelibrary",
         icon: 'whatshot'
         
-      }, {
-        
-        id: "playerdevelopment",
-        title: "Player Assessment",
-        type: "item",
-        url: "playerdevelopment",
-        icon: "whatshot"
       },
       {
 
@@ -170,7 +172,7 @@ export const navigationConfigPC = [
       {
         id: 'profile',
         title: 'Profile',
-        translate: 'PROFILE',
+        // translate: 'PROFILE',
         type: 'item',
         icon: 'whatshot',
         url: 'profilepage',

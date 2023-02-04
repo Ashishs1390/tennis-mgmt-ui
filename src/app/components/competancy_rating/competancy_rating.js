@@ -30,6 +30,22 @@ function CompetancyRating(props) {
     playerName: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? `${JSON.parse(localStorage.getItem("childInfo")).first_name} ${JSON.parse(localStorage.getItem("childInfo")).last_name}`
       : `${JSON.parse(localStorage.getItem("localStore")).first_name} ${JSON.parse(localStorage.getItem("localStore")).last_name}`,
   });
+
+  const [{ goalLevel }] = useState({
+    goalLevel: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? JSON.parse(localStorage.getItem("childInfo")).goal_level || '' : JSON.parse(localStorage.getItem("localStore")).goal_level || ''
+  })
+  const [{ timeFrame }] = useState({
+    timeFrame: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? JSON.parse(localStorage.getItem("childInfo")).time_frame || '' : JSON.parse(localStorage.getItem("localStore")).time_frame || ''
+  })
+  const playsObj = {
+    right: 'Right handed',
+    left: 'Left hannded'
+  };
+  
+  const[{ playerDescription }] = useState({
+    playerDescription: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? `${playsObj[JSON.parse(localStorage.getItem("childInfo")).plays] || ''}, ${JSON.parse(localStorage.getItem("childInfo")).player_type || ''},${JSON.parse(localStorage.getItem("childInfo")).height || ''} ${JSON.parse(localStorage.getItem("childInfo")).height_type || ''},${JSON.parse(localStorage.getItem("childInfo")).weight || ''} ${JSON.parse(localStorage.getItem("childInfo")).weight_type || ''}`
+      : `${playsObj[JSON.parse(localStorage.getItem("childInfo")).plays] || ''}, ${JSON.parse(localStorage.getItem("childInfo")).player_type || ''},${JSON.parse(localStorage.getItem("childInfo")).height || ''} ${JSON.parse(localStorage.getItem("childInfo")).height_type || ''},${JSON.parse(localStorage.getItem("childInfo")).weight || ''} ${JSON.parse(localStorage.getItem("childInfo")).weight_type || ''}`,
+  });
   const [dotPosition, setDotPosition] = useState({x: 0, y: 0});
 
   const current_level = localStorage.getItem("current_level");
@@ -188,7 +204,7 @@ function CompetancyRating(props) {
                       align="left"
                       color="text.primary"
                     >
-                      Male, Play Right, Aggressive Baseline, 5' 4", 115lb
+                      {playerDescription}
                     </Typography>
                   </td>
                 </tr>
@@ -235,7 +251,10 @@ function CompetancyRating(props) {
                       variant="h6"
                       align="left"
                       color="text.primary"
-                    ></Typography>
+                    >
+                      {goalLevel}
+
+                    </Typography>
                   </td>
                 </tr>
                 <tr className="player-content">
@@ -247,7 +266,7 @@ function CompetancyRating(props) {
                       align="left"
                       color="text.primary"
                     >
-                      Timeframe
+                      Time Frame
                     </Typography>
                   </td>
                   <td>
@@ -258,7 +277,7 @@ function CompetancyRating(props) {
                       align="left"
                       color="text.primary"
                     >
-                      1 year
+                      {timeFrame}
                     </Typography>
                   </td>
                 </tr>

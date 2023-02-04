@@ -86,6 +86,16 @@ function Login3Page(props) {
         localStore.role = response.data.role;
         localStore.isPayment = response.data.isPayment;
 
+        localStore.plays = response.data.plays;
+        localStore.player_type = response.data.player_type;
+        localStore.height = response.data.height;
+        localStore.height_type = response.data.height_type;
+        localStore.weight = response.data.weight;
+        localStore.weight_type = response.data.weight_type;
+        localStore.goal_level = response.data.goal_level;
+        localStore.time_frame = response.data.time_frame;
+
+
         // onAuth(true);
         localStorage.setItem("localStore", JSON.stringify(localStore));
         localStorage.setItem("current_level", response.data.current_level);

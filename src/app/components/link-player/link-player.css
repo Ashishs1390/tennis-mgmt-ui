@@ -30,16 +30,6 @@
   position: relative;
 }
 
-.player_data::before{
-  content: '';
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  position: absolute;
-  top: 18px;
-  left: 7px;
-}
 
 .view-player-btn {
   width: 120px;

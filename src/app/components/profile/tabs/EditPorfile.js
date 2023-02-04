@@ -259,11 +259,11 @@ function UpdateUser(props) {
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">Weight</Typography>
-                                    <Typography>{prevValues.weight + ' ' + prevValues.weight_type}</Typography>
+                                    <Typography>{prevValues.weight ? prevValues.weight : ''} {prevValues.weight_type ? prevValues.weight_type :''}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">Height</Typography>
-                                    <Typography>{prevValues.height + ' ' + prevValues.height_type}</Typography>
+                                    <Typography>{prevValues.height ? prevValues.height : ''} {prevValues.height_type ? prevValues.height_type :''}</Typography>
                                 </div>
                                 <div className="mb-24">
                                     <Typography className="font-semibold mb-4 text-15">Current level</Typography>
@@ -660,10 +660,10 @@ function UpdateUser(props) {
                                                     onChange={(event) => onChangeRadio('player_type', event)}
 
                                                 >
-                                                    <FormControlLabel value='counterPuncher' control={<Radio />} label='Counter Puncher' />
-                                                    <FormControlLabel value='aggressive' control={<Radio />} label='Aggressive' />
-                                                    <FormControlLabel value='allCourtPlayer' control={<Radio />} label='All-Court Player' />
-                                                    <FormControlLabel value='netRusher' control={<Radio />} label='Net Rusher' />
+                                                    <FormControlLabel value='Counterpuncher' control={<Radio />} label='Counter Puncher' />
+                                                    <FormControlLabel value='Aggressive Baseliner' control={<Radio />} label='Aggressive' />
+                                                    <FormControlLabel value='All-Court Player' control={<Radio />} label='All-Court Player' />
+                                                    <FormControlLabel value='Net Rusher' control={<Radio />} label='Net Rusher' />
 
                                                 </RadioGroup>
                                             )}
