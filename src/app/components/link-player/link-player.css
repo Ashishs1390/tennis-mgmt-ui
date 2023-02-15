@@ -73,3 +73,12 @@
 .color-green-btn:hover{
   background-color: #00cc00;
 }
+
+.btn_view_player {
+  color :#1841d2;
+  cursor: pointer;
+}
+
+.btn_view_player:hover{
+  text-decoration: underline;
+}

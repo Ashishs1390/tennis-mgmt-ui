@@ -62,6 +62,7 @@ function PlayerDevelopment(props) {
   const [selectedRoles, setSelectedRole] = useState(['parent', 'coach']);
   const [hideScores, setHideScore] = useState(true);
   const [selectedCheckBox, setSelectedCheckBox] = useState({ player: [], parent: [], coach: [] });
+  const [fromCheckbox, setFromCheckBox] = useState(true);
   const {
     getPersonalDevPageInfo,
     pdpData: { progressBarData, assessmentDates, assessmentNewDates, loading = false },
@@ -122,6 +123,17 @@ function PlayerDevelopment(props) {
         }
       }
     }
+    console.log(selectedCheckBox,'-----------1111------------')
+    let selectedCheckBox1 = Object.keys(selectedCheckBox).reduce((acc, curr) => {
+      if (Array.isArray(selectedCheckBox[curr])) {
+        acc = { ...acc, [curr]: selectedCheckBox[curr]}
+      } else {
+        acc = { ...acc, [curr]: [] }
+      }
+      return acc;
+    }, {});
+    console.log(selectedCheckBox1, 'selectedCheckBox')
+    setFromCheckBox(false);
     props.getPersonalDevOnDate({ ...selectedCheckBox });
     setSelectedCheckBox({ ...selectedCheckBox });
   }
@@ -187,7 +199,8 @@ function PlayerDevelopment(props) {
         obj.coach.push(getValue(data?.coach));
 
         setSelectedCheckBox({ ...obj });
-      } else {
+      }
+      else if(fromCheckbox) {
         let newDates = Object.keys(data).reduce((acc, curr) => {
           if (!acc[curr]) {
             acc[curr] = [];
@@ -195,7 +208,12 @@ function PlayerDevelopment(props) {
           const datesArray = data[curr].map((element) => new Date(element));
           acc[curr].push(getDateWithTime(new Date((Math.max(...datesArray)))));
           return acc;
-        }, {});
+        }, {
+          player: [],
+          parent: [],
+          coach: []
+        });
+        console.log('-------22222--------',newDates)
         setSelectedCheckBox({ ...newDates });
 
         // let dates = Object.keys(data).reduce((acc, curr) => {

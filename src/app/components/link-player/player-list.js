@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import './link-player.css'
 
 
 function ContactsList(props) {
@@ -76,7 +77,7 @@ function ContactsList(props) {
         sortable: false,
         Cell: ({ row }) => (
           <div className="flex items-center">
-            <Button onClick = {() => getPlayerItnLevel(row.original.email) }>view player</Button>
+            <Button onClick = {() => getPlayerItnLevel(row.original.email) } className = 'btn_view_player' >View Player</Button>
             {/* <FormControlLabel
                 value={row.original.email}
                 onChange={handleToggle.bind(this, row.original.email)}
