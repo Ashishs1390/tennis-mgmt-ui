@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, useRef, createContext } from "react";
 import BundelCompetancy from "./bundel_competancy";
 import {
   getCompetancy,
@@ -12,10 +12,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Loading from "./../common/loading/loading";
 import TextField from "@mui/material/TextField";
-import { getDateYYYYMMDD } from "../../util/util";
+import { getDateYYYYMMDD,throttle } from "../../util/util";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 import { getDateWithTime } from '../../util/util';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import "./competancy.css";
 
@@ -26,10 +28,21 @@ function CompetancyRating(props) {
     props;
   const [competancyData, SetCompetancyData] = useState([]);
   const [competancyDataHandel, SetCompetancyDataHandel] = useState([]);
+  const stateRef = useRef();
+  const assDateStateRef = useRef();
+  useEffect(() => {
+    assDateStateRef.current = getDateYYYYMMDD(new Date()) +
+      "T" +
+      new Date().toString().match(/\d{2}:\d{2}:\d{2}/g) +
+      ".000Z"    
+  }, []);
+
   const [{ playerName }] = useState({
     playerName: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? `${JSON.parse(localStorage.getItem("childInfo")).first_name} ${JSON.parse(localStorage.getItem("childInfo")).last_name}`
       : `${JSON.parse(localStorage.getItem("localStore")).first_name} ${JSON.parse(localStorage.getItem("localStore")).last_name}`,
   });
+
+  const [backdropOpen, setBackdropOpen] = React.useState(false);
 
   const [{ goalLevel }] = useState({
     goalLevel: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? JSON.parse(localStorage.getItem("childInfo")).goal_level || '' : JSON.parse(localStorage.getItem("localStore")).goal_level || ''
@@ -41,6 +54,7 @@ function CompetancyRating(props) {
     right: 'Right handed',
     left: 'Left hannded'
   };
+
   
   const[{ playerDescription }] = useState({
     playerDescription: (JSON.parse(localStorage.getItem("childInfo")).length !== 0) ? `${playsObj[JSON.parse(localStorage.getItem("childInfo")).plays] || ''}, ${JSON.parse(localStorage.getItem("childInfo")).player_type || ''},${JSON.parse(localStorage.getItem("childInfo")).height || ''} ${JSON.parse(localStorage.getItem("childInfo")).height_type || ''},${JSON.parse(localStorage.getItem("childInfo")).weight || ''} ${JSON.parse(localStorage.getItem("childInfo")).weight_type || ''}`
@@ -79,24 +93,29 @@ function CompetancyRating(props) {
       })
       SetCompetancyDataHandel(props.competancyData);
     }
+    stateRef.current = props.competancyData;
     SetCompetancyData(props.competancyData);
   }, [props.competancyData]);
   const [assDate, setAssDate] = useState(getDateYYYYMMDD(new Date()));
+ 
   const setDate = (selectedDate) => {
+    const currentDate = getDateYYYYMMDD(selectedDate) +
+      "T" +
+      new Date().toString().match(/\d{2}:\d{2}:\d{2}/g) +
+      ".000Z";
+    assDateStateRef.current = currentDate;
     setAssDate(
-      getDateYYYYMMDD(selectedDate) +
-        "T" +
-        new Date().toString().match(/\d{2}:\d{2}:\d{2}/g) +
-        ".000Z"
+      currentDate
     );
   };
   const onSumbit = () => {
     let flag = true;
-    competancyData.forEach((x) => {
+    setBackdropOpen(!backdropOpen);
+    stateRef.current.forEach((x) => {
       flag =
         x.values.every((y) => y.hasOwnProperty('assigned_weight') && y.assigned_weight > 0) && flag;
     });
-    const assignedWeights = competancyData.map((x) => {
+    const assignedWeights = stateRef.current.map((x) => {
       return {
         ...x,
         values: x.values.map(y => {
@@ -117,11 +136,11 @@ function CompetancyRating(props) {
     SetCompetancyDataHandel(assignedWeights);
     if (flag) {
       saveCompetancy(
-        competancyData.map((x) => {
+        stateRef.current.map((x) => {
           return {
             ...x,
-            assessment_date: assDate.match(/T/g)
-              ? assDate
+            assessment_date: assDateStateRef.current.match(/T/g)
+              ? assDateStateRef.current
               : getDateWithTime(new Date()),
           };
         })
@@ -130,6 +149,8 @@ function CompetancyRating(props) {
       alert("Please rate all the questions.");
     }
   };
+  const throttledClick = useRef(throttle(onSumbit, 3000,this)).current;
+
 
   const getDotPosition = (e) => {
     if ([...e.target.classList].indexOf('MuiButton-root') >= 0) {
@@ -320,8 +341,8 @@ function CompetancyRating(props) {
         <Loading open={loading} />
         {competancyDataHandel && competancyDataHandel.length > 0 ? (
           [...competancyDataHandel].map((x, i) => (
-            <>
-            <BundelCompetancy
+            <div key = { x }>
+              <BundelCompetancy 
               {...x}
               key={x.competency_bundle}
               updateBundelCompetancyRating={updateBundelCompetancyRating.bind(
@@ -329,7 +350,7 @@ function CompetancyRating(props) {
                 i
               )}
               />
-            </>
+            </div>
           ))
         ) : (
           <p> Data Loading... </p>
@@ -345,11 +366,18 @@ function CompetancyRating(props) {
             style={{width: '350px'}}
             variant="contained"
             color="secondary"
-            onClick={onSumbit}
+            onClick={()=>throttledClick()}
           >
             Submit
           </Button>
         </Box>
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={backdropOpen}
+        >
+          <CircularProgress color="inherit" />
+          {backdropOpen}
+        </Backdrop>
       </div>
     </AssessmentContext.Provider>
   );

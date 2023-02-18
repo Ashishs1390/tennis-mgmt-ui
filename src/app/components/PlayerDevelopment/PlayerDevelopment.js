@@ -262,7 +262,7 @@ function PlayerDevelopment(props) {
         <FormGroup>
           {rolesArr.map((role, i) => {
             return (
-              <>
+              <div key={role }>
                 <FormControlLabel
                   control={<Checkbox />}
                   key={role}
@@ -273,7 +273,7 @@ function PlayerDevelopment(props) {
                   }}
                 />
                 <span className="alphabet">{`[${role[0].toUpperCase()}]`}</span>
-              </>
+              </div>
             );
           })}
         </FormGroup>
@@ -366,6 +366,7 @@ function PlayerDevelopment(props) {
                       return (
                         <PlayerDevelopmentListItem
                           val={val}
+                          key={ index}
                           index={index}
                           maxDate={maxDate}
                           displayRowArr={displayRowArr}
