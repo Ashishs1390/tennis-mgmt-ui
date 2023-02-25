@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -15,6 +15,7 @@ import PlayerDevelopmentListItem from "./PlayerDevelopmentListItem";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { post, put } from './../../api/axios.api';
 import MenuItem from "@mui/material/MenuItem";
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
 // import DatesPopUp from './../../css-components/DatesPopUp/DatesPopUp';
@@ -73,6 +74,8 @@ function PlayerDevelopment(props) {
   const child_email = localStorage.getItem("child_email")
   const localStore = localStorage.getItem("localStore");
 
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
   useEffect(() => {
     localStorage.setItem("childInfo", JSON.stringify(userInfo.data));
   }, [userInfo]);
@@ -91,7 +94,6 @@ function PlayerDevelopment(props) {
       setRole(role);
       setUserName(fullName);
     })
-
   }, [localStore]);
   useEffect(() => {
     const current_level = localStorage.getItem("current_level");
@@ -172,6 +174,19 @@ function PlayerDevelopment(props) {
     navigate(link);
     // setMenuOpen(false);
   };
+
+  const handleDateChange = (event, oldDate) => {
+  
+    put('/api/tennismgmt/competancy/assessment/datechange', { newDate: getDateWithTime(new Date(event.target.value)), oldDate: oldDate }).then((x) => {
+      console.log('date updated successfully');
+      const current_level = localStorage.getItem("current_level");
+      getPersonalDevPageInfo(current_level);
+      if (role == "parent" || role == "coach") {
+        props.fetchDetails(childEmail);
+      }
+      forceUpdate();
+    });
+  }
 
   useEffect(() => {
     if (
@@ -338,6 +353,13 @@ function PlayerDevelopment(props) {
                                 />
                               </ListItemIcon>
                             </ListItemButton>
+                            <p> <input
+                              type="date"
+                              className="date-input"
+                              id="AssessmentDate"
+                              name="assessmentDate"
+                              onChange={(e) => handleDateChange(e,value) }
+                            ></input></p>
                           </ListItem>
                         )
                       })

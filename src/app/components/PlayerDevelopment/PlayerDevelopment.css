@@ -183,3 +183,7 @@
 .PlayerAssessmentPage{
   margin: 0 20px;
 }
+
+input.date-input{
+  width:19px;
+}
